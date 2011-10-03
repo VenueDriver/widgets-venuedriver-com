@@ -23,7 +23,7 @@ h2.  How to Install
 <code>
 	<html>
 	  <head>
-		<link href="https://raw.github.com/Bakedweb/venue_widget/master/public/css/styles.css"  rel='stylesheet' type='text/css'/>
+			<link href="https://raw.github.com/Bakedweb/venue_widget/master/public/css/styles.css"  rel='stylesheet' type='text/css'/>
 	    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js" charset="utf-8"></script>
 	    <script> 
 	      VenueConfig = new Object();
@@ -36,11 +36,11 @@ h2.  How to Install
 	  <body>
 		<div id="wrapper">
 			<div id="center_table">
-		      <div id="selectevent_columnlabelbar">
-				<div id="venueWidgetMainTable"></div>
+		  	<div id="selectevent_columnlabelbar">
+					<div id="venueWidgetMainTable"></div>
 			  </div>
 			</div>
-	    </div>  
+		</div>  
 	</body>
 	</html>
 </code>
