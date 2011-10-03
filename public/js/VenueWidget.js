@@ -52,7 +52,7 @@ var VenueDriver;
     };
     
     VenueDriver.prepare_table = function(){
-      $(options.div_id).append("<div id='loading'><img src='/images/ajax-loader.gif'/></div>")
+      $(options.div_id).append("<div id='loading'><img src='http://github.com/Bakedweb/venue_widget/raw/master/public/images/ajax-loader.gif'/></div>")
       $(options.div_id).append("<table id='venueWidgetMainTable'><thead><tr></tr></thead><tbody></tbody></table>");
       $(options.div_id + " tr").append(
               "<th class='eventlist_columnlabels' width='10%'>Date</th>" +
