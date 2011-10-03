@@ -21,21 +21,28 @@ h2.  How to Install
 
 <pre>
 <code>
-<html>
-  <head>
-    <script src="jquery.min.js" charset="utf-8"></script>
-    <script> 
-      VenueConfig = new Object();
-      VenueConfig.api_token = "HERE_YOUR_API_TOKEN";  //example '02AFRET3T6A961Q53'
-      VenueConfig.account = 'HERE_YOUR_ACCOUNT_ID';  //example '12345'
-      VenueConfig.div_id = 'list_of_events'; //example 'my_div'
-    </script>
-    <script src="VenueWidget.js" charset="utf-8"></script>
-  </head>
-  <body>
-	<div id="list_of_events"></div>
-  </body>
-</html>
+	<html>
+	  <head>
+		<link href="https://raw.github.com/Bakedweb/venue_widget/master/public/css/styles.css"  rel='stylesheet' type='text/css'/>
+	    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js" charset="utf-8"></script>
+	    <script> 
+	      VenueConfig = new Object();
+	      VenueConfig.api_token = "";  //example '02AFRET3T6A961Q53'
+	      VenueConfig.account = '';  //example '12345'
+	      VenueConfig.div_id = 'venueWidgetMainTable'; //example 'my_div'
+	    </script>
+	    <script src="https://raw.github.com/Bakedweb/venue_widget/master/public/js/VenueWidget.js" charset="utf-8"></script>
+	  </head>
+	  <body>
+		<div id="wrapper">
+			<div id="center_table">
+		      <div id="selectevent_columnlabelbar">
+				<div id="venueWidgetMainTable"></div>
+			  </div>
+			</div>
+	    </div>  
+	</body>
+	</html>
 </code>
 </pre>
 
