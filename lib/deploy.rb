@@ -1,11 +1,14 @@
 require 'rubygems'
 require 'fog'
 require 'yaml'
+require 'htmlentities'
 
 module Deploy
 
   # This method deploys this project to Amazon S3, at http://widgets.venuedriver.com
   def deploy
+    
+    generate_example
     
     # Get the Amazon S3 configuration from the format that we have standardized at Venue Driver.
     s3config = YAML::load_file('config/aws.yml')
@@ -24,6 +27,18 @@ module Deploy
 
     upload_file('/') # '/' is the path relative to the root of the @source.
     
+  end
+  
+  # Copy the /demo.html file to an example.html file that shows the JavaScript code.
+  def generate_example
+    demo_file = ''; File.open('public/demo.html').lines.each do |line|
+      demo_file << line.gsub(/^(.*\').*(\'\;\s*\/\/example.*)$/) { "#{$1}#{$2}" }
+    end
+    
+    example_template = File.open('public/example_template.html').read
+    File.open('public/example.html', 'w') do |example|
+      example.puts example_template.gsub(/\<\%\s*YIELD\s*\%\>/m, HTMLEntities.new.encode(demo_file))
+    end
   end
 
 private
