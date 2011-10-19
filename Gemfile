@@ -5,6 +5,9 @@ gem 'json'
 gem 'rack', '1.2.3'
 gem 'haml'
 gem 'unicorn'
+gem "nokogiri", "~> 1.5.0"
+gem "fog", "~> 1.0.0"
+gem "ruby-debug"
 
 group :test do
   gem 'capybara'
