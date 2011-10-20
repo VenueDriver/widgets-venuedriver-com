@@ -51,6 +51,6 @@ h2. How to update this project
 
 * clone the Git repository for this project from GitHub. (We recommend forking the project first.)
 * "rvm use 1.8.7"
-* "rvm gemset create widgets"
+* "rvm gemset create widgets-venuedriver-com"
 * "rvm rvmrc trust .rvmrc"
 
