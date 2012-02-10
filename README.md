@@ -13,7 +13,7 @@
 
 * Make sure you have jQuery loaded
 
-* You need to set a couple of parameters api_token(your secret api token), account(your account id number) & div_id(the name of div where you draw the table)
+* You need to set a couple of parameters api_token(your api token), account(your account id number) & div_id(the name of div where you draw the table)
 
 * Put the VenueWidget.js file on to HTML document
 
@@ -48,6 +48,28 @@
 # How to update this project
 
 * clone the Git repository for this project from GitHub. (We recommend forking the project first.)
-* "rvm use 1.8.7"
-* "rvm gemset create widgets-venuedriver-com"
-* "rvm rvmrc trust .rvmrc"
+* ```rvm use 1.8.7```
+* ```rvm gemset create widgets-venuedriver-com```
+* ```rvm rvmrc trust .rvmrc```
+
+
+# How to run the tests on this project
+
+* Install RVM.
+* Use RVM to install Ruby 1.8.7 with ```rvm install 1.8.7```
+* Tell RVM to use that Ruby with ```rvm use 1.8.7```
+* Use RVM to create a gemset with ```rvm gemset create widgets-venuedriver-com```
+* Tell RVM to use that gemset with ```rvm gemset use widgets-venuedriver-com```
+* Tell RVM to trust the .rvmrc file with ```rvm rvmrc trust .rvmrc```
+* Install the project's gems into the gemset with ```bundle install```
+
+* ? - How to run Jasmine?  Hugo's Jasmine runner just doesn't work.
+* ? - How to run the RSpec integration spec?  There is no 'rake spec' task for this project.
+
+
+# How to deploy updates.
+
+The JavaScript code that third-party sites embed is hosted on Amazon S3.  To deploy an update to S3:
+
+* Obtain the current aws.yml file with the token and secret key for the S3 account, and store it in config/aws.yml
+* Run the deployment Rake task with ```rake deploy```
