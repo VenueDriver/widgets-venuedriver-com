@@ -9,7 +9,7 @@
 * Put the jquery.min.js file on to HTML document
 
 
-# How to Install
+# How to install the VenueWidget in your web site for your venue
 
 * Make sure you have jQuery loaded
 
@@ -45,7 +45,7 @@
 ```
 
 
-# How to update this project
+# How to update this project (only for developers of the VenueWidget project)
 
 * clone the Git repository for this project from GitHub. (We recommend forking the project first.)
 * ```rvm use 1.8.7```
