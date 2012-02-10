@@ -52,5 +52,3 @@ end
 
 desc "Run specs via server"
 task :jasmine => ['jasmine:server']
-
-

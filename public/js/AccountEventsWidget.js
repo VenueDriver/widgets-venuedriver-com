@@ -3,24 +3,24 @@ var VenueDriverAccountEventsWidget;
   VenueDriverAccountEventsWidget = (function() {
     function VenueDriverAccountEventsWidget() {}
 
-  	options = {
+    options = {
       div_id: "body",
       autostart: true
-  	}
-  	
+    }
+    
     try{
-  	  params = {
-  		  api_token: VenueDriverWidgetConfig.api_token,
+      params = {
+        api_token: VenueDriverWidgetConfig.api_token,
         account: VenueDriverWidgetConfig.account,
         div_id: VenueDriverWidgetConfig.div_id,
         autostart: VenueDriverWidgetConfig.autostart
-  	  };
-  	}catch(e){
-  	  params = {}
-  	}
+      };
+    }catch(e){
+      params = {}
+    }
 
-  	jQuery.extend(options, params);
-  	
+    jQuery.extend(options, params);
+    
     $(function initialize(){
       VenueDriverAccountEventsWidget.api_token = options.api_token;
       VenueDriverAccountEventsWidget.account = options.account;
