@@ -48,20 +48,14 @@
 # How to update this project (only for developers of the VenueWidget project)
 
 * clone the Git repository for this project from GitHub. (We recommend forking the project first.)
-* ```rvm use 1.8.7```
-* ```rvm gemset create widgets-venuedriver-com```
-* ```rvm rvmrc trust .rvmrc```
+* Install RVM.
+* Use RVM to install Ruby 1.8.7 with ```rvm install 1.8.7```
+* Tell RVM to use that Ruby with ```rvm use --create 1.8.7@widgets-venuedriver-com```
+* Tell RVM to trust the .rvmrc file in the future with ```rvm rvmrc trust .rvmrc```
+* Install the project's gems into the gemset with ```bundle install```
 
 
 # How to run the tests on this project
-
-* Install RVM.
-* Use RVM to install Ruby 1.8.7 with ```rvm install 1.8.7```
-* Tell RVM to use that Ruby with ```rvm use 1.8.7```
-* Use RVM to create a gemset with ```rvm gemset create widgets-venuedriver-com```
-* Tell RVM to use that gemset with ```rvm gemset use widgets-venuedriver-com```
-* Tell RVM to trust the .rvmrc file with ```rvm rvmrc trust .rvmrc```
-* Install the project's gems into the gemset with ```bundle install```
 
 * ? - How to run Jasmine?  Hugo's Jasmine runner just doesn't work.
 * ? - How to run the RSpec integration spec?  There is no 'rake spec' task for this project.
