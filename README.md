@@ -56,6 +56,7 @@ ticket-purchase buttons. This widget is intended to be added to a client's web s
 * Tell RVM to use that Ruby with ```rvm use --create 1.8.7@widgets-venuedriver-com```
 * Tell RVM to trust the .rvmrc file in the future with ```rvm rvmrc trust .rvmrc```
 * Install Qt.  Information on how to install can be found at the [jasmine-headless-webkit](http://johnbintz.github.com/jasmine-headless-webkit/) site.
+* Install the gem bundler with ```gem install bundler```
 * Install the project's gems into the gemset with ```bundle install```
 
 
