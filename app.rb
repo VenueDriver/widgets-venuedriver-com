@@ -12,7 +12,6 @@ rescue LoadError
   require "rubygems"
   require "bundler"
   Bundler.setup
-
 end
 
 class VenueWidget < Sinatra::Base
@@ -26,7 +25,7 @@ class VenueWidget < Sinatra::Base
     end
   end
 
-  set :public, File.join(File.dirname(__FILE__), 'public')
+  set :public_folder, File.join(File.dirname(__FILE__), 'public')
   set :views, File.join(File.dirname(__FILE__), '/app/views')
   configure do
     set :views, "#{File.dirname(__FILE__)}/app/views"
