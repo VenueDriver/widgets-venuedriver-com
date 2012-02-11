@@ -25,10 +25,10 @@
         <link href="https://raw.github.com/Bakedweb/venue_widget/master/public/css/styles.css"  rel='stylesheet' type='text/css'/>
         <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js" charset="utf-8"></script>
         <script> 
-          VenueConfig = new Object();
-          VenueConfig.api_token = "";  //example '02AFRET3T6A961Q53'
-          VenueConfig.account = '';  //example '12345'
-          VenueConfig.div_id = 'venueWidgetMainTable'; //example 'my_div'
+          VenueDriverWidgetConfig = new Object();
+          VenueDriverWidgetConfig.api_token = "";  //example '02AFRET3T6A961Q53'
+          VenueDriverWidgetConfig.account = '';  //example '12345'
+          VenueDriverWidgetConfig.div_id = 'venueWidgetMainTable'; //example 'my_div'
         </script>
         <script src="https://raw.github.com/Bakedweb/venue_widget/master/public/js/VenueWidget.js" charset="utf-8"></script>
       </head>
