@@ -1,7 +1,7 @@
 describe("VenueWidget Test Table & Data", function() {
 
   function setup(){
-    test = new VenueDriver;
+    test = new VenueDriverAccountEventsWidget;
     test.fill_table(VenueConfig.testData);
   }
   
@@ -39,20 +39,20 @@ describe("VenueWidget Test Table & Data", function() {
 });
 
 
-describe("VenueWidget Test Object", function() {
+describe("VenueDriverAccountEventsWidget Test Object", function() {
 
-  it("I should have a object named VenueDriver", function() {
-    obj = new VenueDriver;
+  it("I should have a object named VenueDriverAccountEventsWidget", function() {
+    obj = new VenueDriverAccountEventsWidget;
     expect($.type(obj)).toEqual("object");
   });
 
-  it("VenueDriver object should have a function named start", function() {
-    obj = new VenueDriver;
+  it("VenueDriverAccountEventsWidget object should have a function named start", function() {
+    obj = new VenueDriverAccountEventsWidget;
     expect($.type(obj.start)).toEqual("function");
   });
   
-  it("VenueDriver object should have a function named fill_table", function() {
-    obj = new VenueDriver;
+  it("VenueDriverAccountEventsWidget object should have a function named fill_table", function() {
+    obj = new VenueDriverAccountEventsWidget;
     expect($.type(obj.fill_table)).toEqual("function");
   });
     
