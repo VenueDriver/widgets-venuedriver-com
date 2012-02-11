@@ -48,7 +48,7 @@
 # How to update this project (only for developers of the VenueWidget project)
 
 * clone the Git repository for this project from GitHub. (We recommend forking the project first.)
-* Install RVM.
+* Install RVM from [the RVM web site](http://beginrescueend.com/)
 * Use RVM to install Ruby 1.8.7 with ```rvm install 1.8.7```
 * Tell RVM to use that Ruby with ```rvm use --create 1.8.7@widgets-venuedriver-com```
 * Tell RVM to trust the .rvmrc file in the future with ```rvm rvmrc trust .rvmrc```
