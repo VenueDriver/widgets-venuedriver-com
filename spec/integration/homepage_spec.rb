@@ -7,7 +7,7 @@ require  File.expand_path('app')
 
 class VenueWidgetTest < Test::Unit::TestCase
 
-  include Capybara
+  include Capybara::DSL
 
   def setup
     Website.destroy_all
