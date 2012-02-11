@@ -12,3 +12,4 @@ coverage.data
 config/aws.yml
 tmp
 public/cache.manifest
+.jhw-cache

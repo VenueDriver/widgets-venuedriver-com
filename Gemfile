@@ -13,5 +13,6 @@ gem "htmlentities", "~> 4.1.0"
 group :test do
   gem 'capybara', '1.1.2'
   gem 'jasmine', '1.1.2'
+  gem "jasmine-headless-webkit", "~> 0.8.4"
   gem 'rspec', '2.8.0'
 end
