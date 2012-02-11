@@ -2,7 +2,7 @@ describe("VenueWidget Test Table & Data", function() {
 
   function setup(){
     test = new VenueDriverAccountEventsWidget;
-    test.fill_table(VenueConfig.testData);
+    test.fill_table(VenueDriverWidgetConfig.testData);
   }
   
   function clean(){
