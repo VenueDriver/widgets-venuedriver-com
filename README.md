@@ -52,13 +52,23 @@
 * Use RVM to install Ruby 1.8.7 with ```rvm install 1.8.7```
 * Tell RVM to use that Ruby with ```rvm use --create 1.8.7@widgets-venuedriver-com```
 * Tell RVM to trust the .rvmrc file in the future with ```rvm rvmrc trust .rvmrc```
+* Install Qt.  Information on how to install can be found at the [jasmine-headless-webkit](http://johnbintz.github.com/jasmine-headless-webkit/) site.
 * Install the project's gems into the gemset with ```bundle install```
 
 
 # How to run the tests on this project
 
-* ? - How to run Jasmine?  Hugo's Jasmine runner just doesn't work.
-* ? - How to run the RSpec integration spec?  There is no 'rake spec' task for this project.
+## Headless
+
+* Run the Jasmine specs using jasmine-headless-webkit with ```jasmine-headless-webkit```.  You should see results that look something like: ```PASS: 9 tests, 0 failures, 0.025 secs.```
+
+## Interactive
+
+* You can run Jasmine as a web server so that you can use Chrome or Safari or Firebug for Javascript debugging, with ```rake jasmine```.  Then navigate to [http://localhost:8888](http://localhost:8888) to run the specs.
+
+## RSpec
+
+* This project doesn't actually have any RSpec spec.  (yet?)  So don't worry about that.
 
 
 # How to deploy updates.
