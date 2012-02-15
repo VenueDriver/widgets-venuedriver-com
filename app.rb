@@ -14,10 +14,6 @@ rescue LoadError
   Bundler.setup
 end
 
-class VenueWidget < Sinatra::Base
-
-end
-
 set :public_folder, File.join(File.dirname(__FILE__), 'public')
 set :views,         File.join(File.dirname(__FILE__), '/app/views/')
 
