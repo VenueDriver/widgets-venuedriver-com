@@ -19,8 +19,12 @@ class VenueWidget < Sinatra::Base
 end
 
 set :public_folder, File.join(File.dirname(__FILE__), 'public')
-set :views, File.join(File.dirname(__FILE__), '/app/views/')
+set :views,         File.join(File.dirname(__FILE__), '/app/views/')
 
 get '/' do
-  redirect '/index'
+  redirect "/index.html"
+end
+
+get '/index' do
+  redirect "/index.html"
 end
