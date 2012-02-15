@@ -10,6 +10,7 @@ gem "fog", "~> 1.0.0"
 gem "ruby-debug", '0.10.4'
 gem "htmlentities", "~> 4.1.0"
 gem "shotgun"
+gem "rake"
 
 group :test do
   gem 'capybara', '1.1.2'
