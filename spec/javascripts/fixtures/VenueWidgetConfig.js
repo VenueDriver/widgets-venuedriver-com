@@ -3,8 +3,8 @@ VenueDriverWidgetConfig.autostart = false;
 VenueDriverWidgetConfig.account = '93';
 VenueDriverWidgetConfig.testData = 
 [{
-  "venue": {
-    "city": "CityTest", 
+  "venue": 
+    {"city": "CityTest", 
     "title": "TestVenue", 
     "state": "T"}, 
   "events": [
@@ -21,7 +21,7 @@ VenueDriverWidgetConfig.testData =
     "date": "2011/01/02", 
     "canceled": false, 
     "tickets_URL": null, 
-    "description": "Don\u2019t miss Grammy nominated Producer \u0026 DJ, Morgan Page. His live sets merge the best in European Progressive House alongside his original hits and remixes; all tied together with a healthy dose of melody and ferocious beats. Download a live mix now at www.soundcloud.com/morganpage"
-  }], 
+    "description": "Don\u2019t miss Grammy nominated Producer \u0026 DJ, Morgan Page. His live sets merge the best in European Progressive House alongside his original hits and remixes; all tied together with a healthy dose of melody and ferocious beats. Download a live mix now at www.soundcloud.com/morganpage"}
+  ], 
   "friendly_id": "frindly_test_name"
 }]
