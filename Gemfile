@@ -9,6 +9,7 @@ gem "nokogiri", "~> 1.5.0"
 gem "fog", "~> 1.0.0"
 gem "ruby-debug", '0.10.4'
 gem "htmlentities", "~> 4.1.0"
+gem "shotgun"
 
 group :test do
   gem 'capybara', '1.1.2'
