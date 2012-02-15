@@ -16,23 +16,11 @@ end
 
 class VenueWidget < Sinatra::Base
 
-  helpers do
-    def partial(page)
-      haml page, :layout => false
-    end
-    def erb_partial(page)
-      erb page, :layout => false
-    end
-  end
+end
 
-  set :public_folder, File.join(File.dirname(__FILE__), 'public')
-  set :views, File.join(File.dirname(__FILE__), '/app/views')
-  configure do
-    set :views, "#{File.dirname(__FILE__)}/app/views"
-  end
+set :public_folder, File.join(File.dirname(__FILE__), 'public')
+set :views, File.join(File.dirname(__FILE__), '/app/views/')
 
-  get '/' do
-    haml :index
-  end
-
+get '/' do
+  redirect '/index'
 end
