@@ -6,7 +6,11 @@
     <script src="../js/FormWidget.js" charset="utf-8"></script>
 	  <script>
 			$(document).ready(function() {
-			  $('#VenueDriverForm').VenueDriverFormWidget();
+			  $('#VenueDriverForm').VenueDriverFormWidget({
+			  	'api_token' : 'E5MV86M8PCXW5O',
+			  	'account_id': 3,
+			  	'venue_ids' : [117, 15, 183, 147]
+			  });
 			});
 	  </script>
   </head>

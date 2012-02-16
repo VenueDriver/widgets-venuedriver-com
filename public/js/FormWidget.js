@@ -9,12 +9,9 @@
   $.fn.VenueDriverFormWidget = function(options) {
       var defaults = {
       		'form_type'  : 'GUESTLIST',		//GUESTLIST or RESERVATION
-          'api_token'  : '',						//Account API key
           'venue_split': true,					//whether or not to display a separate drop-down for venues and events.
           'cache'      : false,					//cache response
           'cacheTTL'   : 10080,					//how long to keep cache (7 days)
-          'account_id' : 0,							//venuedriver account id
-          'venues'     : []							//venues to load data for
       };
 			var settings = $.extend(true, {}, defaults, options);
 
