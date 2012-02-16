@@ -3,16 +3,21 @@
     <title>GuestListFormWidget: demo</title>
     <link href="http://widgets.venuedriver.com/css/styles.css"  rel='stylesheet' type='text/css'/>
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js" charset="utf-8"></script>
-    <script src="../js/GuestListFormWidget.js" charset="utf-8"></script>
+    <script src="../js/FormWidget.js" charset="utf-8"></script>
+	  <script>
+			$(document).ready(function() {
+			  $('#VenueDriverForm').VenueDriverFormWidget({
+			  	'api_token' : 'E5MV86M8PCXW5O',
+			  	'account_id': 3,
+			  	'venue_ids' : [117, 15, 183, 147]
+			  });
+			});
+	  </script>
   </head>
   <body>
   <h1>GuestListFormWidget: demo</h1>
   <div id="wrapper">
-    <div id="center_table">
-      <div id="selectevent_columnlabelbar">
-        <div id="venueDriverGuestListFormWidgetMainTable"></div>
-      </div>
-    </div>
+    <div id="VenueDriverForm"></div>
   </div>  
 </body>
 </html>
