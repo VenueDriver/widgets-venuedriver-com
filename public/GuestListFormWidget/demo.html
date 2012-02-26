@@ -4,12 +4,16 @@
     <link href="http://widgets.venuedriver.com/css/styles.css"  rel='stylesheet' type='text/css'/>
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js" charset="utf-8"></script>
     <script src="../js/FormWidget.js" charset="utf-8"></script>
+    <script src="../js/getUrlParams.js" charset="utf-8"></script>
 	  <script>
 			$(document).ready(function() {
+				var afc = $.getUrlVar('afc');
+
 			  $('#VenueDriverForm').VenueDriverFormWidget({
 			  	'api_token' : 'E5MV86M8PCXW5O',
 			  	'account_id': 3,
-			  	'venue_ids' : [117, 15, 183, 147]
+			  	'venue_ids' : [117, 15, 183, 147],
+			  	'afc'       : ((afc == undefined) ? null : afc)
 			  });
 			});
 	  </script>
