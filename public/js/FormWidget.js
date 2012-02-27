@@ -39,13 +39,11 @@
 			command = "all_events";
 		}
 
-    $.getJSON("http://venuedriver.com/api/accounts/"+settings['account_id']+"/"+command+"?token="+settings['api_token']+"&callback=?", function(data) {
-     	process_data(data);
-    });
-	}
-
-	var process_data = function(data) {
-		console.log("process_data: " + data);
+    $.getJSON("http://venuedriver.com/api/accounts/"+settings['account_id']+"/"+command+"?token="+settings['api_token']+"&callback=?",
+	    function(data) {
+	    	console.log("success handler: " + data);
+	    }
+	  );
 	}
 
 	//assemble form HTML
