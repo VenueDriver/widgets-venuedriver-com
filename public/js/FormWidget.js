@@ -18,6 +18,7 @@
 				formDiv = $(this);
       	// Draw the form and a loading indicator so that users see something during the API call.
         $(this).append("<div id='loading'><img src='http://widgets.venuedriver.com/images/ajax-loader.gif'/></div>");
+
         if(!validate_settings()) {
         	//return some sort of error data
         	alert("something failed validation");
@@ -28,27 +29,25 @@
 
 	//Fetch event data
 	var fetch_data = function() {
+		console.log("In fetch_data()");
 		if(settings['venue_split'] === true) {
-//	    	$.getJSON("", {
-//	    			form_type   : settings['form_type'],
-//	    			api_token   : settings['api_token'],
-//	    			account_id  : settings['account_id'],
-//	    			venue_ids   : settings['venue_ids'],
-//	    			venue_split : settings['venue_split']
-//	    		},
-//	    		build_form
-//	   		);
+	    	$.getJSON("http://venuedriver.com/api/accounts/"+settings['account_id']+"/all_events?token="+settings['api_token']+"&callback=?", function(data) {
+          process_data(data);
+        });
 		}
 		else {
 		}
 	}
 
+	var process_data = function(data) {
+		console.log("process_data: " + data);
+	}
+
 	//assemble form HTML
-	var build_form = function(data) {
-		formDiv.empty().append(data);
+	var build_form = function() {
 		form_data += '' +
 		'<form action="http://www.venuedriverfiles.com/widget/form_processor.php" method="post" id="widgetForm">';
-		if(settings['afc'] !== '') {
+		if(settings['afc'] !== null) {
 			form_data += '<input type="hidden" name="afc" value="'+settings['afc']+'" />';
 		}
 		if(settings['venue_split'] === true) {
@@ -101,4 +100,17 @@
 	var validate_settings = function() {
 		return true;
 	}
+
+	//temporary delete me...
+	var print_obj = function(obj) {
+	  var arr = [];
+	
+	  $.each(obj, function(key, val) {
+	    var next = key + ": ";
+	    next += $.isPlainObject(val) ? print_obj(val) : val;
+	    arr.push(next);
+	  });
+
+	  return "{ " +  arr.join(", ") + " }";
+	};
 })(jQuery);
