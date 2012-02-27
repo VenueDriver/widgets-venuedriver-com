@@ -30,13 +30,18 @@
 	//Fetch event data
 	var fetch_data = function() {
 		console.log("In fetch_data()");
+		var command;
+
 		if(settings['venue_split'] === true) {
-	    	$.getJSON("http://venuedriver.com/api/accounts/"+settings['account_id']+"/all_events?token="+settings['api_token']+"&callback=?", function(data) {
-          process_data(data);
-        });
+			command = "venues.json";
 		}
 		else {
+			command = "all_events";
 		}
+
+    $.getJSON("http://venuedriver.com/api/accounts/"+settings['account_id']+"/"+command+"?token="+settings['api_token']+"&callback=?", function(data) {
+     	process_data(data);
+    });
 	}
 
 	var process_data = function(data) {
