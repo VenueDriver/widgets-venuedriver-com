@@ -1,6 +1,6 @@
 function attachChangeListener() {
 	$("#venues").change(function () {
-		console.log('test: "'+$("#venues option:selected").val()+'"');
+console.log('test: "'+$("#venues option:selected").val()+'"');
 // 		if($("#venues option:selected").val() == "") {
 //			$('option', $('#event')).remove();
 //			$('#event').append('<option value="" selected="selected"><?php print $eventDefaultOptionTxt ?></option>');

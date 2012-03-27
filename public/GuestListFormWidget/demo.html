@@ -3,20 +3,24 @@
     <title>GuestListFormWidget: demo</title>
     <link href="../css/form.css"  rel='stylesheet' type='text/css'/>
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js" charset="utf-8"></script>
-    <script src="../js/SelectionChangeListener.js" charset="utf-8"></script>
+    <script src="../js/lib/jquery.phpdate.js" charset="utf-8"></script>
     <script src="../js/FormWidget.js" charset="utf-8"></script>
     <script src="../js/getUrlParams.js" charset="utf-8"></script>
 	  <script>
+			var formObj;
+
 			$(document).ready(function() {
 				var afc = $.getUrlVar('afc');
-
-			  $('#VenueDriverForm').VenueDriverFormWidget({
-      		'form_type' : 'GUESTLIST',		//GUESTLIST or RESERVATION
-			  	'api_token' : 'E5MV86M8PCXW5O',
-			  	'account_id': 3,
-			  	'venues'    : {117: 'Delta', 15: 'Gryphon', 183: 'Ink', 147: 'Late Night Pacific '},
-			  	'afc'       : ((afc == undefined) ? null : afc)
-			  });
+			  formObj = $('#VenueDriverForm').VenueDriverFormWidget({
+					      		'form_type' 		: 'GUESTLIST',		//GUESTLIST or RESERVATION
+			  						'api_token' 		: 'E5MV86M8PCXW5O',
+			  						'account_id'		: 3,
+			  						'split_venues'	: false,
+			  						'venues'    		: {117: 'Delta', 15: 'Gryphon', 183: 'Ink', 147: 'Late Night Pacific '},
+			  						'allow_guests'	: true,
+			  						'success'				:	'http://www.venuedriver.com',
+			  						'afc'       		: ((afc == undefined) ? null : afc)
+			  					});
 			});
 	  </script>
   </head>
