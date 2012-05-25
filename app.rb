@@ -25,4 +25,8 @@ get '/index' do
   redirect "/index.html"
 end
 
+get '/cal' do
+  redirect "/CalendarEventsWidget/cal.html"
+end
+
 #commit this
