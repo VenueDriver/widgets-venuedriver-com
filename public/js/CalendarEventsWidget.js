@@ -99,7 +99,7 @@ VenueDriverCalendarEventsWidget = function(options){
     $.getJSON(url,function(data){
       calendar.json_events = data;
       if (glb_debug){console.log(calendar.json_events.length);}
-      calendar.events_ready();
+      calendar.construct_output();
     });
   };
   this.prepare_table_header = function() {
@@ -149,7 +149,7 @@ VenueDriverCalendarEventsWidget = function(options){
       this.current_cell = this.current_cell.next();
     }
   };
-  this.construct_scaffolding = function(){
+  this.construct_output = function(){
 
     //create container div
     $(this.div_id).html("<div id='calendar-container'>");
@@ -169,12 +169,9 @@ VenueDriverCalendarEventsWidget = function(options){
     $('#calendar-container .prev-month a').click(this.to_prev_month);
     $('#calendar-container .next-month a').click(this.to_next_month);
   };
-  this.events_ready = function() {
-    this.construct_scaffolding();
-  };
   this.change_first_day = function(day_str) {
     this.first_day = Utils.day_string_to_number(day_str);
-    this.events_ready();
+    this.construct_output();
   };
   this_calendar = this;
   this.pull_api_events(); 
