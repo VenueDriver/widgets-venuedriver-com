@@ -176,10 +176,6 @@ VenueDriverCalendarEventsWidget = function(options){
   this.pull_api_events(); 
 }
 
-var mini_test = function(cal) {
-  cal.set_month(2012,5);
-}
-
 $(document).ready(function() {
   window.t = new VenueDriverCalendarEventsWidget({api_type:"account",api_id:1,div_id:'cal-test',first_day:'Monday'});
   window.t.set_month(2012,5);
