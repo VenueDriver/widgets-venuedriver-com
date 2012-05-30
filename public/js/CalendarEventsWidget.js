@@ -61,7 +61,7 @@ var CellIndex = function(r,c) {
 }
 
 VenueDriverCalendarEventsWidget = function(options){
-  var this_calendar //value of 'this' changes when functions are called by jquery event handlers
+  var this_calendar =this;//this is for jquery event handlers, which rebind 'this' to something else
   this.test_http = 'http://localhost:3000/api/';
   this.real_http = 'http://www.venuedriver.com/api/';
   this.div_id = '#' + options.div_id
@@ -173,7 +173,6 @@ VenueDriverCalendarEventsWidget = function(options){
     this.first_day = Utils.day_string_to_number(day_str);
     this.construct_output();
   };
-  this_calendar = this;
   this.pull_api_events(); 
 }
 
