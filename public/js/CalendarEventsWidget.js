@@ -58,11 +58,9 @@ VenueDriverCalendarEventsWidget = function(options){
   this.date = Date.today(); //calendar defaults to current month 
   this.json_events ={};
   this.first_day = Utils.day_string_to_number(options.first_day);
-  this.setMonth = function(year,month) { //wrapper so that month param counts from 1
+  this.current_cell = new CellIndex(1,1);
+  this.set_month = function(year,month) { //wrapper so that month param counts from 1
     this.date = new Date(year,month -1);
-  };
-  this.changeMonth = function(year,month){ //change month and pull events
-    this.setMonth(year,month);
     this.pull_api_events();
   };
   this.month = function(){ //wrapper so that month counts from one
@@ -130,11 +128,11 @@ VenueDriverCalendarEventsWidget = function(options){
 }
 
 var mini_test = function(cal) {
-  cal.changeMonth(2012,5);
+  cal.set_month(2012,5);
 }
 
 $(document).ready(function() {
-  var test_obj = new VenueDriverCalendarEventsWidget({api_type:"account",api_id:1,div_id:'cal-test',first_day:'Sunday'});
+  var test_obj = new VenueDriverCalendarEventsWidget({api_type:"account",api_id:1,div_id:'cal-test',first_day:'Monday'});
   
   
 });
