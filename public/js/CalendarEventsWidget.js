@@ -46,11 +46,14 @@ var CellIndex = function(r,c) {
     if (c >= 7) return new CellIndex(this.r+1,1);
     else return new CellIndex(this.r,this.c+1);
   };
-  if (glb_debug) console.log("r="+this.r+"c="+this.c);
+  //if (glb_debug) console.log("r="+this.r+"c="+this.c);
+  this.to_css =function(){
+    return ".rc"+r+c;
+  };
 }
 
 VenueDriverCalendarEventsWidget = function(options){
-  var this_calendar
+  var this_calendar //value of 'this' changes when functions are called by jquery event handlers
   this.test_http = 'http://localhost:3000/api/';
   this.real_http = 'http://www.venuedriver.com/api/';
   this.div_id = '#' + options.div_id
@@ -108,17 +111,29 @@ VenueDriverCalendarEventsWidget = function(options){
     difference = this.first_day_of_month() - this.first_day;
     if( difference >= 0) padding = difference;
     else padding = 7 + difference;
-   
+    if(padding+this.date.getDaysInMonth() <= 35) $('#calendar-container .extra-row').remove();
     if (padding > 0){
+      this.current_cell = new CellIndex(1,1);
       for(i=1;i<=padding;i++){
-        html_location = '#calendar-container .rc1'+i;
-       // debugger;
+        html_location = '#calendar-container ' + this.current_cell.to_css() ;
         $(html_location).text('Not In Month');
+        this.current_cell = this.current_cell.next();
       }
+    }
+    else {
+      this.current_cell = new CellIndex(1,1);
+    }
+  };
+  this.prepare_days = function(){
+    var number_of_days =this.date.getDaysInMonth();
+    for (i=1; i<= number_of_days;i++){
+      var html_location = "#calendar-container " + this.current_cell.to_css();
+      $(html_location).text(i);
+      this.current_cell = this.current_cell.next();
     }
   };
   this.construct_scaffolding = function(){
-    var number_of_days = this.date.getDaysInMonth();
+
     //create container div
     $(this.div_id).html("<div id='calendar-container'>");
     $('</div>').insertAfter("#calendar-container");
@@ -131,12 +146,17 @@ VenueDriverCalendarEventsWidget = function(options){
     
     this.prepare_table_header();
     this.prepare_unused_day_padding();
+    this.prepare_days();
     
     $('#calendar-container .prev-month a').click(this.to_prev_month);
     $('#calendar-container .next-month a').click(this.to_next_month);
   };
   this.events_ready = function() {
     this.construct_scaffolding();
+  };
+  this.change_first_day = function(day_str) {
+    this.first_day = Utils.day_string_to_number(day_str);
+    this.events_ready();
   };
   this_calendar = this;
   this.pull_api_events(); 
@@ -147,7 +167,7 @@ var mini_test = function(cal) {
 }
 
 $(document).ready(function() {
-  window.t = new VenueDriverCalendarEventsWidget({api_type:"account",api_id:1,div_id:'cal-test',first_day:'Monday'});
+  window.t = new VenueDriverCalendarEventsWidget({api_type:"account",api_id:1,div_id:'cal-test',first_day:'Friday'});
   
   
 });
