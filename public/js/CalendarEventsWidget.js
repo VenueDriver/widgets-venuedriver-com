@@ -31,7 +31,22 @@ var Utils = {
       case 6: return "Saturday";
       default: "error";
     }
-  }
+  },
+  first_date_of_month: function(date){
+    newDate = new Date(date.getFullYear(),date.getMonth());
+    return newDate;
+  },
+}
+
+//iterator for table cells
+var CellIndex = function(r,c) {
+  this.r = r;
+  this.c = c
+  this.next =  function() {
+    if (c >= 7) return new CellIndex(this.r+1,1);
+    else return new CellIndex(this.r,this.c+1);
+  };
+  if (glb_debug) console.log("r="+this.r+"c="+this.c);
 }
 
 VenueDriverCalendarEventsWidget = function(options){
@@ -73,19 +88,38 @@ VenueDriverCalendarEventsWidget = function(options){
       var day_num = this.first_day + i;
       if(day_num >= 7) day_num-=7;
       //I use css classes as identifiers here
-      var location = '#calendar-container .header-'+ (i+1);
-      $(location).text(Utils.day_number_to_string(day_num));
+      var html_location = '#calendar-container .header-'+ (i+1);
+      $(html_location).text(Utils.day_number_to_string(day_num));
     }
-  }
+  };
+  this.first_day_of_month = function(){
+    return Utils.first_date_of_month(this.date).getDay();
+  };
+  this.prepare_unused_day_padding = function(){
+    difference = this.first_day_of_month() - this.first_day;
+    if( difference >= 0) padding = difference;
+    else padding = 7 + difference;
+   
+    if (padding > 0){
+      for(i=1;i<=padding;i++){
+        html_location = '#calendar-container .rc1'+i;
+       // debugger;
+        $(html_location).text('Not In Month');
+      }
+    }
+  };
   this.construct_scaffolding = function(){
     var number_of_days = this.date.getDaysInMonth();
     //create container div
     $(this.div_id).html("<div id='calendar-container'>");
     $('</div>').insertAfter("#calendar-container");
     
+    //remove previous table
+    $('cal-table').remove();
     table_template = $('.clone-me').clone().attr('class','cal-table').attr('style','')
     $('#calendar-container').append(table_template);
     this.prepare_table_header();
+    this.prepare_unused_day_padding();
     
     //$('#calendar-container').prepend("Im inside this div");
   };
@@ -100,6 +134,8 @@ var mini_test = function(cal) {
 }
 
 $(document).ready(function() {
-  var test_obj = new VenueDriverCalendarEventsWidget({api_type:"account",api_id:1,div_id:'cal-test',first_day:'Monday'});
+  var test_obj = new VenueDriverCalendarEventsWidget({api_type:"account",api_id:1,div_id:'cal-test',first_day:'Sunday'});
+  
+  
 });
 
