@@ -107,7 +107,7 @@ VenueDriverCalendarEventsWidget = function(options){
   this.first_day_of_month = function(){
     return Utils.first_date_of_month(this.date).getDay();
   };
-  this.prepare_unused_day_padding = function(){
+  this.prepare_unused_day_pre_padding = function(){
     difference = this.first_day_of_month() - this.first_day;
     if( difference >= 0) padding = difference;
     else padding = 7 + difference;
@@ -124,6 +124,14 @@ VenueDriverCalendarEventsWidget = function(options){
       this.current_cell = new CellIndex(1,1);
     }
   };
+  this.prepare_unused_day_post_padding = function(){
+    while(true){
+      var html_location = "#calendar-container " + this.current_cell.to_css();
+      $(html_location).text("Not In Month");
+      this.current_cell = this.current_cell.next();
+      if (this.current_cell.r>=7) break;
+    }
+  }
   this.prepare_days = function(){
     var number_of_days =this.date.getDaysInMonth();
     for (i=1; i<= number_of_days;i++){
@@ -145,8 +153,9 @@ VenueDriverCalendarEventsWidget = function(options){
     $('#calendar-container').append(table_template);
     
     this.prepare_table_header();
-    this.prepare_unused_day_padding();
+    this.prepare_unused_day_pre_padding();
     this.prepare_days();
+    this.prepare_unused_day_post_padding();
     
     $('#calendar-container .prev-month a').click(this.to_prev_month);
     $('#calendar-container .next-month a').click(this.to_next_month);
