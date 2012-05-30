@@ -105,7 +105,7 @@ VenueDriverCalendarEventsWidget = function(options){
   this.prepare_table_header = function() {
     var cal_title = this.date.getMonthName()+' '+this.date.getFullYear();
     $('#calendar-container .title-cell').text(cal_title);
-    for(i=0;i<=7;i++){
+    for(i=0;i<=6;i++){
       var day_num = this.first_day + i;
       if(day_num >= 7) day_num-=7;
       //I use css classes as identifiers here
