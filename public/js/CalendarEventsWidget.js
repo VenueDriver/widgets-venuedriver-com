@@ -1,10 +1,11 @@
 var VenueDriverCalendarEventsWidget;
 // var test_url = 'http://localhost:3000/api/accounts/1/events/calendar_month?month=5&year=2012&token=test'
 // **Calendar Options**
-// TODO:day of the first collumn, as in "calendar starts with sunday/monday"
 // api_type - "account" or "venue"
 // api_id - id of the api resource
 // div_id - the div where we insert the calendar
+// first_day -the first day that shows
+// javascript represents sunday as 0, monday as 1...saturday as 6
 var glb_debug = true;
 VenueDriverCalendarEventsWidget = function(options){
   this.test_http = 'http://localhost:3000/api/';
@@ -14,6 +15,19 @@ VenueDriverCalendarEventsWidget = function(options){
   this.api_id = options.api_id;
   this.date = Date.today(); //calendar defaults to current month 
   this.json_events ={};
+  this.parse_first_day = function(day_str) { //defaults to sunday if day_str is mispelled
+    switch(day_str){
+      case "sunday": return 0;
+      case "monday": return 1;
+      case "tueday": return 2;
+      case "wednesday": return 3;
+      case "thursday": return 4;
+      case "friday": return 5;
+      case "saturday": return 6;
+      default: return 0
+    }
+  }
+  this.first_day = this.parse_first_day(options.first_day);
   this.setMonth = function(year,month) { //wrapper so that month param counts from 1
     this.date = new Date(year,month -1);
   };
@@ -42,7 +56,7 @@ VenueDriverCalendarEventsWidget = function(options){
   this.construct_scaffolding = function(){
     var number_of_days = this.date.getDaysInMonth();
     //create container div
-    $('#cal-test').html("<div id='calendar-container'>");
+    $(this.div_id).html("<div id='calendar-container'>");
     $('</div>').insertAfter("#calendar-container");
     
     
@@ -60,6 +74,6 @@ var mini_test = function(cal) {
 }
 
 $(document).ready(function() {
-  var test_obj = new VenueDriverCalendarEventsWidget({api_type:"account",api_id:1,div_id:'cal-test'});
+  var test_obj = new VenueDriverCalendarEventsWidget({api_type:"account",api_id:1,div_id:'cal-test',first_day:'monday'});
 });
 
