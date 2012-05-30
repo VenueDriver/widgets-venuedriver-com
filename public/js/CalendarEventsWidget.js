@@ -10,12 +10,20 @@ var glb_debug = true;
 var Utils = {
   day_string_to_number: function(day_str) { //defaults to sunday if day_str is mispelled
     switch(day_str){
+      //use fall through behavior to check for capitlized and uncapitlized forms
+      case "sunday":
       case "Sunday": return 0;
+      case "monday":
       case "Monday": return 1;
+      case "tuesday":
       case "Tuesday": return 2;
+      case "wednesday":
       case "Wednesday": return 3;
+      case "thursday":
       case "Thursday": return 4;
+      case "friday":
       case "Friday": return 5;
+      case "saturday":
       case "Saturday": return 6;
       default: return 0;
     }
@@ -62,7 +70,8 @@ VenueDriverCalendarEventsWidget = function(options){
   this.date = Date.today(); //calendar defaults to current month 
   this.json_events ={};
   this.first_day = Utils.day_string_to_number(options.first_day);
-  this.current_cell = new CellIndex(1,1);
+  this.current_cell = new CellIndex(1,1); //WARNING This is used like a global variable in the widget member functions
+  
   this.set_month = function(year,month) { //wrapper so that month param counts from 1
     this.date = new Date(year,month -1);
     this.pull_api_events();
@@ -176,8 +185,8 @@ var mini_test = function(cal) {
 }
 
 $(document).ready(function() {
-  window.t = new VenueDriverCalendarEventsWidget({api_type:"account",api_id:1,div_id:'cal-test',first_day:'Friday'});
-  
+  window.t = new VenueDriverCalendarEventsWidget({api_type:"account",api_id:1,div_id:'cal-test',first_day:'Monday'});
+  window.t.set_month(2012,5);
   
 });
 
