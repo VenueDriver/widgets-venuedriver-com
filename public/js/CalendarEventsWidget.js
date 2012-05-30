@@ -69,6 +69,14 @@ VenueDriverCalendarEventsWidget = function(options){
   this.year = function(){
     return this.date.getFullYear();
   };
+  this.to_next_month = function(){
+    if (this.month() >= 12) this.set_month(this.year()+1,1);
+    else this.set_month(this.year(),this.month()+1);
+  };
+  this.to_prev_month = function(){
+    if (this.month() <= 1) this.set_month(this.year()-1,12);
+    else this.set_month(this.year(),this.month()-1);
+  };
   this.api_url = function(){
     return this.test_http + this.api_type +'s/' + this.api_id + '/events/calendar_month?month='+this.month()+'&year='+this.year()+'&token=test';
   };
@@ -132,7 +140,7 @@ var mini_test = function(cal) {
 }
 
 $(document).ready(function() {
-  var test_obj = new VenueDriverCalendarEventsWidget({api_type:"account",api_id:1,div_id:'cal-test',first_day:'Monday'});
+  window.t = new VenueDriverCalendarEventsWidget({api_type:"account",api_id:1,div_id:'cal-test',first_day:'Monday'});
   
   
 });
