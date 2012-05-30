@@ -50,6 +50,7 @@ var CellIndex = function(r,c) {
 }
 
 VenueDriverCalendarEventsWidget = function(options){
+  var this_calendar
   this.test_http = 'http://localhost:3000/api/';
   this.real_http = 'http://www.venuedriver.com/api/';
   this.div_id = '#' + options.div_id
@@ -70,12 +71,12 @@ VenueDriverCalendarEventsWidget = function(options){
     return this.date.getFullYear();
   };
   this.to_next_month = function(){
-    if (this.month() >= 12) this.set_month(this.year()+1,1);
-    else this.set_month(this.year(),this.month()+1);
+    if (this_calendar.month() >= 12) this_calendar.set_month(this_calendar.year()+1,1);
+    else this_calendar.set_month(this_calendar.year(),this_calendar.month()+1);
   };
   this.to_prev_month = function(){
-    if (this.month() <= 1) this.set_month(this.year()-1,12);
-    else this.set_month(this.year(),this.month()-1);
+    if (this_calendar.month() <= 1) this_calendar.set_month(this_calendar.year()-1,12);
+    else this_calendar.set_month(this_calendar.year(),this_calendar.month()-1);
   };
   this.api_url = function(){
     return this.test_http + this.api_type +'s/' + this.api_id + '/events/calendar_month?month='+this.month()+'&year='+this.year()+'&token=test';
@@ -90,6 +91,8 @@ VenueDriverCalendarEventsWidget = function(options){
     });
   };
   this.prepare_table_header = function() {
+    var cal_title = this.date.getMonthName()+' '+this.date.getFullYear();
+    $('#calendar-container .title-cell').text(cal_title);
     for(i=0;i<=7;i++){
       var day_num = this.first_day + i;
       if(day_num >= 7) day_num-=7;
@@ -122,16 +125,20 @@ VenueDriverCalendarEventsWidget = function(options){
     
     //remove previous table
     $('cal-table').remove();
+    //clone hidden html table
     table_template = $('.clone-me').clone().attr('class','cal-table').attr('style','')
     $('#calendar-container').append(table_template);
+    
     this.prepare_table_header();
     this.prepare_unused_day_padding();
     
-    //$('#calendar-container').prepend("Im inside this div");
+    $('#calendar-container .prev-month a').click(this.to_prev_month);
+    $('#calendar-container .next-month a').click(this.to_next_month);
   };
   this.events_ready = function() {
     this.construct_scaffolding();
   };
+  this_calendar = this;
   this.pull_api_events(); 
 }
 
