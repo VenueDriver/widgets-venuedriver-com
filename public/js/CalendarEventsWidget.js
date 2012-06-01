@@ -127,7 +127,8 @@ VenueDriverCalendarEventsWidget = function(options){
       this.current_cell = new CellIndex(1,1);
       for(i=1;i<=padding;i++){
         html_location = '#calendar-container ' + this.current_cell.to_css() ;
-        $(html_location).text('Not In Month');
+        $(html_location).text("");
+        $(html_location).addClass("not-in-month");
         this.current_cell = this.current_cell.next();
       }
     }
@@ -138,7 +139,8 @@ VenueDriverCalendarEventsWidget = function(options){
   this.prepare_unused_day_post_padding = function(){
     while(true){
       var html_location = "#calendar-container " + this.current_cell.to_css();
-      $(html_location).text("Not In Month");
+      $(html_location).text("");
+      $(html_location).addClass("not-in-month");
       this.current_cell = this.current_cell.next();
       if (this.current_cell.r>=7) break;
     }
@@ -152,7 +154,6 @@ VenueDriverCalendarEventsWidget = function(options){
     for(var i=0;i<this.json_events.length;i++){
       event = this.json_events[i];
       index = Date.parse(event.date).getDate()-1;
-      debugger
       this.sorted_events[index].push(event);
     }
 
@@ -162,9 +163,22 @@ VenueDriverCalendarEventsWidget = function(options){
     this.sort_events();
     for (i=1; i<= number_of_days;i++){
       var html_location = "#calendar-container " + this.current_cell.to_css();
-      $(html_location).text(i);
+      $(html_location).text("");
+      $(html_location).append("<div class='day-number'>"+i+"</div>");
+      $(html_location).addClass('in-month')
+      var the_days_events = this.sorted_events[i-1];
+      for(var j = 0;j<this.sorted_events[i-1].length;j++){
+        event = the_days_events[j];
+
+        $(html_location).append("<div class='event-content' id='event_"+event.event_id +"'>") 
+        $(html_location).append("</div>");
+        $event_location = $('#calendar-container #event_'+event.event_id);
+        $event_location.append("<div class='event-title'>"+event.title+"</div>");
+        $event_location.append("<div class='event-date'>"+event.date+"</div>");
+      }
+      
       this.current_cell = this.current_cell.next();
-    }
+    };
   };
   this.construct_output = function(){
     //create container div
