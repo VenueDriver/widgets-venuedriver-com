@@ -72,7 +72,10 @@ VenueDriverCalendarEventsWidget = function(options){
   this.sorted_events = [];
   this.first_day = Utils.day_string_to_number(options.first_day);
   this.current_cell = new CellIndex(1,1); //WARNING This is used like a global variable in the widget member functions
-  
+  this.ready_calendar_title = function() {
+    var cal_title = this.date.getMonthName()+' '+this.date.getFullYear();
+    $('#calendar-container .title-cell').text(cal_title);
+  };
   this.set_month = function(year,month) { //wrapper so that month param counts from 1
     this.date = new Date(year,month -1);
     this.pull_api_events();
@@ -100,13 +103,13 @@ VenueDriverCalendarEventsWidget = function(options){
     $.getJSON(url,function(data){
       calendar.json_events = data;
       if (glb_debug){console.log(calendar.json_events.length);}
+      calendar.ready_calendar_title();
       calendar.construct_output();
     });
 
   };
   this.prepare_table_header = function() {
-    var cal_title = this.date.getMonthName()+' '+this.date.getFullYear();
-    $('#calendar-container .title-cell').text(cal_title);
+    this.ready_calendar_title();
     for(i=0;i<=6;i++){
       var day_num = this.first_day + i;
       if(day_num >= 7) day_num-=7;
@@ -208,7 +211,6 @@ VenueDriverCalendarEventsWidget = function(options){
 
 $(document).ready(function() {
   window.t = new VenueDriverCalendarEventsWidget({api_type:"account",api_id:1,div_id:'cal-test',first_day:'Monday'});
-  window.t.set_month(2012,5);
-  
+
 });
 
