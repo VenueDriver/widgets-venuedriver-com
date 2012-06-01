@@ -69,6 +69,7 @@ VenueDriverCalendarEventsWidget = function(options){
   this.api_id = options.api_id;
   this.date = Date.today(); //calendar defaults to current month 
   this.json_events ={};
+  this.sorted_events = [];
   this.first_day = Utils.day_string_to_number(options.first_day);
   this.current_cell = new CellIndex(1,1); //WARNING This is used like a global variable in the widget member functions
   
@@ -101,6 +102,7 @@ VenueDriverCalendarEventsWidget = function(options){
       if (glb_debug){console.log(calendar.json_events.length);}
       calendar.construct_output();
     });
+
   };
   this.prepare_table_header = function() {
     var cal_title = this.date.getMonthName()+' '+this.date.getFullYear();
@@ -140,9 +142,24 @@ VenueDriverCalendarEventsWidget = function(options){
       this.current_cell = this.current_cell.next();
       if (this.current_cell.r>=7) break;
     }
-  }
+    
+  };
+  this.sort_events = function(){
+    for(var i =0; i<this.date.getDaysInMonth();i++){
+     this.sorted_events[i]=[] 
+    }
+      
+    for(var i=0;i<this.json_events.length;i++){
+      event = this.json_events[i];
+      index = Date.parse(event.date).getDate()-1;
+      debugger
+      this.sorted_events[index].push(event);
+    }
+
+  };
   this.prepare_days = function(){
     var number_of_days =this.date.getDaysInMonth();
+    this.sort_events();
     for (i=1; i<= number_of_days;i++){
       var html_location = "#calendar-container " + this.current_cell.to_css();
       $(html_location).text(i);
@@ -150,11 +167,9 @@ VenueDriverCalendarEventsWidget = function(options){
     }
   };
   this.construct_output = function(){
-
     //create container div
     $(this.div_id).html("<div id='calendar-container'>");
-    $('</div>').insertAfter("#calendar-container");
-    
+    $('</div>').insertAfter("#calendar-container");    
     //remove previous table
     $('cal-table').remove();
     //clone hidden html table
@@ -174,6 +189,7 @@ VenueDriverCalendarEventsWidget = function(options){
     this.construct_output();
   };
   this.pull_api_events(); 
+  //this.construct_output();
 }
 
 $(document).ready(function() {
