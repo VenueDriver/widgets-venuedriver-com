@@ -4,20 +4,34 @@ body {
 }
 
 table {
-  border: 4px solid black;
+  border: 2px solid black;
   padding:0px;
-
+  margin:0px;
+  border-collapse:collapse;
 }
 
-table, th {
-  border: 3px solid black;
+table th {
+  border: 1px solid black;
+  margin:0px;
 }
 
-td {
-  border: 4px solid black;
+table td {
+  border: 1px solid black;
   text-align:left;
+  margin:0px;
+  padding:0px;
   vertical-align:top;
 }
+
+.event-title {
+  color:white;
+}
+
+.event-date {
+  color:white;
+  font-size:70%;
+}
+
 
 .not-in-month {
   background-color: 0F235C;
@@ -40,13 +54,28 @@ td {
 }
 
 .title-cell {
-  background-color:883511;
-  width:auto;
-  padding:0px;
+  color:white;
+  text-transform: uppercase;
+  margin:4px;
 }
 
 .change-month {
-  background-color:886211;
+  color: white;
+  text-decoration: none;
+  padding: 3px 20px;
+  background: #ff9f00; /* for non-css3 browsers */
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ff9f00', endColorstr='#e08500'); /* for IE */
+  background: -webkit-gradient(linear, left top, left bottom, from(#ff9f00), to(#e08500)); /* for webkit browsers */
+  background: -moz-linear-gradient(top,  #ff9f00,  #e08500); /* for firefox 3.6+ */   
+  border-radius: 3px;
+  border: 1px #e08500 solid;
+}
+
+.change-month:hover {
+  background: #e08500; /* for non-css3 browsers */
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#e08500', endColorstr='#ff9f00'); /* for IE */
+  background: -webkit-gradient(linear, left top, left bottom, from(#e08500), to(#ff9f00)); /* for webkit browsers */
+  background: -moz-linear-gradient(top,  #e08500,  #ff9f00); /* for firefox 3.6+ */   
 }
 
 .prev-month {
@@ -55,4 +84,25 @@ td {
 
 .next-month {
   float:right;
+}
+
+.day-row {
+  padding: 7px;
+  color: white;
+  font-weight: lighter;
+  font-family: 'century gothic', 'arial';
+  text-transform: uppercase;
+  background: #1d333f; /* for non-css3 browsers */
+
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#33464f', endColorstr='#1d333f'); /* for IE */
+  background: -webkit-gradient(linear, left top, left bottom, from(#33464f), to(#1d333f)); /* for webkit browsers */
+  background: -moz-linear-gradient(top,  #33464f,  #1d333f); /* for firefox 3.6+ */ 
+}
+
+table thead{
+  background-color: #A9BBD7;
+  font-family: arial;
+  text-align: left;
+  font-weight: lighter;
+  border: #e9eaeb 1px solid;
 }
