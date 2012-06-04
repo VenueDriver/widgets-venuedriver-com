@@ -198,8 +198,8 @@ VenueDriverCalendarEventsWidget = function(options){
     this.prepare_days();
     this.prepare_unused_day_post_padding();
     
-    $('#calendar-container .prev-month a').click(this.to_prev_month);
-    $('#calendar-container .next-month a').click(this.to_next_month);
+    $('#calendar-container .prev-month').click(this.to_prev_month);
+    $('#calendar-container .next-month').click(this.to_next_month);
   };
   this.change_first_day = function(day_str) {
     this.first_day = Utils.day_string_to_number(day_str);

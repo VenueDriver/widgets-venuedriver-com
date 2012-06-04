@@ -42,3 +42,11 @@ td {
 .change-month {
   background-color:886211;
 }
+
+.prev-month {
+  float:left;
+}
+
+.next-month {
+  float:right;
+}
