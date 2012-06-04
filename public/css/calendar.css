@@ -35,8 +35,14 @@ td {
   background-color:D4A338;
 }
 
+.top {
+  background-color:883511;
+}
+
 .title-cell {
   background-color:883511;
+  width:auto;
+  padding:0px;
 }
 
 .change-month {
