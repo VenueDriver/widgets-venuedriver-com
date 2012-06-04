@@ -169,12 +169,15 @@ VenueDriverCalendarEventsWidget = function(options){
       $(html_location).text("");
       $(html_location).append("<div class='day-number'>"+i+"</div>");
       $(html_location).addClass('in-month')
+      $(html_location).append("<div class='event-content-area'>");
+      $(html_location).append("</div>")
+      $html_location2 = $(html_location + ' .event-content-area')
       var the_days_events = this.sorted_events[i-1];
       for(var j = 0;j<this.sorted_events[i-1].length;j++){
         event = the_days_events[j];
 
-        $(html_location).append("<div class='event-content' id='event_"+event.event_id +"'>") 
-        $(html_location).append("</div>");
+        $html_location2.append("<div class='event-content' id='event_"+event.event_id +"'>") 
+        $html_location2.append("</div>");
         $event_location = $('#calendar-container #event_'+event.event_id);
         $event_location.append("<div class='event-title'>"+event.title+"</div>");
         $event_location.append("<div class='event-date'>"+event.date+"</div>");

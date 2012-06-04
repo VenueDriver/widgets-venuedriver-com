@@ -23,13 +23,22 @@ table td {
   vertical-align:top;
 }
 
+table td .event-content-area {
+  min-height:75px;
+  min-width:110px;
+}
+
+.event-content {
+  font-size:85%;
+}
+
 .event-title {
   color:white;
 }
 
 .event-date {
   color:white;
-  font-size:70%;
+  font-size:50%;
 }
 
 
