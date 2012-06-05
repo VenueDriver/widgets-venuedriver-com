@@ -126,9 +126,9 @@ VenueDriverCalendarEventsWidget = function(options){
     if (padding > 0){
       this.current_cell = new CellIndex(1,1);
       for(i=1;i<=padding;i++){
-        html_location = '#calendar-container ' + this.current_cell.to_css() ;
-        $(html_location).text("");
-        $(html_location).addClass("not-in-month");
+        var $html_location = $('#calendar-container ' + this.current_cell.to_css());
+        $html_location.text("");
+        $html_location.addClass("not-in-month");
         this.current_cell = this.current_cell.next();
       }
     }
@@ -138,9 +138,9 @@ VenueDriverCalendarEventsWidget = function(options){
   };
   this.prepare_unused_day_post_padding = function(){
     while(true){
-      var html_location = "#calendar-container " + this.current_cell.to_css();
-      $(html_location).text("");
-      $(html_location).addClass("not-in-month");
+      var $html_location = $("#calendar-container " + this.current_cell.to_css());
+      $html_location.text("");
+      $html_location.addClass("not-in-month");
       this.current_cell = this.current_cell.next();
       if (this.current_cell.r>=7) break;
     }
