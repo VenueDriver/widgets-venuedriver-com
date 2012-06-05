@@ -5,31 +5,49 @@ body {
 
 table {
   border: 2px solid black;
-  padding:0px;
-  margin:0px;
   border-collapse:collapse;
 }
 
+/* this applies to the first two rows */
 table th {
   border: 1px solid black;
   margin:0px;
 }
 
+/* this refers to all the table cells that could be used to diplay a calendar day*/
 table td {
   border: 1px solid black;
   text-align:left;
   margin:0px;
   padding:0px;
   vertical-align:top;
+  height: 95px;
+  min-width: 110px;
 }
 
-table td .event-content-area {
-  min-height:75px;
-  min-width:110px;
+.not-in-month {
+  background-color:0F235C;
+}
+
+.in-month {
+  background-color:31498F;
+}
+
+.in-month .day-number {
+  background-color:91A8EC;
+}
+
+.day-number {
+  padding-left:5px;
+}
+
+.event-content-area {
+  font-size:85%;
+  padding-left:5px;
 }
 
 .event-content {
-  font-size:85%;
+  
 }
 
 .event-title {
@@ -42,20 +60,8 @@ table td .event-content-area {
 }
 
 
-.not-in-month {
-  background-color: 0F235C;
-}
-
-.in-month {
-  background-color:31498F;
-}
-
-.in-month .day-number {
-  background-color:91A8EC;
-}
-
 .day-name-header {
-  background-color:D4A338;
+  background-color:#ff9f00;
 }
 
 .top {
@@ -78,6 +84,7 @@ table td .event-content-area {
   background: -moz-linear-gradient(top,  #ff9f00,  #e08500); /* for firefox 3.6+ */   
   border-radius: 3px;
   border: 1px #e08500 solid;
+  text-transform: uppercase;
 }
 
 .change-month:hover {
