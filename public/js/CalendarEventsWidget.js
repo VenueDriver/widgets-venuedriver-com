@@ -72,7 +72,7 @@ VenueDriverCalendarEventsWidget = function(options){
   this.sorted_events = [];
   this.first_day = Utils.day_string_to_number(options.first_day);
   this.current_cell = new CellIndex(1,1); //WARNING This is used like a global variable in the widget member functions
-  this.ready_calendar_title = function() {
+  this.prepare_calendar_title = function() {
     var cal_title = this.date.getMonthName()+' '+this.date.getFullYear();
     $('#calendar-container .calendar-title').text(cal_title);
   };
@@ -103,13 +103,13 @@ VenueDriverCalendarEventsWidget = function(options){
     $.getJSON(url,function(data){
       calendar.json_events = data;
       if (glb_debug){console.log(calendar.json_events.length);}
-      calendar.ready_calendar_title();
+      calendar.prepare_calendar_title();
       calendar.construct_output();
     });
 
   };
   this.prepare_table_header = function() {
-    this.ready_calendar_title();
+    this.prepare_calendar_title();
     for(i=0;i<=6;i++){
       var day_num = this.first_day + i;
       if(day_num >= 7) day_num-=7;
