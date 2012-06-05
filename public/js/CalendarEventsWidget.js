@@ -72,10 +72,6 @@ VenueDriverCalendarEventsWidget = function(options){
   this.sorted_events = [];
   this.first_day = Utils.day_string_to_number(options.first_day);
   this.current_cell = new CellIndex(1,1); //WARNING This is used like a global variable in the widget member functions
-  this.prepare_calendar_title = function() {
-    var cal_title = this.date.getMonthName()+' '+this.date.getFullYear();
-    $('#calendar-container .calendar-title').text(cal_title);
-  };
   this.set_month = function(year,month) { //wrapper so that month param counts from 1
     this.date = new Date(year,month -1);
     this.pull_api_events();
@@ -106,7 +102,10 @@ VenueDriverCalendarEventsWidget = function(options){
       calendar.prepare_calendar_title();
       calendar.construct_output();
     });
-
+  };
+  this.prepare_calendar_title = function() {
+    var cal_title = this.date.getMonthName()+' '+this.date.getFullYear();
+    $('#calendar-container .month-title').text(cal_title);
   };
   this.prepare_table_header = function() {
     this.prepare_calendar_title();
