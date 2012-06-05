@@ -192,7 +192,7 @@ VenueDriverCalendarEventsWidget = function(options){
         event = the_days_events[j];
         $html_location2.append("<div class='event-content' id='event_"+event.event_id +"'></div>");
         $event_location = $('#calendar-container #event_'+event.event_id);
-        $event_location.append("<div class='event-title'>"+event.title+"</div>");
+        $event_location.append("<div class='event-title'><a href='#'>"+event.title+"</a></div>");
         $event_location.append("<div class='event-date'>"+event.date+"</div>");
       }     
       this.current_cell = this.current_cell.next();
