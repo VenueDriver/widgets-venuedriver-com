@@ -171,10 +171,10 @@ VenueDriverCalendarEventsWidget = function(options){
       var css_path = "#calendar-container " + this.current_cell.to_css();
       var $html_location = $(css_path);
       $html_location.text("");
-      $html_location.addClass('in-month')
+      $html_location.addClass('in-month');
       $html_location.append("<div class='day-number'>"+i+"</div>");
       $html_location.append("<div class='event-content-area'></div>");
-      $html_location2 = $(css_path + ' .event-content-area')
+      $html_location2 = $(css_path + ' .event-content-area');
       var the_days_events = this.sorted_events[i-1];
      
       if(the_days_events.length > 0){ 
@@ -186,9 +186,7 @@ VenueDriverCalendarEventsWidget = function(options){
       
       for(var j = 0;j<the_days_events.length;j++){
         event = the_days_events[j];
-
-        $html_location2.append("<div class='event-content' id='event_"+event.event_id +"'>") 
-        $html_location2.append("</div>");
+        $html_location2.append("<div class='event-content' id='event_"+event.event_id +"'></div>");
         $event_location = $('#calendar-container #event_'+event.event_id);
         $event_location.append("<div class='event-title'>"+event.title+"</div>");
         $event_location.append("<div class='event-date'>"+event.date+"</div>");
@@ -203,7 +201,7 @@ VenueDriverCalendarEventsWidget = function(options){
     //remove previous table
     $('cal-table').remove();
     //clone hidden html table
-    table_template = $('.clone-me').clone().attr('class','cal-table').attr('style','')
+    table_template = $('.clone-me').clone().attr('class','cal-table').attr('style','');
     $('#calendar-container').append(table_template);
     
     this.prepare_table_header();
