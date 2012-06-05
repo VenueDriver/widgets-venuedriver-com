@@ -95,11 +95,10 @@ VenueDriverCalendarEventsWidget = function(options){
   };
   this.pull_api_events = function() {
     var url = this.api_url();
-    var calendar =this;
     $.getJSON(url,function(data){
-      calendar.json_events = data;
-      if (glb_debug){console.log(calendar.json_events.length);}
-      calendar.construct_output();
+      this_calendar.json_events = data;
+      if (glb_debug){console.log(this_calendar.json_events.length);}
+      this_calendar.construct_output();
     });
   };
   this.prepare_calendar_title = function() {
@@ -148,10 +147,15 @@ VenueDriverCalendarEventsWidget = function(options){
     
   };
   this.sort_events = function(){
-    for(var i =0; i<this.date.getDaysInMonth();i++){
-     this.sorted_events[i]=[] 
+    //sorted events is an array of arrays
+    //the outer arrays index is the date number -1, as in June 5ths events
+    //are in sorted events[4]
+    //each inner array contains all the events for a particular day
+    for(var day_index =0; day_index<this.date.getDaysInMonth();day_index++){
+     this.sorted_events[day_index]=[] 
     }
-      
+    
+    //iterate through all events in json_events with i
     for(var i=0;i<this.json_events.length;i++){
       event = this.json_events[i];
       index = Date.parse(event.date).getDate()-1;
@@ -212,6 +216,5 @@ VenueDriverCalendarEventsWidget = function(options){
 
 $(document).ready(function() {
   window.t = new VenueDriverCalendarEventsWidget({api_type:"account",api_id:1,div_id:'cal-test',first_day:'Monday'});
-
 });
 
