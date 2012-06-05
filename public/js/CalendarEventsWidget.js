@@ -99,7 +99,6 @@ VenueDriverCalendarEventsWidget = function(options){
     $.getJSON(url,function(data){
       calendar.json_events = data;
       if (glb_debug){console.log(calendar.json_events.length);}
-      calendar.prepare_calendar_title();
       calendar.construct_output();
     });
   };
