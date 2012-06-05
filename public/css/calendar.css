@@ -124,6 +124,18 @@ table td {
   color:white;
 }
 
+.event-title a:link{
+  color:white;
+}
+
+.event-title a:visited {
+  color:white;
+}
+
+.event-title a:hover {
+  color:#ff9f00;;
+}
+
 .event-date {
   color:white;
   font-size:50%;
