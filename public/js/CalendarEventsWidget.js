@@ -7,6 +7,7 @@ var VenueDriverCalendarEventsWidget;
 // first_day -the first day that shows
 // javascript represents sunday as 0, monday as 1...saturday as 6
 var glb_debug = true;
+var db_panel = true;
 var Utils = {
   day_string_to_number: function(day_str) { //defaults to sunday if day_str is mispelled
     switch(day_str){
@@ -83,6 +84,9 @@ VenueDriverCalendarEventsWidget = function(options){
   this.year = function(){
     return this.date.getFullYear();
   };
+  this.update_side_panel = function(text) {
+    $('#side-panel').text(text);
+  }
   this.to_next_month = function(){
     if (this_calendar.month() >= 12) this_calendar.set_month(this_calendar.year()+1,1);
     else this_calendar.set_month(this_calendar.year(),this_calendar.month()+1);
@@ -201,7 +205,7 @@ VenueDriverCalendarEventsWidget = function(options){
     //remove previous table
     $('cal-table').remove();
     //clone hidden html table
-    table_template = $('.clone-me').clone().attr('class','cal-table').attr('style','');
+    table_template = $('.clone-me').clone().attr('class','cal-table').attr('style','display:inline-block;float:left');
     $('#calendar-container').append(table_template);
     
     this.prepare_table_header();
@@ -211,6 +215,11 @@ VenueDriverCalendarEventsWidget = function(options){
     
     $('#calendar-container .prev-month').click(this.to_prev_month);
     $('#calendar-container .next-month').click(this.to_next_month);
+    
+    $('#side-panel').remove();
+    debugger;
+    $(this.div_id + ' #calendar-container').append("<div id='side-panel' style='display:inline-block;float:left'>side panel </div>");
+    $('#side-panel').html("<a href='#'>test link</a>");
   };
   this.change_first_day = function(day_str) {
     this.first_day = Utils.day_string_to_number(day_str);

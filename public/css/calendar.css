@@ -77,6 +77,10 @@ table th {
   background: -moz-linear-gradient(top,  #e08500,  #ff9f00); /* for firefox 3.6+ */   
 }
 
+#side-panel {
+  min-height:500px;
+}
+
 /* this refers to all the table cells that could be used to diplay a calendar day*/
 table td {
   border: 1px solid black;
