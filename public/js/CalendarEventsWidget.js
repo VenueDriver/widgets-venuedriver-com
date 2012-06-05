@@ -62,6 +62,7 @@ var CellIndex = function(r,c) {
 
 VenueDriverCalendarEventsWidget = function(options){
   var this_calendar =this;//this is for jquery event handlers, which rebind 'this' to something else
+  var new_div = '#components .empty-div'
   this.test_http = 'http://localhost:3000/api/';
   this.real_http = 'http://www.venuedriver.com/api/';
   this.div_id = '#' + options.div_id
@@ -170,12 +171,19 @@ VenueDriverCalendarEventsWidget = function(options){
       var css_path = "#calendar-container " + this.current_cell.to_css();
       var $html_location = $(css_path);
       $html_location.text("");
-      $html_location.append("<div class='day-number'>"+i+"</div>");
       $html_location.addClass('in-month')
-      $html_location.append("<div class='event-content-area'>");
-      $html_location.append("</div>")
+      $html_location.append("<div class='day-number'>"+i+"</div>");
+      $html_location.append("<div class='event-content-area'></div>");
       $html_location2 = $(css_path + ' .event-content-area')
       var the_days_events = this.sorted_events[i-1];
+     
+      if(the_days_events.length > 0){ 
+        $html_location.addClass('has-events');
+      }
+      else {
+        $html_location.addClass('has-no-events');
+      }
+      
       for(var j = 0;j<the_days_events.length;j++){
         event = the_days_events[j];
 
