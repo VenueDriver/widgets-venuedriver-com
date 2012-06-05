@@ -167,15 +167,16 @@ VenueDriverCalendarEventsWidget = function(options){
     var number_of_days =this.date.getDaysInMonth();
     this.sort_events();
     for (i=1; i<= number_of_days;i++){
-      var html_location = "#calendar-container " + this.current_cell.to_css();
-      $(html_location).text("");
-      $(html_location).append("<div class='day-number'>"+i+"</div>");
-      $(html_location).addClass('in-month')
-      $(html_location).append("<div class='event-content-area'>");
-      $(html_location).append("</div>")
-      $html_location2 = $(html_location + ' .event-content-area')
+      var css_path = "#calendar-container " + this.current_cell.to_css();
+      var $html_location = $(css_path);
+      $html_location.text("");
+      $html_location.append("<div class='day-number'>"+i+"</div>");
+      $html_location.addClass('in-month')
+      $html_location.append("<div class='event-content-area'>");
+      $html_location.append("</div>")
+      $html_location2 = $(css_path + ' .event-content-area')
       var the_days_events = this.sorted_events[i-1];
-      for(var j = 0;j<this.sorted_events[i-1].length;j++){
+      for(var j = 0;j<the_days_events.length;j++){
         event = the_days_events[j];
 
         $html_location2.append("<div class='event-content' id='event_"+event.event_id +"'>") 
@@ -183,8 +184,7 @@ VenueDriverCalendarEventsWidget = function(options){
         $event_location = $('#calendar-container #event_'+event.event_id);
         $event_location.append("<div class='event-title'>"+event.title+"</div>");
         $event_location.append("<div class='event-date'>"+event.date+"</div>");
-      }
-      
+      }     
       this.current_cell = this.current_cell.next();
     };
   };
