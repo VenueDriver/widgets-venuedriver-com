@@ -16,7 +16,7 @@ table th {
 .title-cell {
   /*background-color:883511;*/
  /* filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#883511', endColorstr='#883511'); /* for IE */ 
-  background: -webkit-gradient(linear, left top, left bottom, from(#691F00), to(#A23000)); /* for webkit browsers */
+  background: -webkit-gradient(linear, left top, left bottom, to(#691F00), from(#A23000)); /* for webkit browsers */
  /*  background: -moz-linear-gradient(top,  #883511,  #883511); /* for firefox 3.6+ */
 }
 
@@ -110,7 +110,6 @@ table td {
 }
 
 .event-content {
-  
 }
 
 .event-title {
@@ -120,12 +119,4 @@ table td {
 .event-date {
   color:white;
   font-size:50%;
-}
-
-table thead{
-  background-color: #A9BBD7;
-  font-family: arial;
-  text-align: left;
-  font-weight: lighter;
-  border: #e9eaeb 1px solid;
 }
