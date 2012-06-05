@@ -74,7 +74,7 @@ VenueDriverCalendarEventsWidget = function(options){
   this.current_cell = new CellIndex(1,1); //WARNING This is used like a global variable in the widget member functions
   this.ready_calendar_title = function() {
     var cal_title = this.date.getMonthName()+' '+this.date.getFullYear();
-    $('#calendar-container .title-cell').text(cal_title);
+    $('#calendar-container .calendar-title').text(cal_title);
   };
   this.set_month = function(year,month) { //wrapper so that month param counts from 1
     this.date = new Date(year,month -1);
