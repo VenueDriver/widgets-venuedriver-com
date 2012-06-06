@@ -166,6 +166,7 @@ VenueDriverCalendarEventsWidget = function(options){
       index = Date.parse(event.date).getDate()-1;
       this.sorted_events[index].push(event);
     }
+    event = null;
 
   };
   this.write_hidden_event_info = function(params){
@@ -173,6 +174,29 @@ VenueDriverCalendarEventsWidget = function(options){
     result = "<div class='embed-info' style='display:none' event_id='"+ l_event.event_id+"' title='"+l_event.title+"' date='"+l_event.date;
     result+="'></div> ";
     return result;
+  };
+  this.prepare_events = function(the_days_events,$content_area){
+     for(var j = 0;j<the_days_events.length;j++){
+        var event_= the_days_events[j];
+        var id = 'event_'+event_.event_id;
+        $content_area.append("<div class='event-content' id='event_"+event_.event_id +"'></div>");
+        $event_location = $('#calendar-container #event_'+event_.event_id);
+        debugger;
+        $event_location.append("<div class='event-title'><a href='#'>"+event_.title+"</a></div>");
+        debugger;
+        $event_location.append("<div class='event-date'>"+event_.date+"</div>");
+        $event_location.prepend(this.write_hidden_event_info({event:event_}));
+        $('#'+id).click(function(){
+          var info = $(this).children()[0]
+          info.get = function(attr){
+            return this.getAttribute(attr);
+          };
+          var html = "<p> id: "+info.get('event_id')+" </p>"
+          html += "<p> title: "+info.get('title')+" </p>"
+          html += "<p> date: "+info.get('date')+" </p>"
+          $('#side-panel').html(html);
+        });
+      }
   };
   this.prepare_days = function(){
     var number_of_days =this.date.getDaysInMonth();
@@ -186,35 +210,10 @@ VenueDriverCalendarEventsWidget = function(options){
       $html_location.append("<div class='event-content-area'></div>");
       $html_location2 = $(css_path + ' .event-content-area');
       var the_days_events = this.sorted_events[i-1];
-     
-      if(the_days_events.length > 0){ 
-        $html_location.addClass('has-events');
-      }
-      else {
-        $html_location.addClass('has-no-events');
-      }
-      
-      for(var j = 0;j<the_days_events.length;j++){
-        var event_= the_days_events[j];
-        var id = 'event_'+event_.event_id;
-        $html_location2.append("<div class='event-content' id='event_"+event_.event_id +"'></div>");
-        $event_location = $('#calendar-container #event_'+event_.event_id);
-        $event_location.append("<div class='event-title'><a href='#'>"+event.title+"</a></div>");
-        $event_location.append("<div class='event-date'>"+event_.date+"</div>");
-        $event_location.prepend(this.write_hidden_event_info({event:event_}));
-        $('#'+id).click(function(){
-          var info = $(this).children()[0]
-          info.get = function(attr){
-            return this.getAttribute(attr);
-          };
-          debugger;
-          var html = "<p> id: "+info.get('event_id')+" </p>"
-          html += "<p> title: "+info.get('title')+" </p>"
-          html += "<p> date: "+info.get('date')+" </p>"
-          $('#side-panel').html(html);
-          debugger;
-        });
-      }     
+      if(the_days_events.length > 0)$html_location.addClass('has-events');
+      else $html_location.addClass('has-no-events');
+      debugger;
+      this.prepare_events(the_days_events,$html_location2);         
       this.current_cell = this.current_cell.next();
     };
   };
