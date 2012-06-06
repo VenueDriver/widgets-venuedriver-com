@@ -171,29 +171,26 @@ VenueDriverCalendarEventsWidget = function(options){
   };
   this.write_hidden_event_info = function(params){
     var l_event = params.event;
-    result = "<div class='embed-info' style='display:none' event_id='"+ l_event.event_id+"' title='"+l_event.title+"' date='"+l_event.date;
-    result+="'></div> ";
+    var result = "id='event_"+l_event.event_id+"' data-id='"+ l_event.event_id+"' data-title='"+l_event.title+"' data-date='"+l_event.date;
     return result;
   };
   this.prepare_events = function(the_days_events,$content_area){
      for(var j = 0;j<the_days_events.length;j++){
         var event_= the_days_events[j];
         var id = 'event_'+event_.event_id;
-        $content_area.append("<div class='event-content' id='event_"+event_.event_id +"'></div>");
+        var str = "<div class='event-content' "+ this.write_hidden_event_info({event:event_})+"'></div>";
+        debugger;
+        $content_area.append(str);
+        debugger;
         $event_location = $('#calendar-container #event_'+event_.event_id);
-        debugger;
         $event_location.append("<div class='event-title'><a href='#'>"+event_.title+"</a></div>");
-        debugger;
         $event_location.append("<div class='event-date'>"+event_.date+"</div>");
-        $event_location.prepend(this.write_hidden_event_info({event:event_}));
         $('#'+id).click(function(){
-          var info = $(this).children()[0]
-          info.get = function(attr){
-            return this.getAttribute(attr);
-          };
-          var html = "<p> id: "+info.get('event_id')+" </p>"
-          html += "<p> title: "+info.get('title')+" </p>"
-          html += "<p> date: "+info.get('date')+" </p>"
+          var info = $(this)
+          //here 'this' = $('#'+id) called above ^^
+          var html = "<p> id: "+info.attr('data-id')+" </p>"
+          html += "<p> title: "+info.attr('data-title')+" </p>"
+          html += "<p> date: "+info.attr('data-date')+" </p>"
           $('#side-panel').html(html);
         });
       }
@@ -212,7 +209,6 @@ VenueDriverCalendarEventsWidget = function(options){
       var the_days_events = this.sorted_events[i-1];
       if(the_days_events.length > 0)$html_location.addClass('has-events');
       else $html_location.addClass('has-no-events');
-      debugger;
       this.prepare_events(the_days_events,$html_location2);         
       this.current_cell = this.current_cell.next();
     };
