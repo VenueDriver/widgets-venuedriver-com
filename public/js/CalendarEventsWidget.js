@@ -50,7 +50,7 @@ var Utils = {
 //iterator for table cells
 var CellIndex = function(r,c) {
   this.r = r;
-  this.c = c
+  this.c = c;
   this.next =  function() {
     if (c >= 7) return new CellIndex(this.r+1,1);
     else return new CellIndex(this.r,this.c+1);
@@ -168,6 +168,12 @@ VenueDriverCalendarEventsWidget = function(options){
     }
 
   };
+  this.write_hidden_event_info = function(params){
+    var l_event = params.event;
+    result = "<div class='embed-info' style='display:none' event_id='"+ l_event.event_id+"' title='"+l_event.title+"' date='"+l_event.date;
+    result+="'></div> ";
+    return result;
+  };
   this.prepare_days = function(){
     var number_of_days =this.date.getDaysInMonth();
     this.sort_events();
@@ -189,11 +195,25 @@ VenueDriverCalendarEventsWidget = function(options){
       }
       
       for(var j = 0;j<the_days_events.length;j++){
-        event = the_days_events[j];
-        $html_location2.append("<div class='event-content' id='event_"+event.event_id +"'></div>");
-        $event_location = $('#calendar-container #event_'+event.event_id);
+        var event_= the_days_events[j];
+        var id = 'event_'+event_.event_id;
+        $html_location2.append("<div class='event-content' id='event_"+event_.event_id +"'></div>");
+        $event_location = $('#calendar-container #event_'+event_.event_id);
         $event_location.append("<div class='event-title'><a href='#'>"+event.title+"</a></div>");
-        $event_location.append("<div class='event-date'>"+event.date+"</div>");
+        $event_location.append("<div class='event-date'>"+event_.date+"</div>");
+        $event_location.prepend(this.write_hidden_event_info({event:event_}));
+        $('#'+id).click(function(){
+          var info = $(this).children()[0]
+          info.get = function(attr){
+            return this.getAttribute(attr);
+          };
+          debugger;
+          var html = "<p> id: "+info.get('event_id')+" </p>"
+          html += "<p> title: "+info.get('title')+" </p>"
+          html += "<p> date: "+info.get('date')+" </p>"
+          $('#side-panel').html(html);
+          debugger;
+        });
       }     
       this.current_cell = this.current_cell.next();
     };
@@ -216,10 +236,7 @@ VenueDriverCalendarEventsWidget = function(options){
     $('#calendar-container .prev-month').click(this.to_prev_month);
     $('#calendar-container .next-month').click(this.to_next_month);
     
-    $('#side-panel').remove();
-    debugger;
     $(this.div_id + ' #calendar-container').append("<div id='side-panel' style='display:inline-block;float:left'>side panel </div>");
-    $('#side-panel').html("<a href='#'>test link</a>");
   };
   this.change_first_day = function(day_str) {
     this.first_day = Utils.day_string_to_number(day_str);
