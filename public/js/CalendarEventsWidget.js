@@ -66,6 +66,7 @@ VenueDriverCalendarEventsWidget = function(options){
   this.json_events ={};
   this.sorted_events = [];
   this.current_cell = new CellIndex(1,1); //WARNING This is used like a global variable in the widget member functions
+  //private
   this.read_options = function(options){
     this.test_http = 'http://localhost:3000/api/';
     this.real_http = 'http://www.venuedriver.com/api/';
@@ -94,9 +95,11 @@ VenueDriverCalendarEventsWidget = function(options){
     if (this_calendar.month() <= 1) this_calendar.set_month(this_calendar.year()-1,12);
     else this_calendar.set_month(this_calendar.year(),this_calendar.month()-1);
   };
+  //private
   this.api_url = function(){
     return this.test_http + this.api_type +'s/' + this.api_id + '/events/calendar_month?month='+this.month()+'&year='+this.year()+'&token=test';
   };
+  //private
   this.pull_api_events = function() {
     var url = this.api_url();
     $.getJSON(url,function(data){
@@ -105,10 +108,12 @@ VenueDriverCalendarEventsWidget = function(options){
       this_calendar.construct_output();
     });
   };
+  //private
   this.prepare_calendar_title = function() {
     var cal_title = this.date.getMonthName()+' '+this.date.getFullYear();
     $('#calendar-container .month-title').text(cal_title);
   };
+  //private
   this.prepare_table_header = function() {
     this.prepare_calendar_title();
     for(i=0;i<=6;i++){
@@ -119,9 +124,11 @@ VenueDriverCalendarEventsWidget = function(options){
       $(html_location).text(Utils.day_number_to_string(day_num));
     }
   };
+  //private
   this.first_day_of_month = function(){
     return Utils.first_date_of_month(this.date).getDay();
   };
+  //private
   this.prepare_unused_day_pre_padding = function(){
     // this functions goal is to account for spaces in the calendar table 
     // that are not part of the month. This function handles the spaces
@@ -144,6 +151,7 @@ VenueDriverCalendarEventsWidget = function(options){
       this.current_cell = new CellIndex(1,1);
     }
   };
+  //private
   this.prepare_unused_day_post_padding = function(){
     //this function accounts for unused table cells that occur after the 
     // calendar has run out of days
@@ -156,6 +164,7 @@ VenueDriverCalendarEventsWidget = function(options){
     }
     
   };
+  //private
   this.sort_events = function(){
     //sorted events is an array of arrays
     //the outer arrays index is (the date's number -1), as in June 5ths events
@@ -173,6 +182,7 @@ VenueDriverCalendarEventsWidget = function(options){
     }
     event = null;//help reduce future errors by accidentall reusing this quantity
   };
+  //private
   this.format_event_info = function(event, pairs){
     result = "";
     for (var key in pairs) {
@@ -181,20 +191,23 @@ VenueDriverCalendarEventsWidget = function(options){
     };
     return result;
   };
+  //private
   this.write_embedded_event_data = function(params){
     var l_event = params.event;
     var append = this.format_event_info(l_event,{id:'event_id',title:'title',date:'date',description:'description'});
     var result = "id='event_" + l_event.event_id +append;
     return result;
   };
+  //private
   this.write_event_div = function(l_event){
     return "<div class='event-content' "+ this.write_embedded_event_data({event:l_event})+"'></div>";
   };
+  //private
   this.prepare_event = function(l_event,$content_area) {
     var id = 'event_'+l_event.event_id;
     var event_div = this.write_event_div(l_event);
     $content_area.append(event_div);
-    $event_location = $('#calendar-container #event_'+l_event.event_id);
+    var $event_location = $('#calendar-container #event_'+l_event.event_id);
     $event_location.append("<div class='event-title'><a href='#'>"+l_event.title+"</a></div>");
     $event_location.append("<div class='event-date'>"+l_event.date+"</div>");
     $('#'+id).click(function(){
@@ -202,16 +215,19 @@ VenueDriverCalendarEventsWidget = function(options){
       //here 'this' = $('#'+id) called above ^^
       var html = "<p> id: "+info.attr('data-id')+" </p>"
       html += "<p> title: "+info.attr('data-title')+" </p>"
-      html += "<p> date: "+info.attr('data-date')+" </p>"
+      html += "<p> date: " +info.attr('data-date')+" </p>"
+      html += "<p> description: " +info.attr('data-description')+" </p>"
       $('#side-panel').html(html);
     });
   }
+  //private
   this.prepare_events = function(the_days_events,$content_area){
      for(var j = 0;j<the_days_events.length;j++){
         var event_= the_days_events[j];
         this.prepare_event(event_,$content_area);
       }
   };
+  //private
   this.prepare_days = function(){
     var number_of_days =this.date.getDaysInMonth();
     this.sort_events();
@@ -230,6 +246,7 @@ VenueDriverCalendarEventsWidget = function(options){
       this.current_cell = this.current_cell.next();
     };
   };
+  //private
   this.clone_table_template = function() {
     //remove previous table
     $('cal-table').remove();
@@ -237,10 +254,12 @@ VenueDriverCalendarEventsWidget = function(options){
     table_template = $('.clone-me').clone().attr('class','cal-table').attr('style','display:inline-block;float:left');
     $('#calendar-container').append(table_template);
   };
+  //private
   this.prepare_navigation_buttons = function(){
     $('#calendar-container .prev-month').click(this.to_prev_month);
     $('#calendar-container .next-month').click(this.to_next_month);
   };
+  //private
   this.construct_output = function(){
     $(this.div_id).html("<div id='calendar-container'></div>");  
     this.clone_table_template();
