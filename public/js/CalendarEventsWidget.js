@@ -76,7 +76,7 @@ VenueDriverCalendarEventsWidget = function(options){
   that.first_day = Utils.day_string_to_number(options.first_day);
   that.set_month = function(year,month) { //wrapper so that month param counts from 1
     that.date = new Date(year,month -1);
-    that.pull_api_events();
+    pull_api_events();
   };
   var month = function(){ //wrapper so that month counts from one
     return that.date.getMonth()+1;
@@ -85,16 +85,16 @@ VenueDriverCalendarEventsWidget = function(options){
     return that.date.getFullYear();
   };
   //public or private?
-  that.to_next_month = function(){
-    if (that.month() >= 12) that.set_month(that.year()+1,1);
-    else that.set_month(that.year(),that.month()+1);
+  var to_next_month = function(){
+    if (month() >= 12) that.set_month(year()+1,1);
+    else that.set_month(year(),month()+1);
   };
-  that.to_prev_month = function(){
-    if (that.month() <= 1) that.set_month(that.year()-1,12);
-    else that.set_month(that.year(),that.month()-1);
+  var to_prev_month = function(){
+    if (month() <= 1) that.set_month(that.year()-1,12);
+    else that.set_month(year(),month()-1);
   };
   //private
-  api_url = function(){
+  var api_url = function(){
     return test_http + that.api_type +'s/' + that.api_id + '/events/calendar_month?month='+month()+'&year='+year()+'&token=test';
   };
   //private
@@ -253,9 +253,9 @@ VenueDriverCalendarEventsWidget = function(options){
     $('#calendar-container').append(table_template);
   };
   //private
-  that.prepare_navigation_buttons = function(){
-    $('#calendar-container .prev-month').click(that.to_prev_month);
-    $('#calendar-container .next-month').click(that.to_next_month);
+  var prepare_navigation_buttons = function(){
+    $('#calendar-container .prev-month').click(to_prev_month);
+    $('#calendar-container .next-month').click(to_next_month);
   };
   //private
   that.construct_output = function(){
@@ -265,7 +265,7 @@ VenueDriverCalendarEventsWidget = function(options){
     prepare_unused_day_pre_padding();
     prepare_days();
     prepare_unused_day_post_padding();
-    that.prepare_navigation_buttons();
+    prepare_navigation_buttons();
     $(that.div_id + ' #calendar-container').append("<div id='side-panel' style='display:inline-block;float:left'>side panel </div>");
   };
   that.change_first_day = function(day_str) {
