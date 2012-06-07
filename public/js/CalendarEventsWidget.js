@@ -107,13 +107,13 @@ VenueDriverCalendarEventsWidget = function(options){
     });
   };
   //private
-  that.prepare_calendar_title = function() {
+  var prepare_calendar_title = function() {
     var cal_title = that.date.getMonthName()+' '+that.date.getFullYear();
     $('#calendar-container .month-title').text(cal_title);
   };
   //private
-  that.prepare_table_header = function() {
-    that.prepare_calendar_title();
+  var prepare_table_header = function() {
+    prepare_calendar_title();
     for(i=0;i<=6;i++){
       var day_num = that.first_day + i;
       if(day_num >= 7) day_num-=7;
@@ -127,7 +127,7 @@ VenueDriverCalendarEventsWidget = function(options){
     return Utils.first_date_of_month(that.date).getDay();
   };
   //private
-  that.prepare_unused_day_pre_padding = function(){
+  var prepare_unused_day_pre_padding = function(){
     // that functions goal is to account for spaces in the calendar table 
     // that are not part of the month. that function handles the spaces
     // that occur before the first day of the month
@@ -150,7 +150,7 @@ VenueDriverCalendarEventsWidget = function(options){
     }
   };
   //private
-  that.prepare_unused_day_post_padding = function(){
+  var prepare_unused_day_post_padding = function(){
     //that function accounts for unused table cells that occur after the 
     // calendar has run out of days
     while(true){
@@ -226,7 +226,7 @@ VenueDriverCalendarEventsWidget = function(options){
       }
   };
   //private
-  that.prepare_days = function(){
+  var prepare_days = function(){
     var number_of_days =that.date.getDaysInMonth();
     that.sort_events();
     for (i=1; i<= number_of_days;i++){
@@ -245,7 +245,7 @@ VenueDriverCalendarEventsWidget = function(options){
     };
   };
   //private
-  that.clone_table_template = function() {
+  var clone_table_template = function() {
     //remove previous table
     $('cal-table').remove();
     //clone hidden html table
@@ -260,11 +260,11 @@ VenueDriverCalendarEventsWidget = function(options){
   //private
   that.construct_output = function(){
     $(that.div_id).html("<div id='calendar-container'></div>");  
-    that.clone_table_template();
-    that.prepare_table_header();
-    that.prepare_unused_day_pre_padding();
-    that.prepare_days();
-    that.prepare_unused_day_post_padding();
+    clone_table_template();
+    prepare_table_header();
+    prepare_unused_day_pre_padding();
+    prepare_days();
+    prepare_unused_day_post_padding();
     that.prepare_navigation_buttons();
     $(that.div_id + ' #calendar-container').append("<div id='side-panel' style='display:inline-block;float:left'>side panel </div>");
   };
