@@ -94,12 +94,12 @@ VenueDriverCalendarEventsWidget = function(options){
     else that.set_month(that.year(),that.month()-1);
   };
   //private
-  that.api_url = function(){
+  api_url = function(){
     return test_http + that.api_type +'s/' + that.api_id + '/events/calendar_month?month='+month()+'&year='+year()+'&token=test';
   };
   //private
-  that.pull_api_events = function() {
-    var url = that.api_url();
+  var pull_api_events = function() {
+    var url = api_url();
     $.getJSON(url,function(data){
       that.json_events = data;
       if (glb_debug){console.log(that.json_events.length);}
@@ -272,7 +272,7 @@ VenueDriverCalendarEventsWidget = function(options){
     that.first_day = Utils.day_string_to_number(day_str);
     that.construct_output();
   };
-  that.pull_api_events(); 
+  pull_api_events(); 
 }
 
 $(document).ready(function() {
