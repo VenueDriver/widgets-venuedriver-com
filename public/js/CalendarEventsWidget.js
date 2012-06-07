@@ -62,7 +62,7 @@ var CellIndex = function(r,c) {
 }
 
 VenueDriverCalendarEventsWidget = function(options){
-  var this_calendar =this;//this is for jquery event handlers, which rebind 'this' to something else
+  var that =this;//this is for jquery event handlers, which rebind 'this' to something else
   this.json_events ={};
   this.sorted_events = [];
   this.current_cell = new CellIndex(1,1); //WARNING This is used like a global variable in the widget member functions
@@ -88,12 +88,12 @@ VenueDriverCalendarEventsWidget = function(options){
     return this.date.getFullYear();
   };
   this.to_next_month = function(){
-    if (this_calendar.month() >= 12) this_calendar.set_month(this_calendar.year()+1,1);
-    else this_calendar.set_month(this_calendar.year(),this_calendar.month()+1);
+    if (that.month() >= 12) that.set_month(that.year()+1,1);
+    else that.set_month(that.year(),that.month()+1);
   };
   this.to_prev_month = function(){
-    if (this_calendar.month() <= 1) this_calendar.set_month(this_calendar.year()-1,12);
-    else this_calendar.set_month(this_calendar.year(),this_calendar.month()-1);
+    if (that.month() <= 1) that.set_month(that.year()-1,12);
+    else that.set_month(that.year(),that.month()-1);
   };
   //private
   this.api_url = function(){
@@ -103,9 +103,9 @@ VenueDriverCalendarEventsWidget = function(options){
   this.pull_api_events = function() {
     var url = this.api_url();
     $.getJSON(url,function(data){
-      this_calendar.json_events = data;
-      if (glb_debug){console.log(this_calendar.json_events.length);}
-      this_calendar.construct_output();
+      that.json_events = data;
+      if (glb_debug){console.log(that.json_events.length);}
+      that.construct_output();
     });
   };
   //private
