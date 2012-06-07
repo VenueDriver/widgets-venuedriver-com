@@ -63,15 +63,15 @@ var CellIndex = function(r,c) {
 
 VenueDriverCalendarEventsWidget = function(options){
   var that =this;//that is for jquery event handlers, which rebind 'that' to something else
-  that.json_events ={};
-  that.sorted_events = [];
-  that.current_cell = new CellIndex(1,1); //WARNING that is used like a global variable in the widget member functions
+  var json_events ={};
+  var sorted_events= [];
+  var current_cell = new CellIndex(1,1); //WARNING that is used like a global variable in the widget member functions
   
   var test_http = 'http://localhost:3000/api/';
-  that.real_http = 'http://www.venuedriver.com/api/';
-  that.div_id = '#' + options.div_id
-  that.api_type = options.api_type;
-  that.api_id = options.api_id;
+  var real_http = 'http://www.venuedriver.com/api/';
+  var div_id = '#' + options.div_id
+  var api_type = options.api_type;
+  var api_id = options.api_id;
   that.date = Date.today(); //calendar defaults to current month 
   that.first_day = Utils.day_string_to_number(options.first_day);
   that.set_month = function(year,month) { //wrapper so that month param counts from 1
@@ -95,15 +95,15 @@ VenueDriverCalendarEventsWidget = function(options){
   };
   //private
   var api_url = function(){
-    return test_http + that.api_type +'s/' + that.api_id + '/events/calendar_month?month='+month()+'&year='+year()+'&token=test';
+    return test_http + api_type +'s/' + api_id + '/events/calendar_month?month='+month()+'&year='+year()+'&token=test';
   };
   //private
   var pull_api_events = function() {
     var url = api_url();
     $.getJSON(url,function(data){
-      that.json_events = data;
-      if (glb_debug){console.log(that.json_events.length);}
-      that.construct_output();
+      json_events = data;
+      if (glb_debug){console.log(json_events.length);}
+      construct_output();
     });
   };
   //private
@@ -137,16 +137,16 @@ VenueDriverCalendarEventsWidget = function(options){
     //remove extra row if it is not needed
     if(padding+that.date.getDaysInMonth() <= 35) $('#calendar-container .extra-row').remove();
     if (padding > 0){
-      that.current_cell = new CellIndex(1,1);
+      current_cell = new CellIndex(1,1);
       for(i=1;i<=padding;i++){
-        var $html_location = $('#calendar-container ' + that.current_cell.to_css());
+        var $html_location = $('#calendar-container ' + current_cell.to_css());
         $html_location.text("");
         $html_location.addClass("not-in-month");
-        that.current_cell = that.current_cell.next();
+        current_cell = current_cell.next();
       }
     }
     else {
-      that.current_cell = new CellIndex(1,1);
+      current_cell = new CellIndex(1,1);
     }
   };
   //private
@@ -154,11 +154,11 @@ VenueDriverCalendarEventsWidget = function(options){
     //that function accounts for unused table cells that occur after the 
     // calendar has run out of days
     while(true){
-      var $html_location = $("#calendar-container " + that.current_cell.to_css());
+      var $html_location = $("#calendar-container " + current_cell.to_css());
       $html_location.text("");
       $html_location.addClass("not-in-month");
-      that.current_cell = that.current_cell.next();
-      if (that.current_cell.r>=7) break;
+      current_cell = current_cell.next();
+      if (current_cell.r>=7) break;
     }
     
   };
@@ -169,14 +169,14 @@ VenueDriverCalendarEventsWidget = function(options){
     //are in sorted events[4]
     //each inner array contains all the events for a particular day
     for(var day_index =0; day_index<that.date.getDaysInMonth();day_index++){
-     that.sorted_events[day_index]=[] 
+     sorted_events[day_index]=[] 
     }
     
     //iterate through all events in json_events with i
-    for(var i=0;i<that.json_events.length;i++){
-      event = that.json_events[i];
+    for(var i=0;i<json_events.length;i++){
+      event = json_events[i];
       index = Date.parse(event.date).getDate()-1;
-      that.sorted_events[index].push(event);
+      sorted_events[index].push(event);
     }
     event = null;//help reduce future errors by accidentall reusing that quantity
   };
@@ -230,18 +230,18 @@ VenueDriverCalendarEventsWidget = function(options){
     var number_of_days =that.date.getDaysInMonth();
     sort_events();
     for (i=1; i<= number_of_days;i++){
-      var css_path = "#calendar-container " + that.current_cell.to_css();
+      var css_path = "#calendar-container " + current_cell.to_css();
       var $html_location = $(css_path);
       $html_location.text("");
       $html_location.addClass('in-month');
       $html_location.append("<div class='day-number'>"+i+"</div>");
       $html_location.append("<div class='event-content-area'></div>");
       $event_content_area = $(css_path + ' .event-content-area');
-      var the_days_events = that.sorted_events[i-1];
+      var the_days_events = sorted_events[i-1];
       if(the_days_events.length > 0)$html_location.addClass('has-events');
       else $html_location.addClass('has-no-events');
       prepare_events(the_days_events,$event_content_area);         
-      that.current_cell = that.current_cell.next();
+      current_cell = current_cell.next();
     };
   };
   //private
@@ -258,15 +258,15 @@ VenueDriverCalendarEventsWidget = function(options){
     $('#calendar-container .next-month').click(to_next_month);
   };
   //private
-  that.construct_output = function(){
-    $(that.div_id).html("<div id='calendar-container'></div>");  
+  var construct_output = function(){
+    $(div_id).html("<div id='calendar-container'></div>");  
     clone_table_template();
     prepare_table_header();
     prepare_unused_day_pre_padding();
     prepare_days();
     prepare_unused_day_post_padding();
     prepare_navigation_buttons();
-    $(that.div_id + ' #calendar-container').append("<div id='side-panel' style='display:inline-block;float:left'>side panel </div>");
+    $(div_id + ' #calendar-container').append("<div id='side-panel' style='display:inline-block;float:left'>side panel </div>");
   };
   that.change_first_day = function(day_str) {
     that.first_day = Utils.day_string_to_number(day_str);
