@@ -227,16 +227,18 @@ VenueDriverCalendarEventsWidget = function(options){
       this.current_cell = this.current_cell.next();
     };
   };
-  this.construct_output = function(){
-    //create container div
-    $(this.div_id).html("<div id='calendar-container'>");
-    $('</div>').insertAfter("#calendar-container");    
+  this.clone_table_template = function() {
     //remove previous table
     $('cal-table').remove();
     //clone hidden html table
     table_template = $('.clone-me').clone().attr('class','cal-table').attr('style','display:inline-block;float:left');
     $('#calendar-container').append(table_template);
+  };
+  this.construct_output = function(){
+    //create container div
+    $(this.div_id).html("<div id='calendar-container'></div>");  
     
+    this.clone_table_template();
     this.prepare_table_header();
     this.prepare_unused_day_pre_padding();
     this.prepare_days();
@@ -252,7 +254,6 @@ VenueDriverCalendarEventsWidget = function(options){
     this.construct_output();
   };
   this.pull_api_events(); 
-  //this.construct_output();
 }
 
 $(document).ready(function() {
