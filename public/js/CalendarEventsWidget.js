@@ -66,7 +66,6 @@ VenueDriverCalendarEventsWidget = function(options){
   var json_events ={};
   var sorted_events= [];
   var current_cell = new CellIndex(1,1); //WARNING that is used like a global variable in the widget member functions
-  
   var test_http = 'http://localhost:3000/api/';
   var real_http = 'http://www.venuedriver.com/api/';
   var div_id = '#' + options.div_id
