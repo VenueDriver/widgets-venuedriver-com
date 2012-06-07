@@ -124,9 +124,13 @@ VenueDriverCalendarEventsWidget = function(options){
     return Utils.first_date_of_month(this.date).getDay();
   };
   this.prepare_unused_day_pre_padding = function(){
+    // this functions goal is to account for spaces in the calendar table 
+    // that are not part of the month. This function handles the spaces
+    // that occur before the first day of the month
     difference = this.first_day_of_month() - this.first_day;
     if( difference >= 0) padding = difference;
     else padding = 7 + difference;
+    //remove extra row if it is not needed
     if(padding+this.date.getDaysInMonth() <= 35) $('#calendar-container .extra-row').remove();
     if (padding > 0){
       this.current_cell = new CellIndex(1,1);
@@ -142,6 +146,8 @@ VenueDriverCalendarEventsWidget = function(options){
     }
   };
   this.prepare_unused_day_post_padding = function(){
+    //this function accounts for unused table cells that occur after the 
+    // calendar has run out of days
     while(true){
       var $html_location = $("#calendar-container " + this.current_cell.to_css());
       $html_location.text("");
@@ -153,7 +159,7 @@ VenueDriverCalendarEventsWidget = function(options){
   };
   this.sort_events = function(){
     //sorted events is an array of arrays
-    //the outer arrays index is the date number -1, as in June 5ths events
+    //the outer arrays index is (the date's number -1), as in June 5ths events
     //are in sorted events[4]
     //each inner array contains all the events for a particular day
     for(var day_index =0; day_index<this.date.getDaysInMonth();day_index++){
@@ -166,22 +172,30 @@ VenueDriverCalendarEventsWidget = function(options){
       index = Date.parse(event.date).getDate()-1;
       this.sorted_events[index].push(event);
     }
-    event = null;
-
+    event = null;//help reduce future errors by accidentall reusing this quantity
   };
-  this.write_hidden_event_info = function(params){
-    var l_event = params.event;
-    var result = "id='event_"+l_event.event_id+"' data-id='"+ l_event.event_id+"' data-title='"+l_event.title+"' data-date='"+l_event.date;
+  this.format_event_info = function(event, pairs){
+    result = "";
+    for (var key in pairs) {
+      result += "' data-" + key + "='"+event[pairs[key]];
+    };
     return result;
+  };
+  this.write_embedded_event_data = function(params){
+    var l_event = params.event;
+    var append = this.format_event_info(l_event,{id:'event_id',title:'title',date:'date',description:'description'});
+    var result = "id='event_" + l_event.event_id +append;
+    return result;
+  };
+  this.write_event_div = function(l_event){
+    return "<div class='event-content' "+ this.write_embedded_event_data({event:l_event})+"'></div>";
   };
   this.prepare_events = function(the_days_events,$content_area){
      for(var j = 0;j<the_days_events.length;j++){
         var event_= the_days_events[j];
         var id = 'event_'+event_.event_id;
-        var str = "<div class='event-content' "+ this.write_hidden_event_info({event:event_})+"'></div>";
-        debugger;
-        $content_area.append(str);
-        debugger;
+        var event_div = this.write_event_div(event_);
+        $content_area.append(event_div);
         $event_location = $('#calendar-container #event_'+event_.event_id);
         $event_location.append("<div class='event-title'><a href='#'>"+event_.title+"</a></div>");
         $event_location.append("<div class='event-date'>"+event_.date+"</div>");
