@@ -66,27 +66,25 @@ VenueDriverCalendarEventsWidget = function(options){
   this.json_events ={};
   this.sorted_events = [];
   this.current_cell = new CellIndex(1,1); //WARNING This is used like a global variable in the widget member functions
-  //private
-  this.read_options = function(options){
-    this.test_http = 'http://localhost:3000/api/';
-    this.real_http = 'http://www.venuedriver.com/api/';
-    this.div_id = '#' + options.div_id
-    this.api_type = options.api_type;
-    this.api_id = options.api_id;
-    this.date = Date.today(); //calendar defaults to current month 
-    this.first_day = Utils.day_string_to_number(options.first_day);
-  };
-  this.read_options(options);
+  
+  var test_http = 'http://localhost:3000/api/';
+  that.real_http = 'http://www.venuedriver.com/api/';
+  that.div_id = '#' + options.div_id
+  that.api_type = options.api_type;
+  that.api_id = options.api_id;
+  that.date = Date.today(); //calendar defaults to current month 
+  that.first_day = Utils.day_string_to_number(options.first_day);
   this.set_month = function(year,month) { //wrapper so that month param counts from 1
     this.date = new Date(year,month -1);
     this.pull_api_events();
   };
-  this.month = function(){ //wrapper so that month counts from one
-    return this.date.getMonth()+1;
+  var month = function(){ //wrapper so that month counts from one
+    return that.date.getMonth()+1;
   };
-  this.year = function(){
-    return this.date.getFullYear();
+  var year = function(){
+    return that.date.getFullYear();
   };
+  //public or private?
   this.to_next_month = function(){
     if (that.month() >= 12) that.set_month(that.year()+1,1);
     else that.set_month(that.year(),that.month()+1);
@@ -97,7 +95,7 @@ VenueDriverCalendarEventsWidget = function(options){
   };
   //private
   this.api_url = function(){
-    return this.test_http + this.api_type +'s/' + this.api_id + '/events/calendar_month?month='+this.month()+'&year='+this.year()+'&token=test';
+    return test_http + this.api_type +'s/' + this.api_id + '/events/calendar_month?month='+month()+'&year='+year()+'&token=test';
   };
   //private
   this.pull_api_events = function() {
