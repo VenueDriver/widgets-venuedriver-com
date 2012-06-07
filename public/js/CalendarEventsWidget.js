@@ -72,17 +72,17 @@ VenueDriverCalendarEventsWidget = function(options){
   var div_id = '#' + options.div_id
   var api_type = options.api_type;
   var api_id = options.api_id;
-  that.date = Date.today(); //calendar defaults to current month 
-  that.first_day = Utils.day_string_to_number(options.first_day);
+  var date = Date.today(); //calendar defaults to current month 
+  var first_day = Utils.day_string_to_number(options.first_day);
   that.set_month = function(year,month) { //wrapper so that month param counts from 1
-    that.date = new Date(year,month -1);
+    date = new Date(year,month -1);
     pull_api_events();
   };
   var month = function(){ //wrapper so that month counts from one
-    return that.date.getMonth()+1;
+    return date.getMonth()+1;
   };
   var year = function(){
-    return that.date.getFullYear();
+    return date.getFullYear();
   };
   //public or private?
   var to_next_month = function(){
@@ -108,14 +108,14 @@ VenueDriverCalendarEventsWidget = function(options){
   };
   //private
   var prepare_calendar_title = function() {
-    var cal_title = that.date.getMonthName()+' '+that.date.getFullYear();
+    var cal_title = date.getMonthName()+' '+date.getFullYear();
     $('#calendar-container .month-title').text(cal_title);
   };
   //private
   var prepare_table_header = function() {
     prepare_calendar_title();
     for(i=0;i<=6;i++){
-      var day_num = that.first_day + i;
+      var day_num = first_day + i;
       if(day_num >= 7) day_num-=7;
       //I use css classes as identifiers here
       var html_location = '#calendar-container .header-'+ (i+1);
@@ -123,19 +123,19 @@ VenueDriverCalendarEventsWidget = function(options){
     }
   };
   //private
-  that.first_day_of_month = function(){
-    return Utils.first_date_of_month(that.date).getDay();
+  first_day_of_month = function(){
+    return Utils.first_date_of_month(date).getDay();
   };
   //private
   var prepare_unused_day_pre_padding = function(){
     // that functions goal is to account for spaces in the calendar table 
     // that are not part of the month. that function handles the spaces
     // that occur before the first day of the month
-    difference = that.first_day_of_month() - that.first_day;
+    difference = first_day_of_month() - first_day;
     if( difference >= 0) padding = difference;
     else padding = 7 + difference;
     //remove extra row if it is not needed
-    if(padding+that.date.getDaysInMonth() <= 35) $('#calendar-container .extra-row').remove();
+    if(padding+date.getDaysInMonth() <= 35) $('#calendar-container .extra-row').remove();
     if (padding > 0){
       current_cell = new CellIndex(1,1);
       for(i=1;i<=padding;i++){
@@ -168,7 +168,7 @@ VenueDriverCalendarEventsWidget = function(options){
     //the outer arrays index is (the date's number -1), as in June 5ths events
     //are in sorted events[4]
     //each inner array contains all the events for a particular day
-    for(var day_index =0; day_index<that.date.getDaysInMonth();day_index++){
+    for(var day_index =0; day_index<date.getDaysInMonth();day_index++){
      sorted_events[day_index]=[] 
     }
     
@@ -227,7 +227,7 @@ VenueDriverCalendarEventsWidget = function(options){
   };
   //private
   var prepare_days = function(){
-    var number_of_days =that.date.getDaysInMonth();
+    var number_of_days =date.getDaysInMonth();
     sort_events();
     for (i=1; i<= number_of_days;i++){
       var css_path = "#calendar-container " + current_cell.to_css();
@@ -269,7 +269,7 @@ VenueDriverCalendarEventsWidget = function(options){
     $(div_id + ' #calendar-container').append("<div id='side-panel' style='display:inline-block;float:left'>side panel </div>");
   };
   that.change_first_day = function(day_str) {
-    that.first_day = Utils.day_string_to_number(day_str);
+    first_day = Utils.day_string_to_number(day_str);
     that.construct_output();
   };
   pull_api_events(); 
