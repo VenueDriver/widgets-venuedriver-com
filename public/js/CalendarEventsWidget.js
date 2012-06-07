@@ -163,7 +163,7 @@ VenueDriverCalendarEventsWidget = function(options){
     
   };
   //private
-  that.sort_events = function(){
+  var sort_events = function(){
     //sorted events is an array of arrays
     //the outer arrays index is (the date's number -1), as in June 5ths events
     //are in sorted events[4]
@@ -181,7 +181,7 @@ VenueDriverCalendarEventsWidget = function(options){
     event = null;//help reduce future errors by accidentall reusing that quantity
   };
   //private
-  that.format_event_info = function(event, pairs){
+  var format_event_info = function(event, pairs){
     result = "";
     for (var key in pairs) {
       var property = pairs[key];
@@ -190,20 +190,20 @@ VenueDriverCalendarEventsWidget = function(options){
     return result;
   };
   //private
-  that.write_embedded_event_data = function(params){
+  var write_embedded_event_data = function(params){
     var l_event = params.event;
-    var append = that.format_event_info(l_event,{id:'event_id',title:'title',date:'date',description:'description'});
+    var append = format_event_info(l_event,{id:'event_id',title:'title',date:'date',description:'description'});
     var result = "id='event_" + l_event.event_id +append;
     return result;
   };
   //private
-  that.write_event_div = function(l_event){
-    return "<div class='event-content' "+ that.write_embedded_event_data({event:l_event})+"'></div>";
+  var write_event_div = function(l_event){
+    return "<div class='event-content' "+ write_embedded_event_data({event:l_event})+"'></div>";
   };
   //private
-  that.prepare_event = function(l_event,$content_area) {
+  var prepare_event = function(l_event,$content_area) {
     var id = 'event_'+l_event.event_id;
-    var event_div = that.write_event_div(l_event);
+    var event_div = write_event_div(l_event);
     $content_area.append(event_div);
     var $event_location = $('#calendar-container #event_'+l_event.event_id);
     $event_location.append("<div class='event-title'><a href='#'>"+l_event.title+"</a></div>");
@@ -219,16 +219,16 @@ VenueDriverCalendarEventsWidget = function(options){
     });
   }
   //private
-  that.prepare_events = function(the_days_events,$content_area){
+  var prepare_events = function(the_days_events,$content_area){
      for(var j = 0;j<the_days_events.length;j++){
         var event_= the_days_events[j];
-        that.prepare_event(event_,$content_area);
+        prepare_event(event_,$content_area);
       }
   };
   //private
   var prepare_days = function(){
     var number_of_days =that.date.getDaysInMonth();
-    that.sort_events();
+    sort_events();
     for (i=1; i<= number_of_days;i++){
       var css_path = "#calendar-container " + that.current_cell.to_css();
       var $html_location = $(css_path);
@@ -240,7 +240,7 @@ VenueDriverCalendarEventsWidget = function(options){
       var the_days_events = that.sorted_events[i-1];
       if(the_days_events.length > 0)$html_location.addClass('has-events');
       else $html_location.addClass('has-no-events');
-      that.prepare_events(the_days_events,$event_content_area);         
+      prepare_events(the_days_events,$event_content_area);         
       that.current_cell = that.current_cell.next();
     };
   };
