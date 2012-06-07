@@ -209,7 +209,7 @@ VenueDriverCalendarEventsWidget = function(options){
     $event_location.append("<div class='event-title'><a href='#'>"+l_event.title+"</a></div>");
     $event_location.append("<div class='event-date'>"+l_event.date+"</div>");
     $('#'+id).click(function(){
-      var info = $(that)
+      var info = $(this)
       //here 'that' = $('#'+id) called above ^^
       var html = "<p> id: "+info.attr('data-id')+" </p>"
       html += "<p> title: "+info.attr('data-title')+" </p>"
