@@ -63,6 +63,7 @@ var CellIndex = function(r,c) {
 
 VenueDriverCalendarEventsWidget = function(options){
   var that =this;//that is for jquery event handlers, which rebind 'that' to something else
+  this._inner_workings = {};
   var json_events ={};
   var sorted_events= [];
   var current_cell = new CellIndex(1,1); //WARNING that is used like a global variable in the widget member functions
@@ -73,6 +74,7 @@ VenueDriverCalendarEventsWidget = function(options){
   var api_id = options.api_id;
   var date = Date.today(); //calendar defaults to current month 
   var first_day = Utils.day_string_to_number(options.first_day);
+  var refresh_on_creation = options.refresh_on_creation;
   that.set_month = function(year,month) { //wrapper so that month param counts from 1
     date = new Date(year,month -1);
     pull_api_events();
@@ -271,10 +273,10 @@ VenueDriverCalendarEventsWidget = function(options){
     first_day = Utils.day_string_to_number(day_str);
     that.construct_output();
   };
-  pull_api_events(); 
+  if (refresh_on_creation) pull_api_events(); 
 }
 
 $(document).ready(function() {
-  window.t = new VenueDriverCalendarEventsWidget({api_type:"account",api_id:1,div_id:'cal-test',first_day:'Monday'});
+  window.t = new VenueDriverCalendarEventsWidget({api_type:"account",api_id:1,div_id:'cal-test',first_day:'Monday',refresh_on_creation:true});
 });
 
