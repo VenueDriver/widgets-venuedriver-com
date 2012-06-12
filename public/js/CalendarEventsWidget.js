@@ -74,7 +74,7 @@ VenueDriverCalendarEventsWidget = function(options){
   var api_id = options.api_id;
   var date = Date.today(); //calendar defaults to current month 
   var first_day = Utils.day_string_to_number(options.first_day);
-  var refresh_on_creation = options.refresh_on_creation;
+  var refresh_on_creation = options.refresh_on_creation || true;
   that.set_month = function(year,month) { //wrapper so that month param counts from 1
     date = new Date(year,month -1);
     pull_api_events();
@@ -273,6 +273,7 @@ VenueDriverCalendarEventsWidget = function(options){
     first_day = Utils.day_string_to_number(day_str);
     that.construct_output();
   };
+  construct_output();
   if (refresh_on_creation) pull_api_events(); 
 }
 
