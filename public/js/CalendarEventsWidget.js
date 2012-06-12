@@ -234,6 +234,11 @@ VenueDriverCalendarEventsWidget = function(options){
       var css_path = "#calendar-container " + current_cell.to_css();
       var $html_location = $(css_path);
       $html_location.text("");
+      //TODO:this snippet should be a function
+      var d = Utils.first_date_of_month(date).add(i-1).days();
+      var id = d.getMonth()+'-'+d.getDate()+'-'+ d.getFullYear();
+      
+      $html_location.attr('id',id);
       $html_location.addClass('in-month');
       $html_location.append("<div class='day-number'>"+i+"</div>");
       $html_location.append("<div class='event-content-area'></div>");
