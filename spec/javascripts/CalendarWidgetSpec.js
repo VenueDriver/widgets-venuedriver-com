@@ -94,8 +94,11 @@ describe("Calendar Widget", function() {
     //setup
     $('body').append("<div<div id='cal-test'> </div>");
     $('body').append(_table_template);
+    request=mostRecentAjaxRequest();
+    console.log(request);
     var test = new VenueDriverCalendarEventsWidget({api_type:"account",api_id:1,div_id:'cal-test',first_day:'Monday'})
     request=mostRecentAjaxRequest();
+    console.log(request);
     request.response(TestResponses.search.success);
   };
   
