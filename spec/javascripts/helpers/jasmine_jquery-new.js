@@ -1,3 +1,4 @@
+//couldn't get version number at time of update
 var readFixtures = function() {
   return jasmine.getFixtures().proxyCallTo_('read', arguments);
 };

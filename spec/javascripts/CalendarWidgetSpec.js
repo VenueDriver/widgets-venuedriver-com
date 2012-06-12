@@ -20,6 +20,7 @@ describe("Calendar Widget", function() {
   };
   
   beforeEach(function() {
+    preloadFixtures('calendar.html')
     setup();
   });
   
@@ -28,7 +29,7 @@ describe("Calendar Widget", function() {
   }
   
   it("should test", function(){
-    
+    expect(true).toBe(true);
   });
   
 });
