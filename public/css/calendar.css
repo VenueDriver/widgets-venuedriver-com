@@ -4,13 +4,11 @@ body {
 }
 
 table {
-  border: 2px solid black;
   border-collapse:collapse;
 }
 
 /* this applies to the first two rows */
 table th {
-  border: 1px solid black;
 }
 
 .title-cell {
@@ -37,9 +35,7 @@ table th {
 }
 
 .day-title-row {
-  padding: 7px;
   color: white;
-  font-weight: lighter;
   font-family: 'century gothic', 'arial';
   text-transform: uppercase;
   background: #1d333f; /* for non-css3 browsers */
@@ -60,12 +56,10 @@ table th {
 /* this class applies to the 'next month' and 'prevous month' buttons */
 .change-month {
   color: white;
-  text-decoration: none;
   background: #ff9f00; /* for non-css3 browsers */
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ff9f00', endColorstr='#e08500'); /* for IE */
   background: -webkit-gradient(linear, left top, left bottom, from(#ff9f00), to(#e08500)); /* for webkit browsers */
   background: -moz-linear-gradient(top,  #ff9f00,  #e08500); /* for firefox 3.6+ */   
-  border-radius: 3px;
   border: 1px #e08500 solid;
   text-transform: uppercase;
 }
@@ -83,11 +77,10 @@ table th {
 
 /* this refers to all the table cells that could be used to diplay a calendar day*/
 table td {
-  border: 1px solid black;
   text-align:left;
+  vertical-align:bottom;
   margin:0px;
   padding:0px;
-  vertical-align:top;
   height: 95px;
   min-width: 110px;
 }
@@ -108,7 +101,8 @@ table td {
 .day-number {
   /* background-color:#91A8EC; */
   background: -webkit-gradient(linear, left top, left bottom, from(#C1CEF6), to(#516AB2));
-  padding-left:5px;
+  padding:0px;
+  margin:0px;
   font-weight:bold;
 }
 
