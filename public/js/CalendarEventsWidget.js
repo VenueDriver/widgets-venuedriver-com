@@ -68,6 +68,12 @@ VenueDriverCalendarEventsWidget = function(options){
   var current_cell = new CellIndex(1,1); //WARNING that is used like a global variable in the widget member functions
   var test_http = 'http://localhost:3000/api/';
   var real_http = 'http://www.venuedriver.com/api/';
+  var http_str
+  if (options.testing ==true){
+    http_str = test_http;
+  } else {
+    http_str = real_http;
+  }
   var div_id = '#' + options.div_id
   var api_type = options.api_type;
   var api_id = options.api_id;
@@ -95,7 +101,7 @@ VenueDriverCalendarEventsWidget = function(options){
   };
   //private
   var api_url = function(){
-    return test_http + api_type +'s/' + api_id + '/events/calendar_month?month='+month()+'&year='+year()+'&token=test';
+    return http_str + api_type +'s/' + api_id + '/events/calendar_month?month='+month()+'&year='+year()+'&token=test';
   };
   //private
   var pull_api_events = function() {
@@ -282,6 +288,6 @@ VenueDriverCalendarEventsWidget = function(options){
 }
 
 $(document).ready(function() {
-  window.t = new VenueDriverCalendarEventsWidget({api_type:"account",api_id:1,div_id:'cal-test',first_day:'Monday',refresh_on_creation:true});
+  window.t = new VenueDriverCalendarEventsWidget({api_type:"account",api_id:1,div_id:'cal-test',first_day:'Monday',testing:true});
 });
 
