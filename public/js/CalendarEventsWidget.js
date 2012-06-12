@@ -68,7 +68,8 @@ VenueDriverCalendarEventsWidget = function(options){
   var current_cell = new CellIndex(1,1); //WARNING that is used like a global variable in the widget member functions
   var test_http = 'http://localhost:3000/api/';
   var real_http = 'http://www.venuedriver.com/api/';
-  var http_str
+  var http_str;
+  this.db_transform = true;
   if (options.testing ==true){
     http_str = test_http;
   } else {
@@ -251,7 +252,12 @@ VenueDriverCalendarEventsWidget = function(options){
       var the_days_events = sorted_events[i-1];
       if(the_days_events.length > 0)$html_location.addClass('has-events');
       else $html_location.addClass('has-no-events');
-      prepare_events(the_days_events,$event_content_area);         
+      prepare_events(the_days_events,$event_content_area);
+      if(false){
+        $('#'+id + ' .event-content-area').insertBefore('#'+id + ' .day-number');
+        $('#'+id + ' .day-number').attr('style','vertical-align:bottom')
+        console.log('a')
+      }         
       current_cell = current_cell.next();
     };
   };
@@ -284,6 +290,7 @@ VenueDriverCalendarEventsWidget = function(options){
     that.construct_output();
   };
   construct_output();
+  this.refresh = construct_output;
   if (refresh_on_creation) pull_api_events(); 
 }
 
