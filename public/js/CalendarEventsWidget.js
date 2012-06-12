@@ -63,7 +63,6 @@ var CellIndex = function(r,c) {
 
 VenueDriverCalendarEventsWidget = function(options){
   var that =this;//that is for jquery event handlers, which rebind 'that' to something else
-  this._inner_workings = {};
   var json_events ={};
   var sorted_events= [];
   var current_cell = new CellIndex(1,1); //WARNING that is used like a global variable in the widget member functions
@@ -72,7 +71,7 @@ VenueDriverCalendarEventsWidget = function(options){
   var div_id = '#' + options.div_id
   var api_type = options.api_type;
   var api_id = options.api_id;
-  var date = Date.today(); //calendar defaults to current month 
+  var date = Date.today(); this._date = date;//calendar defaults to current month 
   var first_day = Utils.day_string_to_number(options.first_day);
   var refresh_on_creation = options.refresh_on_creation || true;
   that.set_month = function(year,month) { //wrapper so that month param counts from 1
