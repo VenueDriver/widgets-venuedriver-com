@@ -31,7 +31,7 @@ describe("Calendar Widget", function() {
   }
   
   it("should test", function(){
-    debugger
+    debugger;
     expect(true).toBe(true);
   });
   

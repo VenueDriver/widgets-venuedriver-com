@@ -69,7 +69,7 @@ VenueDriverCalendarEventsWidget = function(options){
   var test_http = 'http://localhost:3000/api/';
   var real_http = 'http://www.venuedriver.com/api/';
   var http_str;
-  this.db_transform = true;
+  this.db_transform = options.day_bottom;
   if (options.testing ==true){
     http_str = test_http;
   } else {
@@ -253,10 +253,14 @@ VenueDriverCalendarEventsWidget = function(options){
       if(the_days_events.length > 0)$html_location.addClass('has-events');
       else $html_location.addClass('has-no-events');
       prepare_events(the_days_events,$event_content_area);
-      if(false){
+      
+      if(that.db_transform){
+        $html_location.addClass('date-bottom-style')
         $('#'+id + ' .event-content-area').insertBefore('#'+id + ' .day-number');
         $('#'+id + ' .day-number').attr('style','vertical-align:bottom')
         console.log('a')
+      } else {
+        $html_location.addClass('date-top-style')
       }         
       current_cell = current_cell.next();
     };
@@ -295,6 +299,6 @@ VenueDriverCalendarEventsWidget = function(options){
 }
 
 $(document).ready(function() {
-  window.t = new VenueDriverCalendarEventsWidget({api_type:"account",api_id:1,div_id:'cal-test',first_day:'Monday',testing:true});
+  window.t = new VenueDriverCalendarEventsWidget({api_type:"account",api_id:1,div_id:'cal-test',first_day:'Monday',testing:true,day_bottom:true});
 });
 
