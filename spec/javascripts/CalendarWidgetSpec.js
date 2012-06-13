@@ -21,6 +21,8 @@ describe("Calendar Widget", function() {
   
   beforeEach(function() {
     preloadFixtures('calendar.html')
+    window.gon = {}; gon.base_url = 'http://venuedriver.com';
+    jQuery.ajaxMock.url( /\/api\/(.+)/, "success");
     setup();
   });
   
@@ -29,6 +31,7 @@ describe("Calendar Widget", function() {
   }
   
   it("should test", function(){
+    debugger
     expect(true).toBe(true);
   });
   

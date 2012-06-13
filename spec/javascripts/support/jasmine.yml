@@ -15,7 +15,7 @@ src_files:
     - **/fixtures/VenueWidgetConfig.js
     - public/js/lib/**/*.js
     - public/js/**/*.js
-    - spec/javascripts/helpers/mock-ajax.js
+    - spec/javascripts/helpers/jquery.mockjax.js
 
 
 # stylesheets
