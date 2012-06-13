@@ -64,6 +64,7 @@ var CellIndex = function(r,c) {
 VenueDriverCalendarEventsWidget = function(options){
   var that =this;//that is for jquery event handlers, which rebind 'that' to something else
   var json_events ={};
+  this._json_events = json_events;
   var sorted_events= [];
   var current_cell = new CellIndex(1,1); //WARNING that is used like a global variable in the widget member functions
   var test_http = 'http://localhost:3000/api/';
@@ -107,9 +108,11 @@ VenueDriverCalendarEventsWidget = function(options){
   //private
   var pull_api_events = function() {
     var url = api_url();
+    console.log(url);
     $.getJSON(url,function(data){
       json_events = data;
-      if (glb_debug){console.log(json_events.length);}
+      that._json_events = data
+      console.log(json_events.length);
       construct_output();
     });
   };
@@ -258,7 +261,6 @@ VenueDriverCalendarEventsWidget = function(options){
         $html_location.addClass('date-bottom-style')
         $('#'+id + ' .event-content-area').insertBefore('#'+id + ' .day-number');
         $('#'+id + ' .day-number').attr('style','vertical-align:bottom')
-        console.log('a')
       } else {
         $html_location.addClass('date-top-style')
       }         
@@ -299,6 +301,6 @@ VenueDriverCalendarEventsWidget = function(options){
 }
 
 $(document).ready(function() {
-  window.t = new VenueDriverCalendarEventsWidget({api_type:"account",api_id:1,div_id:'cal-test',first_day:'Monday',testing:true,day_bottom:true});
+  //window.t = new VenueDriverCalendarEventsWidget({api_type:"account",api_id:1,div_id:'cal-test',first_day:'Monday',testing:true,day_bottom:true});
 });
 

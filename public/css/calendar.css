@@ -116,7 +116,7 @@ table td {
 .event-content-area {
   vertical-align:top;
   font-size:85%;
-  padding-bottom:20px;
+  margin-bottom:auto;
   height:auto;
 }
 
