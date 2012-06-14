@@ -36,7 +36,7 @@ function make_event_json(options){
     tickets_sold_count: 0,
     time: null,
     title: options.description || "No Title given",
-    updated_at: "2012/06/13 14:59:58 -0400",
+    updated_at: "2012/02/14 14:59:58 -0400",
     venue_id: "1",
     wiki_name: null
   }
