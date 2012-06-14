@@ -66,6 +66,7 @@ VenueDriverCalendarEventsWidget = function(options){
   var json_events ={};
   this._json_events = json_events;
   var sorted_events= [];
+  this._sorted_events = sorted_events;
   var current_cell = new CellIndex(1,1); //WARNING that is used like a global variable in the widget member functions
   var test_http = 'http://localhost:3000/api/';
   var real_http = 'http://www.venuedriver.com/api/';
@@ -192,6 +193,7 @@ VenueDriverCalendarEventsWidget = function(options){
       index = Date.parse(event.date).getDate()-1;
       sorted_events[index].push(event);
     }
+    this._sorted_events = sorted_events
     event = null;//help reduce future errors by accidentall reusing that quantity
   };
 
@@ -305,6 +307,6 @@ VenueDriverCalendarEventsWidget = function(options){
 }
 
 $(document).ready(function() {
-  window.t = new VenueDriverCalendarEventsWidget({api_type:"account",api_id:1,div_id:'cal-test',first_day:'Monday',testing:true,day_bottom:false});
+  //window.t = new VenueDriverCalendarEventsWidget({api_type:"account",api_id:1,div_id:'cal-test',first_day:'Monday',testing:true,day_bottom:false});
 });
 
