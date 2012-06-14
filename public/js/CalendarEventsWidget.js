@@ -133,7 +133,7 @@ VenueDriverCalendarEventsWidget = function(options){
       var day_num = first_day + i;
       if(day_num >= 7) day_num-=7;
       //I use css classes as identifiers here
-      var html_location = '#calendar-container .header-'+ (i+1);
+      var html_location = '#calendar-container .day-'+ (i+1);
       $(html_location).text(Utils.day_number_to_string(day_num));
     }
   };
