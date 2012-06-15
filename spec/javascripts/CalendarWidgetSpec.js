@@ -14,6 +14,7 @@ describe("Calendar Widget", function() {
     
     it("can be Monday", function(){
       test_first_day('Monday');
+      //rcXY is a class for a calendar cell in row X, collumn Y
       check_first_day_position("rc15");
     });
     
