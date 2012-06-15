@@ -9,8 +9,8 @@ function make_date_array(year_num,month_num,date_arr){
 };
 
 function make_event_json(options){
-  //specify date,id,title,
-  json = {
+  //specify event_date,id,event_title,
+  var json = {
     VIP_URL: null,
     active: null,
     ages: null,
@@ -21,7 +21,7 @@ function make_event_json(options){
     created_at: "2012/01/02 14:59:58 -0400",
     date: options.event_date,    //ex 2012/06/01,
     description: options.description || "No Deescription Given",
-    event_id: options.id.toString(), //must
+    event_id: options.id.toString(), 
     friendly_id: null,
     guestlist_URL: null,
     guestlist_conditions: null,
@@ -53,7 +53,7 @@ function make_event_json(options){
 };
 
 function generate_events_json(dates){
-  number = 1;
+  var number = 1;
   var json = [];
   for (var i =0;i<dates.length;i++){
     this_date = dates[i]
