@@ -251,7 +251,11 @@ VenueDriverCalendarEventsWidget = function(options){
       $html_location.text("");
       //TODO:this snippet should be a function
       var d = Utils.first_date_of_month(date).add(i-1).days();
-      var id = d.getMonth()+'-'+d.getDate()+'-'+ d.getFullYear();
+      var month = d.getMonth();
+      var date_num = d.getDate()
+      if (month <10) month = '0' +month;
+      if (date_num<10) date_num = '0'+date_num;
+      var id = d.getFullYear()+'/'+month+'/'+ date_num;
       
       $html_location.attr('id',id);
       $html_location.addClass('in-month');
