@@ -3,9 +3,10 @@ describe("Calendar Widget", function() {
     preloadFixtures('calendar.html')
     $.ajaxMock.on();
     loadFixtures('calendar.html');
+    mock_date_today('2012/06/01')
   });
   
-  describe("The First Day of The Calendar Grid Can Be Set To Any Day",function(){
+  describe("The first day of The calendar grid can be set to any day",function(){
     
     beforeEach(function() {
       std_options = {api_type:"account",api_id:1,div_id:'cal-test'}
@@ -42,9 +43,19 @@ describe("Calendar Widget", function() {
     function test_first_day(name){
       var options = $().extend(std_options,{first_day:name})
       var calendar = new VenueDriverCalendarEventsWidget(options);
-      expect($('#calendar-container .day-1').text()).toEqual('name');
+      expect($('#calendar-container .day-1').text()).toEqual(name);
     };
      
+  });
+  
+  describe("It shows events in the correct position in the calendar",function(){
+    
+    
+    
+  });
+  
+  it('should test',function(){
+    debugger;
   });
   
 });

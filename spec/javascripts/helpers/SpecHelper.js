@@ -63,6 +63,13 @@ function generate_events_json(dates){
   return json;
 };
 
+function mock_date_today(date_str){
+  var OldDate = Date
+  Date.today = function(){
+    return new Date(date_str);
+  }
+};
+
 beforeEach(function() {
 
 });
