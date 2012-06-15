@@ -1,21 +1,50 @@
-
-describe("Calendar Widget", function() {
-  function setup(){
-    loadFixtures('calendar.html');
-    window.cal = new VenueDriverCalendarEventsWidget({api_type:"account",api_id:1,div_id:'cal-test',first_day:'Monday'});  
-  };
-  
+describe("Calendar Widget", function() {  
   beforeEach(function() {
     preloadFixtures('calendar.html')
     $.ajaxMock.on();
-    str = 'http://www.venuedriver.com/api/accounts/1/events/calendar_month?month=6&year=2012&token=test';
-    $.ajaxMock.url(str, generate_events_json(make_date_array(2012,6,['04','07','08','12','16'])));
-    setup();
+    loadFixtures('calendar.html');
   });
   
-  it("should test", function(){
-    debugger;
-    expect(true).toBe(true);
+  describe("The First Day of The Calendar Grid Can Be Set To Any Day",function(){
+    
+    beforeEach(function() {
+      std_options = {api_type:"account",api_id:1,div_id:'cal-test'}
+    });
+    
+    it("Can be Monday", function(){
+      test_first_day('Monday');
+    });
+    
+    it("Can be Tuesday", function(){
+      test_first_day('Tuesday');
+    });
+    
+    it("Can be Wednesday", function(){
+      test_first_day('Wednesday');
+    });
+    
+    it("Can be Thursday", function(){
+      test_first_day('Thursday');
+    });
+    
+    it("Can be Friday", function(){
+      test_first_day('Friday');
+    });
+    
+    it("Can be Saturday", function(){
+      test_first_day('Saturday');
+    });
+    
+    it("Can be Sunday", function(){
+      test_first_day('Sunday');
+    });
+    
+    function test_first_day(name){
+      var options = $().extend(std_options,{first_day:name})
+      var calendar = new VenueDriverCalendarEventsWidget(options);
+      expect($('#calendar-container .day-1').text()).toEqual('name');
+    };
+     
   });
   
 });
