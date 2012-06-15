@@ -14,36 +14,47 @@ describe("Calendar Widget", function() {
     
     it("can be Monday", function(){
       test_first_day('Monday');
+      check_first_day_position("rc15");
     });
     
     it("can be Tuesday", function(){
       test_first_day('Tuesday');
+      check_first_day_position("rc14");
     });
     
     it("can be Wednesday", function(){
       test_first_day('Wednesday');
+      check_first_day_position("rc13");
     });
     
     it("can be Thursday", function(){
       test_first_day('Thursday');
+      check_first_day_position("rc12");
     });
     
     it("can be Friday", function(){
       test_first_day('Friday');
+      check_first_day_position("rc11");
     });
     
     it("can be Saturday", function(){
       test_first_day('Saturday');
+      check_first_day_position("rc17");
     });
     
     it("can be Sunday", function(){
       test_first_day('Sunday');
+      check_first_day_position("rc16");
     });
     
     function test_first_day(name){
       var options = $().extend(std_options,{first_day:name})
       var calendar = new VenueDriverCalendarEventsWidget(options);
       expect($('#calendar-container .day-1').text()).toEqual(name);
+    };
+    
+    function check_first_day_position(position){
+      expect($('#calendar-container ' +'.'+position).attr('id')).toEqual('2012-06-01');
     };
      
   });
