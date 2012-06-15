@@ -260,8 +260,8 @@ VenueDriverCalendarEventsWidget = function(options){
       $html_location.attr('id',id);
       $html_location.addClass('in-month');
       $html_location.append("<div class='day-number'>"+i+"</div>");
-      $html_location.append("<div class='event-content-area'></div>");
-      $event_content_area = $(css_path + ' .event-content-area');
+      $html_location.append("<div class='events-content-area'></div>");
+      $event_content_area = $(css_path + ' .events-content-area');
       var the_days_events = sorted_events[i-1];
       if(the_days_events.length > 0)$html_location.addClass('has-events');
       else $html_location.addClass('has-no-events');
@@ -269,7 +269,7 @@ VenueDriverCalendarEventsWidget = function(options){
       
       if(that.db_transform){
         $html_location.addClass('date-bottom-style')
-        $('#'+id + ' .event-content-area').insertBefore('#'+id + ' .day-number');
+        $('#'+id + ' .events-content-area').insertBefore('#'+id + ' .day-number');
         $('#'+id + ' .day-number').attr('style','vertical-align:bottom')
       } else {
         $html_location.addClass('date-top-style')

@@ -74,9 +74,9 @@ describe("Calendar Widget", function() {
     });
     
     it('shows events in their proper positions', function(){
-      expect($('#calendar-container #2012-06-04 .event-content-area :first-child a').text()).toEqual("Event 1");
-      expect($('#calendar-container #2012-06-05 .event-content-area :first-child a').text()).toEqual("Event 2");
-      expect($('#calendar-container #2012-06-06 .event-content-area :first-child a').text()).toEqual("Event 3");
+      expect($('#calendar-container #2012-06-04 .events-content-area :first-child a').text()).toEqual("Event 1");
+      expect($('#calendar-container #2012-06-05 .events-content-area :first-child a').text()).toEqual("Event 2");
+      expect($('#calendar-container #2012-06-06 .events-content-area :first-child a').text()).toEqual("Event 3");
     });
   });
   
