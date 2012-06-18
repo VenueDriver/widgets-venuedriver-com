@@ -76,6 +76,10 @@ function mock_date_today(date_str){
   }
 };
 
+function restore_date_today(){
+  Date.today = function (){return Date.now().clearTime();}
+}
+
 beforeEach(function() {
 
 });

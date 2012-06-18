@@ -12,6 +12,8 @@ describe("Calendar Widget", function() {
       mock_date_today('2012/06/01')
     });
     
+    afterEach(restore_date_today);
+    
     it("can be Monday", function(){
       test_first_day('Monday');
       //rcXY is a class for a calendar cell in row X, collumn Y
@@ -110,6 +112,8 @@ describe("Calendar Widget", function() {
         mock_date_today('2012/06/01');
         window.cal = new VenueDriverCalendarEventsWidget(std_options);
       });
+      
+      afterEach(restore_date_today);
     
       it("should go to the next month, when the 'next month' button is pressed",function(){
         expect($('#calendar-container .month-title').text()).toEqual("June 2012");
@@ -145,6 +149,8 @@ describe("Calendar Widget", function() {
         $btn.trigger('click');
         expect($('#calendar-container .month-title').text()).toEqual("December 2011");
       })
+      
+      afterEach(restore_date_today);
       
     });
   });
