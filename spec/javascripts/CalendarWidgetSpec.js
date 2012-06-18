@@ -78,6 +78,13 @@ describe("Calendar Widget", function() {
       expect($('#calendar-container #2012-06-05 .events-content-area :first-child a').text()).toEqual("Event 2");
       expect($('#calendar-container #2012-06-06 .events-content-area :first-child a').text()).toEqual("Event 3");
     });
+    
+    it('embeds information in data-attributes inside the event-content divs', function(){
+      var $test_location = $('#calendar-container #2012-06-04 .events-content-area :first-child');
+      expect($test_location.attr('data-title')).toEqual('Event 1');
+      expect($test_location.attr('data-date')).toEqual('2012/06/04');
+      expect($test_location.attr('data-id')).toEqual('1');
+    });
   });
   
 });
