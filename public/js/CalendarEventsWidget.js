@@ -105,7 +105,7 @@ VenueDriverCalendarEventsWidget = function(options){
   };
   
   var to_prev_month = function(){
-    if (month() <= 1) that.set_month(that.year()-1,12);
+    if (month() <= 1) that.set_month(year()-1,12);
     else that.set_month(year(),month()-1);
   };
 
