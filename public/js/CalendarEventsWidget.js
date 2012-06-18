@@ -63,7 +63,7 @@ var CellIndex = function(r,c) {
 
 VenueDriverCalendarEventsWidget = function(options){
   var that =this;//that is for jquery event handlers, which rebind 'that' to something else
-  var json_events ={};
+  var json_events =[];
   this._json_events = json_events;
   var sorted_events= [];
   this._sorted_events = sorted_events;
@@ -86,6 +86,8 @@ VenueDriverCalendarEventsWidget = function(options){
   var refresh_on_creation = options.refresh_on_creation || true;
   that.set_month = function(year,month) { //wrapper so that month param counts from 1
     date = new Date(year,month -1);
+    json_events=[];
+    construct_output();
     pull_api_events();
   };
   
@@ -124,6 +126,7 @@ VenueDriverCalendarEventsWidget = function(options){
 
   var prepare_calendar_title = function() {
     var cal_title = date.getMonthName()+' '+date.getFullYear();
+    $('#calendar-container .calendar-title').text("Events Calendar");
     $('#calendar-container .month-title').text(cal_title);
   };
 
