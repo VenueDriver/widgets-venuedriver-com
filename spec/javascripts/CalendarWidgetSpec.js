@@ -1,4 +1,5 @@
 describe("Calendar Widget", function() {  
+  var std_options = {api_type:"account",api_id:1,div_id:'cal-test',first_day:"Monday"};
   beforeEach(function() {
     preloadFixtures('calendar.html')
     $.ajaxMock.on();
@@ -8,7 +9,6 @@ describe("Calendar Widget", function() {
   describe("The first day of The calendar grid can be set to any day",function(){
     
     beforeEach(function() {
-      std_options = {api_type:"account",api_id:1,div_id:'cal-test'}
       mock_date_today('2012/06/01')
     });
     
@@ -49,7 +49,8 @@ describe("Calendar Widget", function() {
     });
     
     function test_first_day(name){
-      var options = $().extend(std_options,{first_day:name})
+      var options = $().extend(std_options,{});
+      options.first_day =name;
       var calendar = new VenueDriverCalendarEventsWidget(options);
       expect($('#calendar-container .day-1').text()).toEqual(name);
     };
@@ -66,9 +67,14 @@ describe("Calendar Widget", function() {
       var options = {api_type:"account",api_id:1,div_id:'cal-test',first_day:"Monday"}
       mock_date_today('2012/06/01');
       json = [];
-      json.push(make_event_json({event_title:'Event 1',event_date:'2012/06/04',id:1}));
-      json.push(make_event_json({event_title:'Event 2',event_date:'2012/06/05',id:2}));
-      json.push(make_event_json({event_title:'Event 3',event_date:'2012/06/06',id:3}));
+      events = []
+      event1 = new FakeEvent({event_title:'Event 1',event_date:'2012/06/04',id:1});
+      event2 = new FakeEvent({event_title:'Event 2',event_date:'2012/06/05',id:2});
+      event3 = new FakeEvent({event_title:'Event 3',event_date:'2012/06/06',id:3});
+      
+      json.push(make_event_json(event1));
+      json.push(make_event_json(event2));
+      json.push(make_event_json(event3));
       jQuery.ajaxMock.url('http://www.venuedriver.com/api/accounts/1/events/calendar_month?month=6&year=2012&token=test', json);
       window.cal = new VenueDriverCalendarEventsWidget(options);
     });
@@ -84,7 +90,44 @@ describe("Calendar Widget", function() {
       expect($test_location.attr('data-title')).toEqual('Event 1');
       expect($test_location.attr('data-date')).toEqual('2012/06/04');
       expect($test_location.attr('data-id')).toEqual('1');
+      
+      $test_location = $('#calendar-container #2012-06-05 .events-content-area :first-child');
+      expect($test_location.attr('data-title')).toEqual('Event 2');
+      expect($test_location.attr('data-date')).toEqual('2012/06/05');
+      expect($test_location.attr('data-id')).toEqual('2');
+      
+      $test_location = $('#calendar-container #2012-06-06 .events-content-area :first-child');
+      expect($test_location.attr('data-title')).toEqual('Event 3');
+      expect($test_location.attr('data-date')).toEqual('2012/06/06');
+      expect($test_location.attr('data-id')).toEqual('3');
     });
   });
   
+  describe("Navigation", function(){
+    
+    describe('Month to Month',function(){
+      beforeEach(function(){
+        mock_date_today('2012/06/01');
+        window.cal = new VenueDriverCalendarEventsWidget(std_options);
+      });
+    
+      it("should go to the next month, when the 'next month' button is pressed",function(){
+        expect($('#calendar-container .month-title').text()).toEqual("June 2012");
+        $btn = $('#calendar-container .next-month');
+        $btn.trigger('click');
+        expect($('#calendar-container .month-title').text()).toEqual("July 2012")
+      });
+    
+      it("should go to the previous month, when the 'previous month' button is pressed",function(){
+        expect($('#calendar-container .month-title').text()).toEqual("June 2012");
+        $btn = $('#calendar-container .prev-month');
+        $btn.trigger('click');
+        expect($('#calendar-container .month-title').text()).toEqual("May 2012")
+      });
+    });
+    
+    describe('Crossing Year Bounaries',function(){
+      
+    });
+  });
 });

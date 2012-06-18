@@ -8,7 +8,7 @@ function make_date_array(year_num,month_num,date_arr){
   return result;
 };
 
-function make_event_json(options){
+function make_event_json(fake_event){
   //specify event_date,id,event_title,
   var json = {
     VIP_URL: null,
@@ -19,15 +19,15 @@ function make_event_json(options){
     closed_message: null,
     cover: null,
     created_at: "2012/01/02 14:59:58 -0400",
-    date: options.event_date,    //ex 2012/06/01,
+    date: fake_event.event_date,    //ex 2012/06/01,
     description: options.description || "No Deescription Given",
-    event_id: options.id.toString(), 
+    event_id: fake_event.id.toString(), 
     friendly_id: null,
     guestlist_URL: null,
     guestlist_conditions: null,
     guestlist_count: 0,
     home_URL: null,
-    id: options.id,
+    id: fake_event.id,
     max_guests_per_guestlist: 20000,
     max_number_of_guests: null,
     myspace_URL: null,
@@ -44,13 +44,19 @@ function make_event_json(options){
     tickets_URL: null,
     tickets_sold_count: 0,
     time: null,
-    title: options.event_title ,
+    title: fake_event.event_title ,
     updated_at: "2012/02/14 14:59:58 -0400",
     venue_id: "1",
     wiki_name: null
   }
   return json;
 };
+
+function FakeEvent(params){
+  this.id = params.id;
+  this.event_date = params.event_date;
+  this.event_title = params.event_title;
+}
 
 function generate_events_json(dates){
   var number = 1;
