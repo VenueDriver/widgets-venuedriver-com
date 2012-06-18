@@ -128,6 +128,24 @@ describe("Calendar Widget", function() {
     
     describe('Crossing Year Bounaries',function(){
       
+      it('should go to the next year',function(){
+        mock_date_today('2012/12/01');
+        window.cal = new VenueDriverCalendarEventsWidget(std_options);
+        expect($('#calendar-container .month-title').text()).toEqual("December 2012");
+        $btn = $('#calendar-container .next-month');
+        $btn.trigger('click');
+        expect($('#calendar-container .month-title').text()).toEqual("January 2013");
+      })
+      
+      it('should go to the previous year',function(){
+        mock_date_today('2012/01/01');
+        window.cal = new VenueDriverCalendarEventsWidget(std_options);
+        expect($('#calendar-container .month-title').text()).toEqual("January 2012");
+        $btn = $('#calendar-container .prev-month');
+        $btn.trigger('click');
+        expect($('#calendar-container .month-title').text()).toEqual("December 2011");
+      })
+      
     });
   });
 });
