@@ -64,9 +64,9 @@ var CellIndex = function(r,c) {
 VenueDriverCalendarEventsWidget = function(options){
   var that =this;//that is for jquery event handlers, which rebind 'that' to something else
   var json_events =[];
-  this._json_events = json_events;
+  this.t_json_events = json_events;
   var sorted_events= [];
-  this._sorted_events = sorted_events;
+  this.t_sorted_events = sorted_events;
   var current_cell = new CellIndex(1,1); //WARNING that is used like a global variable in the widget member functions
   var test_http = 'http://localhost:3000/api/';
   var real_http = 'http://www.venuedriver.com/api/';
@@ -81,7 +81,7 @@ VenueDriverCalendarEventsWidget = function(options){
   var api_type = options.api_type;
   var api_id = options.api_id;
   var date = Date.today(); //calendar defaults to current month 
-  this._date = date;
+  this.t_date = date;
   var first_day = Utils.day_string_to_number(options.first_day);
   var refresh_on_creation = options.refresh_on_creation || true;
   that.set_month = function(year,month) { //wrapper so that month param counts from 1
@@ -111,7 +111,7 @@ VenueDriverCalendarEventsWidget = function(options){
 
   var api_url = function(){
     return http_str + api_type +'s/' + api_id + '/events/calendar_month?month='+month()+'&year='+year()+'&token=test';
-  };this._api_url = api_url;
+  };this.t_api_url = api_url;
 
   var pull_api_events = function() {
     var url = api_url();
@@ -122,7 +122,7 @@ VenueDriverCalendarEventsWidget = function(options){
       console.log(json_events.length);
       construct_output();
     });
-  };this._pull_api_events = pull_api_events;
+  };this.t_pull_api_events = pull_api_events;
 
   var prepare_calendar_title = function() {
     var cal_title = date.getMonthName()+' '+date.getFullYear();
@@ -196,7 +196,7 @@ VenueDriverCalendarEventsWidget = function(options){
       index = Date.parse(event.date).getDate()-1;
       sorted_events[index].push(event);
     }
-    this._sorted_events = sorted_events
+    this.t_sorted_events = sorted_events
     event = null;//help reduce future errors by accidentall reusing that quantity
   };
 

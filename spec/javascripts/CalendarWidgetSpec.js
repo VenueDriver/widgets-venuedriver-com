@@ -51,8 +51,7 @@ describe("Calendar Widget", function() {
     });
     
     function test_first_day(name){
-      var options = $().extend(std_options,{});
-      options.first_day =name;
+      var options = $().extend(std_options,{first_day:name});
       var calendar = new VenueDriverCalendarEventsWidget(options);
       expect($('#calendar-container .day-1').text()).toEqual(name);
     };
@@ -151,7 +150,10 @@ describe("Calendar Widget", function() {
       })
       
       afterEach(restore_date_today);
-      
     });
+  });
+  
+  describe('API Requests',function(){
+    
   });
 });
