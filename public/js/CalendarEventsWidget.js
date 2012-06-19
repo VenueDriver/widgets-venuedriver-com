@@ -1,4 +1,4 @@
-var VenueDriverCalendarEventsWidget;
+var VenueDriverCalendarWidget;
 // var test_url = 'http://localhost:3000/api/accounts/1/events/calendar_month?month=5&year=2012&token=test'
 // **Calendar Options**
 // api_type - "account" or "venue"
@@ -6,7 +6,6 @@ var VenueDriverCalendarEventsWidget;
 // div_id - the div where we insert the calendar
 // first_day -the first day that shows
 // javascript represents sunday as 0, monday as 1...saturday as 6
-var glb_debug = true;
 var db_panel = true;
 var Utils = {
   day_string_to_number: function(day_str) { //defaults to sunday if day_str is mispelled
@@ -55,13 +54,13 @@ var CellIndex = function(r,c) {
     if (c >= 7) return new CellIndex(this.r+1,1);
     else return new CellIndex(this.r,this.c+1);
   };
-  //if (glb_debug) console.log("r="+that.r+"c="+that.c);
+  
   this.to_css =function(){
     return ".rc"+r+c;
   };
 }
 
-VenueDriverCalendarEventsWidget = function(options){
+VenueDriverCalendarWidget = function(options){
   var that =this;//that is for jquery event handlers, which rebind 'that' to something else
   var json_events =[];
   this.t_json_events = json_events;
@@ -313,7 +312,31 @@ VenueDriverCalendarEventsWidget = function(options){
   if (refresh_on_creation) pull_api_events(); 
 }
 
+
+jQuery.fn.VenueDriverCalendar = function(params) {
+  var $location = this.attr('id')
+  var settings = jQuery.extend(params,{div_id:$location})
+  window.my_calendar = new VenueDriverCalendarWidget(settings);
+};
+
+jQuery.fn.VenueDriverAccountCalendar = function(params) {
+  var $location = this.attr('id')
+  var settings = jQuery.extend(params,{div_id:$location})
+  window.my_calendar = new VenueDriverCalendarWidget(settings);
+};
+
+jQuery.fn.VenueDriverVenueCalendar = function(params) {
+  var $location = this.attr('id')
+  var settings = jQuery.extend(params,{div_id:$location})
+  window.my_calendar = new VenueDriverCalendarWidget(settings);
+};
+
+
+
 $(document).ready(function() {
-  window.t = new VenueDriverCalendarEventsWidget({api_type:"account",api_id:1,div_id:'cal-test',first_day:'Monday',testing:true,day_bottom:false});
+  //window.t = new VenueDriverCalendarWidget({api_type:"account",api_id:1,div_id:'cal-test',first_day:'Monday',testing:true,day_bottom:false});
+  $('#cal-test').VenueDriverCalendar({api_type:"account",api_id:1,first_day:'Monday',testing:true,day_bottom:false})
 });
+
+
 
