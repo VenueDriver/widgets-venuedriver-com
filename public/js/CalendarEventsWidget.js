@@ -70,7 +70,7 @@ VenueDriverCalendarWidget = function(options){
   var test_http = 'http://localhost:3000/api/';
   var real_http = 'http://www.venuedriver.com/api/';
   var http_str;
-  this.db_transform = options.day_bottom;
+  this.db_transform = options.day_bottom || false;
   if (options.testing ==true){
     http_str = test_http;
   } else {
@@ -313,21 +313,15 @@ VenueDriverCalendarWidget = function(options){
 }
 
 
-jQuery.fn.VenueDriverCalendar = function(params) {
+jQuery.fn.VenueCalendar = function(params) {
   var $location = this.attr('id')
-  var settings = jQuery.extend(params,{div_id:$location})
+  var settings = jQuery.extend(params,{div_id:$location,api_type:'venue'})
   window.my_calendar = new VenueDriverCalendarWidget(settings);
 };
 
-jQuery.fn.VenueDriverAccountCalendar = function(params) {
+jQuery.fn.AccountCalendar = function(params) {
   var $location = this.attr('id')
-  var settings = jQuery.extend(params,{div_id:$location})
-  window.my_calendar = new VenueDriverCalendarWidget(settings);
-};
-
-jQuery.fn.VenueDriverVenueCalendar = function(params) {
-  var $location = this.attr('id')
-  var settings = jQuery.extend(params,{div_id:$location})
+  var settings = jQuery.extend(params,{div_id:$location,api_type:'account'})
   window.my_calendar = new VenueDriverCalendarWidget(settings);
 };
 
@@ -335,7 +329,7 @@ jQuery.fn.VenueDriverVenueCalendar = function(params) {
 
 $(document).ready(function() {
   //window.t = new VenueDriverCalendarWidget({api_type:"account",api_id:1,div_id:'cal-test',first_day:'Monday',testing:true,day_bottom:false});
-  $('#cal-test').VenueDriverCalendar({api_type:"account",api_id:1,first_day:'Monday',testing:true,day_bottom:false})
+  $('#cal-test').AccountCalendar({api_id:1,first_day:'Monday',testing:true})
 });
 
 
