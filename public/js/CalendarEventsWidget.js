@@ -109,7 +109,7 @@ VenueDriverCalendarWidget = function(options){
   };
 
   var api_url = function(){
-    return http_str + api_type +'s/' + api_id + '/events/calendar_month?month='+month()+'&year='+year()+'&token=test';
+    return http_str + api_type +'s/' + api_id + '/events/calendar_month?month='+month()+'&year='+year();
   };this.t_api_url = api_url;
 
   var pull_api_events = function() {
