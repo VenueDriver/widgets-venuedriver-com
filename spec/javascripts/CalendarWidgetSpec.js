@@ -1,4 +1,5 @@
 describe("Calendar Widget", function() {  
+  //cal-test div is in calendar.html fixture
   var std_options = {api_type:"account",api_id:1,div_id:'cal-test',first_day:"Monday"};
   beforeEach(function() {
     preloadFixtures('calendar.html')
@@ -154,6 +155,34 @@ describe("Calendar Widget", function() {
   });
   
   describe('API Requests',function(){
+    afterEach(restore_date_today);
+    
+    it('makes the correct request using account id',function(){
+      mock_date_today('2012/06/01');
+      var options = $().extend(std_options,{api_type:"account",api_id:52})
+      var cal = new VenueDriverCalendarEventsWidget(options);
+      expect(cal.t_api_url()).toEqual('http://www.venuedriver.com/api/accounts/52/events/calendar_month?month=6&year=2012&token=test');
+    });
+    
+    it('makes the correct request using venue id',function(){
+      mock_date_today('2012/06/01');
+      var options = $().extend(std_options,{api_type:"venue",api_id:33})
+      var cal = new VenueDriverCalendarEventsWidget(options);
+      expect(cal.t_api_url()).toEqual('http://www.venuedriver.com/api/venues/33/events/calendar_month?month=6&year=2012&token=test');
+    });
+    
+    it('updates the request string when the month changes',function(){
+      mock_date_today('2012/06/01');
+      var options = $().extend(std_options,{api_type:"account",api_id:1})
+      var cal = new VenueDriverCalendarEventsWidget(options);
+      expect(cal.t_api_url()).toEqual('http://www.venuedriver.com/api/accounts/1/events/calendar_month?month=6&year=2012&token=test');
+      $('#calendar-container .next-month').trigger('click');
+      expect(cal.t_api_url()).toEqual('http://www.venuedriver.com/api/accounts/1/events/calendar_month?month=7&year=2012&token=test');
+      $('#calendar-container .prev-month').trigger('click');
+      expect(cal.t_api_url()).toEqual('http://www.venuedriver.com/api/accounts/1/events/calendar_month?month=6&year=2012&token=test');
+      $('#calendar-container .prev-month').trigger('click');
+      expect(cal.t_api_url()).toEqual('http://www.venuedriver.com/api/accounts/1/events/calendar_month?month=5&year=2012&token=test');
+    });
     
   });
 });
