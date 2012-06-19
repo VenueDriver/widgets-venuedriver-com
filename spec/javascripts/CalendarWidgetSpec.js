@@ -1,6 +1,8 @@
+
 describe("Calendar Widget", function() {  
   //cal-test div is in calendar.html fixture
-  var std_options = {api_type:"account",api_id:1,div_id:'cal-test',first_day:"Monday"};
+  
+  var std_options = {api_type:"account",api_id:1,div_id:'cal-test'};
   beforeEach(function() {
     preloadFixtures('calendar.html')
     $.ajaxMock.on();
@@ -51,8 +53,16 @@ describe("Calendar Widget", function() {
       check_first_day_position("rc16");
     });
     
+    it("defaults to Monday if no day is specified",function(){
+      
+      var calendar = new VenueDriverCalendarWidget(std_options);
+      expect($('#calendar-container .day-1').text()).toEqual('Monday');
+    });
+    
     function test_first_day(name){
-      var options = $().extend(std_options,{first_day:name});
+      var options = {}
+      $().extend(options,std_options);
+      $().extend(options,{first_day:name})
       var calendar = new VenueDriverCalendarWidget(options);
       expect($('#calendar-container .day-1').text()).toEqual(name);
     };
@@ -66,7 +76,7 @@ describe("Calendar Widget", function() {
   describe("Displaying Events",function(){
     
     beforeEach(function() {
-      var options = {api_type:"account",api_id:1,div_id:'cal-test',first_day:"Monday"}
+      var options = {api_type:"account",api_id:1,div_id:'cal-test'}
       mock_date_today('2012/06/01');
       json = [];
       events = []
@@ -130,7 +140,7 @@ describe("Calendar Widget", function() {
       });
     });
     
-    describe('Crossing Year Bounaries',function(){
+    describe('Crossing Year Boudnaries',function(){
       
       it('should go to the next year',function(){
         mock_date_today('2012/12/01');
@@ -159,21 +169,27 @@ describe("Calendar Widget", function() {
     
     it('makes the correct request using account id',function(){
       mock_date_today('2012/06/01');
-      var options = $().extend(std_options,{api_type:"account",api_id:52})
+      var options = {}
+      $().extend(options,std_options)
+      $().extend(options,{api_type:"account",api_id:52})
       var cal = new VenueDriverCalendarWidget(options);
       expect(cal.t_api_url()).toEqual('http://www.venuedriver.com/api/accounts/52/events/calendar_month?month=6&year=2012&token=test');
     });
     
     it('makes the correct request using venue id',function(){
       mock_date_today('2012/06/01');
-      var options = $().extend(std_options,{api_type:"venue",api_id:33})
+      var options = {}
+      $().extend(options,std_options)
+      $().extend(options,{api_type:"venue",api_id:33})
       var cal = new VenueDriverCalendarWidget(options);
       expect(cal.t_api_url()).toEqual('http://www.venuedriver.com/api/venues/33/events/calendar_month?month=6&year=2012&token=test');
     });
     
     it('updates the request string when the month changes',function(){
       mock_date_today('2012/06/01');
-      var options = $().extend(std_options,{api_type:"account",api_id:1})
+      var options = {}
+      $().extend(options,std_options)
+      $().extend(options,{api_type:"account",api_id:1})
       var cal = new VenueDriverCalendarWidget(options);
       expect(cal.t_api_url()).toEqual('http://www.venuedriver.com/api/accounts/1/events/calendar_month?month=6&year=2012&token=test');
       $('#calendar-container .next-month').trigger('click');
