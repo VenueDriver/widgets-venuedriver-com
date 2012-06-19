@@ -328,8 +328,9 @@ jQuery.fn.AccountCalendar = function(params) {
 
 
 $(document).ready(function() {
-  //window.t = new VenueDriverCalendarWidget({api_type:"account",api_id:1,div_id:'cal-test',first_day:'Monday',testing:true,day_bottom:false});
+  //$('#cal-test').AccountCalendar({api_id:1,first_day:'Thursday',testing:true,day_bottom:false});
   $('#cal-test').AccountCalendar({api_id:1,testing:true})
+  //$('#cal-test').AccountCalendar({api_id:1})
 });
 
 
