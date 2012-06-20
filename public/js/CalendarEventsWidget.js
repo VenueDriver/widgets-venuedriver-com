@@ -317,12 +317,14 @@ jQuery.fn.VenueCalendar = function(params) {
   var $location = this.attr('id');
   var settings = jQuery.extend(params,{div_id:$location,api_type:'venue',api_id:params.venue_id});
   window.my_calendar = new VenueDriverCalendarWidget(settings);
+  return this;
 };
 
 jQuery.fn.AccountCalendar = function(params) {
   var $location = this.attr('id');
   var settings = jQuery.extend(params,{div_id:$location,api_type:'account',api_id:params.account_id});
   window.my_calendar = new VenueDriverCalendarWidget(settings);
+  return this;
 };
 
 
