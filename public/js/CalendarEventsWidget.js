@@ -314,14 +314,14 @@ VenueDriverCalendarWidget = function(options){
 
 
 jQuery.fn.VenueCalendar = function(params) {
-  var $location = this.attr('id')
-  var settings = jQuery.extend(params,{div_id:$location,api_type:'venue'})
+  var $location = this.attr('id');
+  var settings = jQuery.extend(params,{div_id:$location,api_type:'venue',api_id:params.venue_id});
   window.my_calendar = new VenueDriverCalendarWidget(settings);
 };
 
 jQuery.fn.AccountCalendar = function(params) {
-  var $location = this.attr('id')
-  var settings = jQuery.extend(params,{div_id:$location,api_type:'account'})
+  var $location = this.attr('id');
+  var settings = jQuery.extend(params,{div_id:$location,api_type:'account',api_id:params.account_id});
   window.my_calendar = new VenueDriverCalendarWidget(settings);
 };
 
@@ -329,7 +329,7 @@ jQuery.fn.AccountCalendar = function(params) {
 
 $(document).ready(function() {
   //$('#cal-test').AccountCalendar({api_id:1,first_day:'Thursday',testing:true,day_bottom:false});
-  $('#cal-test').AccountCalendar({api_id:1,testing:true})
+  $('#cal-test').AccountCalendar({account_id:1,testing:true})
   //$('#cal-test').AccountCalendar({api_id:1})
 });
 
