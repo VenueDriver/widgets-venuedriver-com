@@ -329,7 +329,7 @@ jQuery.fn.AccountCalendar = function(params) {
 
 $(document).ready(function() {
   //$('#cal-test').AccountCalendar({api_id:1,first_day:'Thursday',testing:true,day_bottom:false});
-  $('#cal-test').AccountCalendar({account_id:1,testing:true})
+  //$('#cal-test').AccountCalendar({account_id:1,testing:true})
   //$('#cal-test').AccountCalendar({api_id:1})
 });
 
