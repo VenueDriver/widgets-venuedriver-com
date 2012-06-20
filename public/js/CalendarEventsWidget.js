@@ -48,16 +48,25 @@ var Utils = {
 
 //iterator for table cells
 var CellIndex = function(r,c) {
-  this.r = r;
-  this.c = c;
-  this.next =  function() {
-    if (c >= 7) return new CellIndex(this.r+1,1);
+  this.set = function(new_row,new_col) {
+    this.r = new_row;
+    this.c = new_col
+  };
+  this.set(r,c);
+  this.next = function() {
+    if (this.c >= 7) return new CellIndex(this.r+1,1);
     else return new CellIndex(this.r,this.c+1);
+  };
+  this.go_to_next = function(){
+    if (this.c >= 7) this.set(this.r+1,1);
+    else this.set(this.r,this.c+1);
   };
   
   this.to_css =function(){
-    return ".rc"+r+c;
+    return ".rc"+this.r+this.c;
   };
+  r= null;
+  c= null;
 }
 
 VenueDriverCalendarWidget = function(options){
@@ -159,7 +168,8 @@ VenueDriverCalendarWidget = function(options){
         var $html_location = $('#calendar-container ' + current_cell.to_css());
         $html_location.text("");
         $html_location.addClass("not-in-month");
-        current_cell = current_cell.next();
+        debugger;
+        current_cell.go_to_next();
       }
     }
     else {
@@ -174,7 +184,7 @@ VenueDriverCalendarWidget = function(options){
       var $html_location = $("#calendar-container " + current_cell.to_css());
       $html_location.text("");
       $html_location.addClass("not-in-month");
-      current_cell = current_cell.next();
+      current_cell.go_to_next();
       if (current_cell.r>=7) break;
     }
     
@@ -276,7 +286,7 @@ VenueDriverCalendarWidget = function(options){
       } else {
         $html_location.addClass('date-top-style')
       }         
-      current_cell = current_cell.next();
+      current_cell.go_to_next();
     };
   };
 
@@ -331,7 +341,7 @@ jQuery.fn.AccountCalendar = function(params) {
 
 $(document).ready(function() {
   //$('#cal-test').AccountCalendar({api_id:1,first_day:'Thursday',testing:true,day_bottom:false});
-  //$('#cal-test').AccountCalendar({account_id:1,testing:true})
+  $('#cal-test').AccountCalendar({account_id:1,testing:true})
   //$('#cal-test').AccountCalendar({api_id:1})
 });
 
