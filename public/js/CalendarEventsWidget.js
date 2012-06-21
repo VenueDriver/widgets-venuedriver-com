@@ -345,7 +345,7 @@ $(document).ready(function() {
 });
 
 //for development
-window.show_calendar = function(){
+window.show_calendar_in_devel = function(){
   $('#cal-test').AccountCalendar({account_id:1,testing:true})
 };
 

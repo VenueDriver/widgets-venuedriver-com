@@ -83,3 +83,11 @@ The JavaScript code that third-party sites embed is hosted on Amazon S3.  To dep
 * Run the deployment Rake task with ```rake deploy```
 
 ## Calendar Widget Protype
+
+# Installing the Calendar
+
+* To begin, you will need your html to look like this
+
+```html
+  this is a test
+```
