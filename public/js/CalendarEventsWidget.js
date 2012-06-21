@@ -211,7 +211,7 @@ VenueDriverCalendarWidget = function(options){
     });
   };this.t_pull_api_events = pull_api_events;
   
-  first_day_of_month = function(){
+  var first_day_of_month = function(){
     return Utils.first_date_of_month(date).getDay();
   };
 
