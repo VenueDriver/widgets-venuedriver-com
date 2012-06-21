@@ -264,7 +264,6 @@ VenueDriverCalendarWidget = function(options){
       current_cell.go_to_next();
       if (current_cell.r>=7) break;
     }
-    
   };
 
   var sort_events = function(){
@@ -315,7 +314,7 @@ VenueDriverCalendarWidget = function(options){
     $event_location.append("<div class='event-date'>"+l_event.date+"</div>");
     $('#'+id).click(function(){
       var info = $(this)
-      //here 'that' = $('#'+id) called above ^^
+      //here 'this' = $('#'+id) called above ^^
       var html = "<p> id: "+info.attr('data-id')+" </p>"
       html += "<p> title: "+info.attr('data-title')+" </p>"
       html += "<p> date: " +info.attr('data-date')+" </p>"
