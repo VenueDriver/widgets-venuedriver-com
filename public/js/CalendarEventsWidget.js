@@ -369,6 +369,10 @@ VenueDriverCalendarWidget = function(options){
   var clone_table_template = function() {
     //remove previous table
     $('cal-table').remove();
+    //create hidden table template if there is none
+    if ($('.clone-me').length == 0){
+      $('body').append(calendar_html);
+    }
     //clone hidden html table
     table_template = $('.clone-me').clone().attr('class','cal-table').attr('style','display:inline-block;float:left');
     $('#calendar-container').append(table_template);
@@ -381,9 +385,6 @@ VenueDriverCalendarWidget = function(options){
 
   var construct_output = function(){
     $(div_id).html("<div id='calendar-container'></div>");  
-    if ($('.clone-me').length == 0){
-      $('body').append(calendar_html);
-    }
     clone_table_template();
     construct_table_header();
     construct_unused_day_pre_padding();
