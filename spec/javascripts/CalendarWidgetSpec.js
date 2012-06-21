@@ -9,6 +9,10 @@ describe("Calendar Widget", function() {
     loadFixtures('calendar.html');
   });
   
+  afterEach(function(){
+    $('.clone-me').remove();
+  });
+  
   describe("The first day of The calendar grid can be set to any day",function(){
     
     beforeEach(function() {
@@ -189,5 +193,13 @@ describe("Calendar Widget", function() {
       expect(cal.t_api_url()).toEqual('http://www.venuedriver.com/api/accounts/1/events/calendar_month?month=5&year=2012');
     });
     
+  });
+  
+  it("Creates its own table template from a javascript multiline string but only if the template doesnt exist", function(){
+    expect($('.clone-me').length).toEqual(0)
+    $('#cal-test').AccountCalendar({account_id:1});
+    expect($('.clone-me').length).toEqual(1);
+    window.my_calendar.refresh();//construct output again, should not create another table template
+    expect($('.clone-me').length).toEqual(1);
   });
 });
