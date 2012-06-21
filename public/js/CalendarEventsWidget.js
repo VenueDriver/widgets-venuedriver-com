@@ -416,18 +416,3 @@ jQuery.fn.AccountCalendar = function(params) {
   window.my_calendar = new VenueDriverCalendarWidget(settings);
   return this;
 };
-
-
-
-$(document).ready(function() {
-  //$('#cal-test').AccountCalendar({api_id:1,first_day:'Thursday',testing:true,day_bottom:false});
-  //$('#cal-test').AccountCalendar({account_id:1,testing:true})
-  //$('#cal-test').AccountCalendar({api_id:1})
-});
-
-//for development
-window.show_calendar_in_devel = function(){
-  $('#cal-test').AccountCalendar({account_id:1,testing:true})
-};
-
-
