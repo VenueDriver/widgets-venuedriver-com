@@ -215,16 +215,16 @@ VenueDriverCalendarWidget = function(options){
     return Utils.first_date_of_month(date).getDay();
   };
 
-  var prepare_calendar_title = function() {
+  var construct_calendar_title = function() {
     var cal_title = date.getMonthName()+' '+date.getFullYear();
     //TODO, make an option for setting calendar title
     $('#calendar-container .calendar-title').text("Events Calendar");
     $('#calendar-container .month-title').text(cal_title);
   };
 
-  var prepare_table_header = function() {
+  var construct_table_header = function() {
     //clarify this if time permits
-    prepare_calendar_title();
+    construct_calendar_title();
     for(i=0;i<=6;i++){
       var day_num = first_day + i;
       if(day_num >= 7) day_num-=7;
@@ -234,7 +234,7 @@ VenueDriverCalendarWidget = function(options){
     }
   };
 
-  var prepare_unused_day_pre_padding = function(){
+  var construct_unused_day_pre_padding = function(){
     // that functions goal is to account for spaces in the calendar table 
     // that are not part of the month. that function handles the spaces
     // that occur before the first day of the month
@@ -257,7 +257,7 @@ VenueDriverCalendarWidget = function(options){
     }
   };
 
-  var prepare_unused_day_post_padding = function(){
+  var construct_unused_day_post_padding = function(){
     //that function accounts for unused table cells that occur after the 
     // calendar has run out of days
     while(true){
@@ -309,7 +309,7 @@ VenueDriverCalendarWidget = function(options){
     return "<div class='event-content' "+ write_embedded_event_data(l_event)+"'></div>";
   };
 
-  var prepare_event = function(l_event,$content_area) {
+  var construct_event = function(l_event,$content_area) {
     var id = 'event_'+l_event.event_id;
     var event_div = write_event_div(l_event);
     $content_area.append(event_div);
@@ -327,14 +327,14 @@ VenueDriverCalendarWidget = function(options){
     });
   }
 
-  var prepare_events = function(the_days_events,$content_area){
+  var construct_events = function(the_days_events,$content_area){
      for(var j = 0;j<the_days_events.length;j++){
         var event_= the_days_events[j];
-        prepare_event(event_,$content_area);
+        construct_event(event_,$content_area);
       }
   };
 
-  var prepare_days = function(){
+  var construct_days = function(){
     var number_of_days =date.getDaysInMonth();
     sort_events();
     for (i=1; i<= number_of_days;i++){
@@ -357,7 +357,7 @@ VenueDriverCalendarWidget = function(options){
       var the_days_events = sorted_events[i-1];
       if(the_days_events.length > 0)$html_location.addClass('has-events');
       else $html_location.addClass('has-no-events');
-      prepare_events(the_days_events,$event_content_area);
+      construct_events(the_days_events,$event_content_area);
       
       if(that.db_transform){
         $html_location.addClass('date-bottom-style')
@@ -378,7 +378,7 @@ VenueDriverCalendarWidget = function(options){
     $('#calendar-container').append(table_template);
   };
 
-  var prepare_navigation_buttons = function(){
+  var construct_navigation_buttons = function(){
     $('#calendar-container .prev-month').click(to_prev_month);
     $('#calendar-container .next-month').click(to_next_month);
   };
@@ -389,11 +389,11 @@ VenueDriverCalendarWidget = function(options){
       $('body').append(calendar_html);
     }
     clone_table_template();
-    prepare_table_header();
-    prepare_unused_day_pre_padding();
-    prepare_days();
-    prepare_unused_day_post_padding();
-    prepare_navigation_buttons();
+    construct_table_header();
+    construct_unused_day_pre_padding();
+    construct_days();
+    construct_unused_day_post_padding();
+    construct_navigation_buttons();
     $(div_id + ' #calendar-container').append("<div id='side-panel' style='display:inline-block;float:left'>side panel </div>");
   };
   that.change_first_day = function(day_str) {
