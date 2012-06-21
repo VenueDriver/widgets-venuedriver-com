@@ -84,28 +84,57 @@ The JavaScript code that third-party sites embed is hosted on Amazon S3.  To dep
 
 ## Calendar Widget Protype
 
-# Installing the Calendar
+# Example
 
-* To begin, you will need your html to look like this
+* To begin, here is an exmaple of what your markup should look like
 
 ```html
 <html>
   <head>
     <title>Calendar demo</title>
     <!--This css is for demonstration purposes, and is not required-->
+    <!--This css only works for webkit browsers at the moment, has been tested on chrome-->
     <link href= "http://widgets.venuedriver.com/css/styles.css"  rel='stylesheet' type='text/css'/>
+    <!--These area required by the Calendar Widget-->
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js" charset="utf-8"></script>
     <script src="http://widgets.venuedriver.com/js/lib/date.js"s charset="utf-8"></script>
+    <!--Finally, include the calendar widget code-->
     <script src="http://widgets.venuedriver.com/js/CalendarEventsWidget.js" charset="utf-8"></script>
   </head>
   <body>
     <!--This is the div where the calendar will reside-->
     <div id='calendar-location'>
     </div>
-    <script>
+    <script id='install here'>
       //Your installation code goes here
       $('#calendar-location').AccountCalendar({account_id:1})
     </script> 
   </body>
 </html>
 ```
+
+# Installation Requirements
+
+* You will need a div put the calendar. The example uses '#calendar-location'
+
+* You will need the id of the Account or Venue that the calendar will get events from.
+
+* There are two plugins AccountCalendar and VenueCalendar - one requires am account_id and the other requires a venue_id
+
+* For an account calendar, use the AccountCalendar plugin "$('#calendar-location').AccountCalendar({account_id:12})"
+
+* For a venue calendar, use the VenueCalendar plugin "$('#calendar-location').VenueCalendar({venue_id:42})"
+
+* The plugins are otherwise identical
+
+* The basic installation is finished.
+
+# Installtion options
+
+* By default, the calendar starts on 'Monday'. This can be changed with the first_day parameter "$('#calendar-location').AccountCalendar({account_id:12,first_day:Thursday})"
+
+* The calendar defaults to Sunday if the first_day parameter is mispelled $('#calendar-location').AccountCalendar({account_id:12,first_day:Thurday})" will default to Sunday
+
+* (under development- this feature may look akward at the moment) The calendar currently shows the date number for each day of the calendar at the top of its cell. This can be changed by setting the day_bottom parameter to true "$('#calendar-location').AccountCalendar({account_id:12,day_bottom:true})"
+
+ 
