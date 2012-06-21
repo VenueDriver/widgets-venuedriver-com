@@ -243,17 +243,14 @@ VenueDriverCalendarWidget = function(options){
     else padding = 7 + difference;
     //remove extra row if it is not needed
     if(padding+date.getDaysInMonth() <= 35) $('#calendar-container .extra-row').remove();
+    current_cell = new CellIndex(1,1);
     if (padding > 0){
-      current_cell = new CellIndex(1,1);
       for(i=1;i<=padding;i++){
         var $html_location = $('#calendar-container ' + current_cell.to_css());
         $html_location.text("");
         $html_location.addClass("not-in-month");
         current_cell.go_to_next();
       }
-    }
-    else {
-      current_cell = new CellIndex(1,1);
     }
   };
 
