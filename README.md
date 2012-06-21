@@ -137,4 +137,6 @@ The JavaScript code that third-party sites embed is hosted on Amazon S3.  To dep
 
 * (under development- this feature may look akward at the moment) The calendar currently shows the date number for each day of the calendar at the top of its cell. This can be changed by setting the day_bottom parameter to true ```$('#calendar-location').AccountCalendar({account_id:12,day_bottom:true})```
 
+* Try clicking on event titles in the calendar!
+
  
