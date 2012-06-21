@@ -92,7 +92,7 @@ VenueDriverCalendarWidget = function(options){
   this.t_date = date;
   var first_day = Utils.day_string_to_number(options.first_day || 'Monday');
   var refresh_on_creation = options.refresh_on_creation || true;
-  that.set_month = function(year,month) { //wrapper so that month param counts from 1
+  that.set_month = function(year,month) {
     date = new Date(year,month -1);
     json_events=[];
     construct_output();
@@ -127,18 +127,23 @@ VenueDriverCalendarWidget = function(options){
     $.getJSON(url,function(data){
       json_events = data;
       that._json_events = data
-      console.log(json_events.length);
       construct_output();
     });
   };this.t_pull_api_events = pull_api_events;
+  
+  first_day_of_month = function(){
+    return Utils.first_date_of_month(date).getDay();
+  };
 
   var prepare_calendar_title = function() {
     var cal_title = date.getMonthName()+' '+date.getFullYear();
+    //TODO, make an option for setting calendar title
     $('#calendar-container .calendar-title').text("Events Calendar");
     $('#calendar-container .month-title').text(cal_title);
   };
 
   var prepare_table_header = function() {
+    //clarify this if time permits
     prepare_calendar_title();
     for(i=0;i<=6;i++){
       var day_num = first_day + i;
@@ -147,10 +152,6 @@ VenueDriverCalendarWidget = function(options){
       var html_location = '#calendar-container .day-'+ (i+1);
       $(html_location).text(Utils.day_number_to_string(day_num));
     }
-  };
-
-  first_day_of_month = function(){
-    return Utils.first_date_of_month(date).getDay();
   };
 
   var prepare_unused_day_pre_padding = function(){
