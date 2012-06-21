@@ -1,3 +1,84 @@
+
+var calendar_html = "<table border='1' class='clone-me' style='display:none'>\n\
+  <tr class='calendar-title-row'>\n\
+    <th class='title-cell' colspan='7'>\n\
+      <span class='calendar-title title'></span>\n\
+      <span class ='navigation-group'>\n\
+        <button class='prev-month change-month' >Previous Month</button>\n\
+        <span class='month-title title'> </span>\n\
+        <button class='next-month change-month'>Next Month</button>\n\
+      </span>\n\
+    </th>\n\
+  </tr>\n\
+  \n\
+  <tr class ='day-title-row'>\n\
+    <th class='day-1'></th>\n\
+    <th class='day-2'></th>\n\
+    <th class='day-3'></th>\n\
+    <th class='day-4'></th>\n\
+    <th class='day-5'></th>\n\
+    <th class='day-6'></th>\n\
+    <th class='day-7'></th>\n\
+  </tr>\n\
+  \n\
+  <tr class='row1'>\n\
+    <td class='rc11'></td>\n\
+    <td class='rc12'></td>\n\
+    <td class='rc13'></td>\n\
+    <td class='rc14'></td>\n\
+    <td class='rc15'></td>\n\
+    <td class='rc16'></td>\n\
+    <td class='rc17'></td>\n\
+  </tr>\n\
+  <tr class='row2'>\n\
+    <td class='rc21'></td>\n\
+    <td class='rc22'></td>\n\
+    <td class='rc23'></td>\n\
+    <td class='rc24'></td>\n\
+    <td class='rc25'></td>\n\
+    <td class='rc26'></td>\n\
+    <td class='rc27'></td>\n\
+  </tr>\n\
+  <tr class='row3'>\n\
+    <td class='rc31'></td>\n\
+    <td class='rc32'></td>\n\
+    <td class='rc33'></td>\n\
+    <td class='rc34'></td>\n\
+    <td class='rc35'></td>\n\
+    <td class='rc36'></td>\n\
+    <td class='rc37'></td>\n\
+  </tr>\n\
+  <tr class='row4'>\n\
+    <td class='rc41'></td>\n\
+    <td class='rc42'></td>\n\
+    <td class='rc43'></td>\n\
+    <td class='rc44'></td>\n\
+    <td class='rc45'></td>\n\
+    <td class='rc46'></td>\n\
+    <td class='rc47'></td>\n\
+  </tr>\n\
+  <tr class='row5'>\n\
+    <td class='rc51'></td>\n\
+    <td class='rc52'></td>\n\
+    <td class='rc53'></td>\n\
+    <td class='rc54'></td>\n\
+    <td class='rc55'></td>\n\
+    <td class='rc56'></td>\n\
+    <td class='rc57'></td>\n\
+  </tr>\n\
+  <tr class='extra-row'>\n\
+    <td class='rc61'></td>\n\
+    <td class='rc62'></td>\n\
+    <td class='rc63'></td>\n\
+    <td class='rc64'></td>\n\
+    <td class='rc65'></td>\n\
+    <td class='rc66'></td>\n\
+    <td class='rc67'></td>\n\
+  </tr>\n\
+</table>";
+
+
+
 var VenueDriverCalendarWidget;
 // **Calendar Options**
 // api_type - "account" or "venue"
@@ -304,6 +385,9 @@ VenueDriverCalendarWidget = function(options){
 
   var construct_output = function(){
     $(div_id).html("<div id='calendar-container'></div>");  
+    if ($('.clone-me').length == 0){
+      $('body').append(calendar_html);
+    }
     clone_table_template();
     prepare_table_header();
     prepare_unused_day_pre_padding();
