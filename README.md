@@ -86,7 +86,7 @@ The JavaScript code that third-party sites embed is hosted on Amazon S3.  To dep
 
 # Example
 
-* To begin, here is an exmaple of what your markup should look like
+* To begin, here is an example of what your markup should look like
 
 ```html
 <html>
