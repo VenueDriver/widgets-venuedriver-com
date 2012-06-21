@@ -1,5 +1,4 @@
 var VenueDriverCalendarWidget;
-// var test_url = 'http://localhost:3000/api/accounts/1/events/calendar_month?month=5&year=2012&token=test'
 // **Calendar Options**
 // api_type - "account" or "venue"
 // api_id - id of the api resource
@@ -169,7 +168,6 @@ VenueDriverCalendarWidget = function(options){
         var $html_location = $('#calendar-container ' + current_cell.to_css());
         $html_location.text("");
         $html_location.addClass("not-in-month");
-        debugger;
         current_cell.go_to_next();
       }
     }
@@ -342,9 +340,13 @@ jQuery.fn.AccountCalendar = function(params) {
 
 $(document).ready(function() {
   //$('#cal-test').AccountCalendar({api_id:1,first_day:'Thursday',testing:true,day_bottom:false});
-  $('#cal-test').AccountCalendar({account_id:1,testing:true})
+  //$('#cal-test').AccountCalendar({account_id:1,testing:true})
   //$('#cal-test').AccountCalendar({api_id:1})
 });
 
+//for development
+window.show_calendar = function(){
+  $('#cal-test').AccountCalendar({account_id:1,testing:true})
+};
 
 

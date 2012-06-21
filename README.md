@@ -81,3 +81,5 @@ The JavaScript code that third-party sites embed is hosted on Amazon S3.  To dep
 
 * Obtain the current aws.yml file with the token and secret key for the S3 account, and store it in config/aws.yml
 * Run the deployment Rake task with ```rake deploy```
+
+## Calendar Widget Protype
