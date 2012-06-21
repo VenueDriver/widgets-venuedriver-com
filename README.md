@@ -115,11 +115,11 @@ The JavaScript code that third-party sites embed is hosted on Amazon S3.  To dep
 
 # Installation Requirements
 
-* You will need a div put the calendar. The example uses '#calendar-location'
+* You will need a div to place calendar. The example uses '#calendar-location'
 
 * You will need the id of the Account or Venue that the calendar will get events from.
 
-* There are two plugins AccountCalendar and VenueCalendar - one requires am account_id and the other requires a venue_id
+* There are two plugins: AccountCalendar and VenueCalendar - one requires am account_id and the other requires a venue_id
 
 * For an account calendar, use the AccountCalendar plugin "$('#calendar-location').AccountCalendar({account_id:12})"
 
@@ -129,7 +129,7 @@ The JavaScript code that third-party sites embed is hosted on Amazon S3.  To dep
 
 * The basic installation is finished.
 
-# Installtion options
+# Calendar Options
 
 * By default, the calendar starts on 'Monday'. This can be changed with the first_day parameter "$('#calendar-location').AccountCalendar({account_id:12,first_day:Thursday})"
 
