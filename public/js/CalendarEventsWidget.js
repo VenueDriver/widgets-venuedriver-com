@@ -311,7 +311,7 @@ VenueDriverCalendarWidget = function(options){
     $content_area.append(event_div);
     var $event_location = $('#calendar-container #event_'+l_event.event_id);
     $event_location.append("<div class='event-title'><a href='#'>"+l_event.title+"</a></div>");
-    $event_location.append("<div class='event-date'>"+l_event.date+"</div>");
+    //$event_location.append("<div class='event-date'>"+l_event.date+"</div>");
     $('#'+id).click(function(){
       var info = $(this)
       //here 'this' = $('#'+id) called above ^^
