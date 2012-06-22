@@ -94,7 +94,7 @@ The JavaScript code that third-party sites embed is hosted on Amazon S3.  To dep
     <title>Calendar demo</title>
     <!--This css is for demonstration purposes, and is not required-->
     <!--This css only works for webkit browsers at the moment, has been tested on chrome-->
-    <link href="http://widgets.venuedriver.com/css/styles.css"  rel='stylesheet' type='text/css'/>
+    <link href="http://widgets.venuedriver.com/css/calendar.css"  rel='stylesheet' type='text/css'/>
     <!--These are required by the Calendar Widget-->
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js" charset="utf-8"></script>
     <script src="http://widgets.venuedriver.com/js/lib/date.js"s charset="utf-8"></script>
