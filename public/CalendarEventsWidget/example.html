@@ -1,18 +1,32 @@
 <html>
 <head>
-<title>CalendarEventsWidget: example</title>
+<title>widgets.venuedriver.com -- example</title>
 </head>
 <body>
-<h1>CalendarEventsWidget: example</h1>
+<h1>widgets.venuedriver.com -- example</h1>
 
 <h3>Code To Embed</h3>
-<p>Copy this example code, then set the options, then embed the widget in your HTML page.</p>
+<p>Copy this example code, then set the API access token, then embed the widget in your HTML page.</p>
 
 <p>
 <blockquote>
-<pre><code>
-  
-</code></pre>
+<pre><code>&lt;html&gt;
+  &lt;head&gt;
+    &lt;title&gt;Calendar demo&lt;/title&gt;
+    &lt;link href=&quot;http://widgets.venuedriver.com/css/calendar.css&quot;  rel=&apos;stylesheet&apos; type=&apos;text/css&apos;/&gt;
+    &lt;script src=&quot;http://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js&quot; charset=&quot;utf-8&quot;&gt;&lt;/script&gt;
+    &lt;script src=&quot;http://widgets.venuedriver.com/js/lib/date.js&quot; charset=&quot;utf-8&quot;&gt;&lt;/script&gt;
+    &lt;script src=&quot;http://widgets.venuedriver.com/js/CalendarEventsWidget.js&quot; charset=&quot;utf-8&quot;&gt;&lt;/script&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+    &lt;div id=&apos;cal-test&apos;&gt;
+    &lt;/div&gt;
+    &lt;script&gt;
+      $(&apos;#cal-test&apos;).AccountCalendar({account_id:1})
+    &lt;/script&gt;
+  &lt;/body&gt; 
+&lt;/html&gt;
+  </code></pre>
 </blockquote>
 </p>
 

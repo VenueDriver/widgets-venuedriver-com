@@ -5,7 +5,7 @@ gem 'json', '1.6.5'
 gem 'rack', '1.3.6'
 gem 'haml', '3.1.4'
 gem 'unicorn', '4.2.0'
-gem "nokogiri", "~> 1.5.0"
+gem "nokogiri", " 1.5.0"
 gem "fog", "~> 1.0.0"
 gem "ruby-debug", '0.10.4'
 gem "htmlentities", "~> 4.1.0"
