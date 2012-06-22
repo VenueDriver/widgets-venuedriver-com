@@ -31,12 +31,12 @@ module Deploy
   
   # Copy the /demo.html file to an example.html file that shows the JavaScript code.
   def generate_example
-    demo_file = ''; File.open('public/demo.html').lines.each do |line|
+    demo_file = ''; File.open('public/AccountEventsWidget/demo.html').lines.each do |line|
       demo_file << line.gsub(/^(.*\').*(\'\;\s*\/\/example.*)$/) { "#{$1}#{$2}" }
     end
     
     example_template = File.open('public/example_template.html').read
-    File.open('public/example.html', 'w') do |example|
+    File.open('public/AccountEventsWidget/example.html', 'w') do |example|
       example.puts example_template.gsub(/\<\%\s*YIELD\s*\%\>/m, HTMLEntities.new.encode(demo_file))
     end
   end
