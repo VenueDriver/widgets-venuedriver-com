@@ -14,3 +14,10 @@ task :deploy do
   include Deploy
   deploy
 end
+
+desc "Generate encoded markup for example code pages. "
+task :generate do 
+  require 'lib/deploy.rb'
+  include Deploy
+  generate_example
+end  
