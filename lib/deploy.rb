@@ -37,7 +37,7 @@ module Deploy
       end
     
       example_template = File.open('public/example_template.html').read
-      2.times {example_template.sub!('widgets.venuedriver.com',"#{folder_name}")}
+      2.times {example_template.sub!('widgets.venuedriver.com',folder_name)}
       File.open("public/#{folder_name}/example.html", 'w') do |example|
         example.puts example_template.gsub(/\<\%\s*YIELD\s*\%\>/m, HTMLEntities.new.encode(demo_file))
       end
