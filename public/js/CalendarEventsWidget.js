@@ -151,6 +151,7 @@ var CellIndex = function(r,c) {
 
 VenueDriverCalendarWidget = function(options){
   var that =this;//that is for jquery event handlers, which rebind 'that' to something else
+  var truncate_events = options.truncate_events || false;
   var json_events =[];
   this.t_json_events = json_events;
   var sorted_events= [];
@@ -311,6 +312,7 @@ VenueDriverCalendarWidget = function(options){
     $content_area.append(event_div);
     var $event_location = $('#calendar-container #event_'+l_event.event_id);
     $event_location.append("<div class='event-title'><a href='#'>"+l_event.title+"</a></div>");
+    if (truncate_events) {$event_location.children(":first-child").addClass("title-truncate")}
     //$event_location.append("<div class='event-date'>"+l_event.date+"</div>");
     $('#'+id).click(function(){
       var info = $(this)
