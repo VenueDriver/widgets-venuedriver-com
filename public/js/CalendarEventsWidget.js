@@ -338,7 +338,7 @@ VenueDriverCalendarWidget = function(options){
   var construct_days = function(){
     var number_of_days =date.getDaysInMonth();
     sort_events();
-    for (i=1; i<= number_of_days;i++){
+    for (i=1; i<= number_of_days;i++ && current_cell.go_to_next()){
       var css_path = "#calendar-container " + current_cell.to_css();
       var $html_location = $(css_path);
       $html_location.text("");
@@ -362,7 +362,6 @@ VenueDriverCalendarWidget = function(options){
       } else {
         $html_location.addClass('date-top-style')
       }         
-      current_cell.go_to_next();
     };
   };
 
