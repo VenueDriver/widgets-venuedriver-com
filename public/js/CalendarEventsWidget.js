@@ -297,6 +297,14 @@ VenueDriverCalendarWidget = function(options){
   var write_event_div = function(l_event){
     return "<div class='event-content' "+ write_embedded_event_data(l_event)+"'></div>";
   };
+  
+  var update_side_panel =  function(info){
+    var html = "<p> id: "+info.attr('data-id')+" </p>"
+    html += "<p> title: "+info.attr('data-title')+" </p>"
+    html += "<p> date: " +info.attr('data-date')+" </p>"
+    html += "<p> description: " +info.attr('data-description')+" </p>"
+    $('#side-panel').html(html);
+  };
 
   var construct_event = function(l_event,$content_area) {
     var id = 'event_'+l_event.event_id;
@@ -304,17 +312,12 @@ VenueDriverCalendarWidget = function(options){
     $content_area.append(event_div);
     var $event_location = $('#calendar-container #'+id);
     $event_location.append("<div class='event-title'><a href='#'>"+l_event.title+"</a></div>");
-    if (truncate_events) {$("#"+id).addClass("title-truncate")}
-    $('#'+id).click(function(){
-      var info = $(this)
-      //here 'this' = $('#'+id) called above ^^
-      var html = "<p> id: "+info.attr('data-id')+" </p>"
-      html += "<p> title: "+info.attr('data-title')+" </p>"
-      html += "<p> date: " +info.attr('data-date')+" </p>"
-      html += "<p> description: " +info.attr('data-description')+" </p>"
-      $('#side-panel').html(html);
+    $event_title = $("#"+id)
+    if (truncate_events) {$event_title.addClass("title-truncate")}
+    $($event_title).click(function(){
+      update_side_panel($(this));
     });
-  }
+  };
 
   var construct_events = function(the_days_events,$content_area){
      for(var j = 0;j<the_days_events.length;j++){
@@ -322,6 +325,15 @@ VenueDriverCalendarWidget = function(options){
         construct_event(event_,$content_area);
       }
   };
+  
+  var make_cell_id = function(i){
+    var d = Utils.first_date_of_month(date).add(i-1).days();
+    var month = d.getMonth()+1;
+    var date_num = d.getDate()
+    if (month <10) month = '0' +month;
+    if (date_num<10) date_num = '0'+date_num;
+    return d.getFullYear()+'-'+month+'-'+ date_num;
+  }
 
   var construct_days = function(){
     var number_of_days =date.getDaysInMonth();
@@ -330,13 +342,8 @@ VenueDriverCalendarWidget = function(options){
       var css_path = "#calendar-container " + current_cell.to_css();
       var $html_location = $(css_path);
       $html_location.text("");
-      //TODO:this snippet should be a function
-      var d = Utils.first_date_of_month(date).add(i-1).days();
-      var month = d.getMonth()+1;
-      var date_num = d.getDate()
-      if (month <10) month = '0' +month;
-      if (date_num<10) date_num = '0'+date_num;
-      var id = d.getFullYear()+'-'+month+'-'+ date_num;
+      
+      var id = make_cell_id(i);
       
       $html_location.attr('id',id);
       $html_location.addClass('in-month');
