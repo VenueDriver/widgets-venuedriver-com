@@ -93,13 +93,14 @@ td {
   /* background-color:#91A8EC; */
   background: -webkit-gradient(linear, left top, left bottom, from(#C1CEF6), to(#516AB2));
   font-weight:bold;
+  height:auto;
 }
 
 /* TODO: this should be 'events' */
 .events-content-area {
   vertical-align:top;
   margin-bottom:auto;
-  height:auto;
+  height:85%;
 }
 
 .event-title {
