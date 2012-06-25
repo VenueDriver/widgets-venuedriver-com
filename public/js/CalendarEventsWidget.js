@@ -80,11 +80,6 @@ var calendar_html = "<table border='1' class='clone-me' style='display:none'>\n\
 
 
 var VenueDriverCalendarWidget;
-// **Calendar Options**
-// api_type - "account" or "venue"
-// api_id - id of the api resource
-// div_id - the div where we insert the calendar
-// first_day -the first day that shows
 // javascript represents sunday as 0, monday as 1...saturday as 6
 var db_panel = true;
 var Utils = {
@@ -160,7 +155,7 @@ VenueDriverCalendarWidget = function(options){
   var test_http = 'http://localhost:3000/api/';
   var real_http = 'http://www.venuedriver.com/api/';
   var http_str;
-  this.db_transform = options.day_bottom || false;
+  var day_bottom = options.day_bottom || false;
   if (options.testing ==true){
     http_str = test_http;
   } else {
@@ -357,7 +352,7 @@ VenueDriverCalendarWidget = function(options){
       else $html_location.addClass('has-no-events');
       construct_events(the_days_events,$event_content_area);
       
-      if(that.db_transform){
+      if(day_bottom){
         $html_location.addClass('date-bottom-style')
         $('#'+id + ' .events-content-area').insertBefore('#'+id + ' .day-number');
         $('#'+id + ' .day-number').attr('style','vertical-align:bottom')
