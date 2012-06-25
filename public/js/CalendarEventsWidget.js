@@ -263,22 +263,19 @@ VenueDriverCalendarWidget = function(options){
   };
 
   var sort_events = function(){
-    //sorted events is an array of arrays
-    //the outer arrays index is (the date's number -1), as in June 5ths events
-    //are in sorted events[4]
-    //each inner array contains all the events for a particular day
+    //sorted events is an array of arrays the outer arrays index is (the date's number -1), as in June 5ths events
+    //are in sorted events[4] each inner array contains all the events for a particular day
     for(var day_index =0; day_index<date.getDaysInMonth();day_index++){
      sorted_events[day_index]=[] 
     }
     
     //iterate through all events in json_events with i
     for(var i=0;i<json_events.length;i++){
-      event = json_events[i];
-      index = Date.parse(event.date).getDate()-1;
+      var event = json_events[i];
+      var index = Date.parse(event.date).getDate()-1;
       sorted_events[index].push(event);
     }
     this.t_sorted_events = sorted_events
-    event = null;//help reduce future errors by accidentall reusing that quantity
   };
 
   var format_event_info = function(event, pairs){
@@ -305,10 +302,9 @@ VenueDriverCalendarWidget = function(options){
     var id = 'event_'+l_event.event_id;
     var event_div = write_event_div(l_event);
     $content_area.append(event_div);
-    var $event_location = $('#calendar-container #event_'+l_event.event_id);
+    var $event_location = $('#calendar-container #'+id);
     $event_location.append("<div class='event-title'><a href='#'>"+l_event.title+"</a></div>");
-    if (truncate_events) {$event_location.children(":first-child").addClass("title-truncate")}
-    //$event_location.append("<div class='event-date'>"+l_event.date+"</div>");
+    if (truncate_events) {$("#"+id).addClass("title-truncate")}
     $('#'+id).click(function(){
       var info = $(this)
       //here 'this' = $('#'+id) called above ^^
