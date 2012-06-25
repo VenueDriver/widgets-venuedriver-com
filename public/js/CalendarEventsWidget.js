@@ -145,13 +145,13 @@ var CellIndex = function(r,c) {
 }
 
 VenueDriverCalendarWidget = function(options){
-  var that =this;//that is for jquery event handlers, which rebind 'that' to something else
+  var that = this;//that is for jquery event handlers, which rebind 'this' to something else
   var truncate_events = options.truncate_events || false;
   var json_events =[];
-  this.t_json_events = json_events;
+  that.t_json_events = json_events;
   var sorted_events= [];
-  this.t_sorted_events = sorted_events;
-  var current_cell = new CellIndex(1,1); //WARNING that is used like a global variable in the widget member functions
+  that.t_sorted_events = sorted_events;
+  var current_cell = new CellIndex(1,1); //WARNING this is used like a global variable in the widget member functions
   var test_http = 'http://localhost:3000/api/';
   var real_http = 'http://www.venuedriver.com/api/';
   var http_str;
@@ -165,7 +165,7 @@ VenueDriverCalendarWidget = function(options){
   var api_type = options.api_type;
   var api_id = options.api_id;
   var date = Date.today(); //calendar defaults to current month 
-  this.t_date = date;
+  that.t_date = date;
   var first_day = Utils.day_string_to_number(options.first_day || 'Monday');
   var refresh_on_creation = options.refresh_on_creation || true;
   that.set_month = function(year,month) {
@@ -195,7 +195,7 @@ VenueDriverCalendarWidget = function(options){
 
   var api_url = function(){
     return http_str + api_type +'s/' + api_id + '/events/calendar_month?month='+month()+'&year='+year();
-  };this.t_api_url = api_url;
+  };that.t_api_url = api_url;
 
   var pull_api_events = function() {
     var url = api_url();
@@ -205,7 +205,7 @@ VenueDriverCalendarWidget = function(options){
       that._json_events = data
       construct_output();
     });
-  };this.t_pull_api_events = pull_api_events;
+  };that.t_pull_api_events = pull_api_events;
   
   var first_day_of_month = function(){
     return Utils.first_date_of_month(date).getDay();
@@ -231,7 +231,7 @@ VenueDriverCalendarWidget = function(options){
   };
 
   var construct_unused_day_pre_padding = function(){
-    // that functions goal is to account for spaces in the calendar table 
+    // this functions goal is to account for spaces in the calendar table 
     // that are not part of the month. that function handles the spaces
     // that occur before the first day of the month
     difference = first_day_of_month() - first_day;
@@ -251,7 +251,7 @@ VenueDriverCalendarWidget = function(options){
   };
 
   var construct_unused_day_post_padding = function(){
-    //that function accounts for unused table cells that occur after the 
+    //this function accounts for unused table cells that occur after the 
     // calendar has run out of days
     while(true){
       var $html_location = $("#calendar-container " + current_cell.to_css());
@@ -275,7 +275,7 @@ VenueDriverCalendarWidget = function(options){
       var index = Date.parse(event.date).getDate()-1;
       sorted_events[index].push(event);
     }
-    this.t_sorted_events = sorted_events
+    that.t_sorted_events = sorted_events
   };
 
   var format_event_info = function(event, pairs){
@@ -397,7 +397,7 @@ VenueDriverCalendarWidget = function(options){
     that.construct_output();
   };
   construct_output();
-  this.refresh = construct_output;
+  that.refresh = construct_output;
   if (refresh_on_creation) pull_api_events(); 
 }
 
