@@ -1,4 +1,3 @@
-/* these all select different cell types */
 a {
 text-decoration: none; 
 }
@@ -110,15 +109,12 @@ td {
 
 .event-title a:link{
   color:white;
-  overflow:hidden;
 }
 
 .event-title a:visited {
   color:white;
-  overflow:hidden;
 }
 
 .event-title a:hover {
   color:#ff9f00;
-  overflow:hidden;
 }

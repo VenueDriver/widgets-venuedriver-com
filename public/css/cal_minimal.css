@@ -1,0 +1,100 @@
+a {
+text-decoration: none; 
+}
+
+body {
+  font-family:sans-serif;
+}
+
+table {
+  border-collapse:collapse;
+}
+
+.title-cell {
+  /* class for first row of calendar */
+}
+
+.title {
+  /* class for styling calendar title and event title */
+}
+
+.navigation-group {
+  float:right;
+}
+
+.day-title-row {
+  /* controls second row of calendar */
+}
+
+.change-month {
+  /* label for style the next month and previous month buttons */
+}
+
+.change-month:hover {
+  /* see above */
+}
+
+#side-panel {
+  min-height:500px;
+}
+
+/* this refers to all the table cells that could be used to diplay a calendar day*/
+td {
+  width:124;
+  height:96;
+}
+.title-truncate {
+  /* this class is necessary for the truncate_events option, ideally has same width as td */
+  overflow:hidden;
+  white-space: nowrap;
+  width:124;
+}
+
+.date-top-style{
+  vertical-align:top;
+}
+
+.date-bottom-style{
+  vertical-align:bottom;
+}
+
+.not-in-month {
+}
+
+.in_month {
+  
+}
+
+.has-events {
+}
+
+.has-no-events {
+}
+
+.day-number {
+  /* class for styling the section of each cell that shows that days date number */
+}
+
+/* TODO: this should be 'events' */
+.events-content-area {
+  vertical-align:top;
+  margin-bottom:auto;
+  height:auto;
+}
+
+.event-title {
+  color:black;
+  font-size:77%;
+}
+
+.event-title a:link{
+  color:black;
+}
+
+.event-title a:visited {
+  color:black;
+}
+
+.event-title a:hover {
+  color:#ff9f00;
+}
