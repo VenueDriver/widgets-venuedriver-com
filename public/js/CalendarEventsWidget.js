@@ -1,7 +1,7 @@
 
 var calendar_html = "<table border='1' class='clone-me' style='display:none'>\n\
-  <tr class='calendar-title-row'>\n\
-    <th class='title-cell' colspan='7'>\n\
+  <tr id='title-row'>\n\
+    <th colspan='7'>\n\
       <span class='calendar-title title'></span>\n\
       <span class ='navigation-group'>\n\
         <button class='prev-month change-month' >Previous Month</button>\n\
