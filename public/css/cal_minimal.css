@@ -35,10 +35,6 @@ table {
   /* see above */
 }
 
-#side-panel {
-  min-height:500px;
-}
-
 td {
   /* this refers to all the table cells that could be used to display a calendar day*/
   width:124;
@@ -105,4 +101,21 @@ td {
 
 .event-title a:hover {
   color:#ff9f00;
+}
+
+/* side panel stuff here */
+#side-panel{
+  border:3px solid black;
+  height:550px;
+  width:205px;
+}
+
+#side-panel #sp-event-title {
+  margin:1px;
+  padding:0px;
+}
+
+#side-panel #sp-event-date {
+  margin:1px;
+  padding:0px;
 }

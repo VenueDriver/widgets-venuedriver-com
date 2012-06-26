@@ -26,11 +26,13 @@ table th{
   /* class for first row of calendar */
   color:#FF4900;
   background-color:black;
+  text-transform:uppercase;
 }
 
 .day-title-row {
   /* controls second row of calendar */
   color:#51E841;
+  text-transform:uppercase;
 }
 
 .title {
@@ -43,6 +45,10 @@ table th{
 
 .change-month {
   /* label for style the next month and previous month buttons */
+  background-color:black;
+  border-color:#FF4900;
+  color:#FF4900;
+  text-transform:uppercase;
 }
 
 .change-month:hover {

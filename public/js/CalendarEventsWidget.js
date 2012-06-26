@@ -77,7 +77,12 @@ var calendar_html = "<table border='1' class='clone-me' style='display:none'>\n\
   </tr>\n\
 </table>";
 
-
+var side_panel_html = "\
+<div id='side-panel' style='display:inline-block;float:left'>\
+  <h2> <div id='sp-event-title'>testing</div> </h2>\
+  <div id='sp-event-date'>testing date </div>\
+</div>\
+"
 
 var VenueDriverCalendarWidget;
 // javascript represents sunday as 0, monday as 1...saturday as 6
@@ -145,6 +150,7 @@ var CellIndex = function(r,c) {
 }
 
 VenueDriverCalendarWidget = function(options){
+  
   var that = this;//that is for jquery event handlers, which rebind 'this' to something else
   var truncate_events = options.truncate_events || false;
   var json_events =[];
@@ -168,6 +174,7 @@ VenueDriverCalendarWidget = function(options){
   that.t_date = date;
   var first_day = Utils.day_string_to_number(options.first_day || 'Monday');
   var refresh_on_creation = options.refresh_on_creation || true;
+  
   that.set_month = function(year,month) {
     date = new Date(year,month -1);
     json_events=[];
@@ -299,11 +306,10 @@ VenueDriverCalendarWidget = function(options){
   };
   
   var update_side_panel =  function(info){
-    var html = "<p> id: "+info.attr('data-id')+" </p>"
-    html += "<p> title: "+info.attr('data-title')+" </p>"
-    html += "<p> date: " +info.attr('data-date')+" </p>"
-    html += "<p> description: " +info.attr('data-description')+" </p>"
-    $('#side-panel').html(html);
+    $('#sp-event-title').html(info.attr('data-title'));
+    var l_date = Date.parse(info.attr('data-date'));
+    var date_str = l_date.toDateString();
+    $('#sp-event-date').html(date_str);
   };
 
   var construct_event = function(l_event,$content_area) {
@@ -390,7 +396,7 @@ VenueDriverCalendarWidget = function(options){
     construct_days();
     construct_unused_day_post_padding();
     construct_navigation_buttons();
-    $(div_id + ' #calendar-container').append("<div id='side-panel' style='display:inline-block;float:left'>side panel </div>");
+    $(div_id + ' #calendar-container').append(side_panel_html);
   };
   that.change_first_day = function(day_str) {
     first_day = Utils.day_string_to_number(day_str);
