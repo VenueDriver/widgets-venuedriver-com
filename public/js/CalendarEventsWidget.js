@@ -81,6 +81,10 @@ var side_panel_html = "\
 <div id='side-panel' style='display:inline-block;float:left'>\
   <h2> <div id='sp-event-title'>testing</div> </h2>\
   <div id='sp-event-date'>testing date </div>\
+  <div id='sp-event-closed' style='display:none'>CLOSED</div>\
+  <div id='sp-buy-tickets'><button type='button'>Buy Tickets</button></div>\
+  <div id='sp-join-guestlist'><button type='button'>Join The Guestlist</button></div>\
+  <div id='sp-vip-reservation'><button type='button'>Make a VIP Reservation</button></div>\
 </div>\
 "
 
@@ -150,7 +154,7 @@ var CellIndex = function(r,c) {
 }
 
 VenueDriverCalendarWidget = function(options){
-  
+
   var that = this;//that is for jquery event handlers, which rebind 'this' to something else
   var truncate_events = options.truncate_events || false;
   var json_events =[];
