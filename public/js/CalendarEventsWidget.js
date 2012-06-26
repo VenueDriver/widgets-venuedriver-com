@@ -4,9 +4,9 @@ var calendar_html = "<table border='1' class='clone-me' style='display:none'>\n\
     <th colspan='7'>\n\
       <span class='calendar-title title'></span>\n\
       <span class ='navigation-group'>\n\
-        <button class='prev-month change-month' >Previous Month</button>\n\
+        <button id = 'prev-month' class='change-month' >Previous Month</button>\n\
         <span class='month-title title'> </span>\n\
-        <button class='next-month change-month'>Next Month</button>\n\
+        <button id = 'next-month' class='change-month'>Next Month</button>\n\
       </span>\n\
     </th>\n\
   </tr>\n\
@@ -388,8 +388,8 @@ VenueDriverCalendarWidget = function(options){
   };
 
   var construct_navigation_buttons = function(){
-    $('#calendar-container .prev-month').click(to_prev_month);
-    $('#calendar-container .next-month').click(to_next_month);
+    $('#calendar-container #prev-month').click(to_prev_month);
+    $('#calendar-container #next-month').click(to_next_month);
   };
 
   var construct_output = function(){
