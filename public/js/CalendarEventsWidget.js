@@ -11,7 +11,7 @@ var calendar_html = "<table border='1' class='clone-me' style='display:none'>\n\
     </th>\n\
   </tr>\n\
   \n\
-  <tr class ='day-title-row'>\n\
+  <tr id ='day-title-row'>\n\
     <th class='day-1'></th>\n\
     <th class='day-2'></th>\n\
     <th class='day-3'></th>\n\

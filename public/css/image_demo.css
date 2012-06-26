@@ -25,7 +25,7 @@ table th{
   text-transform:uppercase;
 }
 
-.day-title-row {
+#day-title-row {
   /* controls second row of calendar */
   color:#51E841;
   text-transform:uppercase;

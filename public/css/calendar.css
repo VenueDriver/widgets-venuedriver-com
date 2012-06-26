@@ -25,7 +25,7 @@ table {
   margin-right:5%;
 }
 
-.day-title-row {
+#day-title-row {
   color: white;
   font-family: 'century gothic', 'arial';
   text-transform: uppercase;

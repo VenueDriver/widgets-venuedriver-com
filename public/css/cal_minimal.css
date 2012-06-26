@@ -23,7 +23,7 @@ table {
   /* this is a label for the div that contains the month title, and next and previous month buttons */
 }
 
-.day-title-row {
+#day-title-row {
   /* controls second row of calendar */
 }
 
