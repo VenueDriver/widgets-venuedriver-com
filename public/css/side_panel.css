@@ -21,6 +21,7 @@
 }
 
 #calendar-container {
-width: 1300px;
-overflow: hidden;
+  width: 1300px;
+  overflow: hidden;
+  margin:50px;
 }
