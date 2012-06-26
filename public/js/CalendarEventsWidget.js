@@ -3,7 +3,7 @@ var calendar_html = "<table border='1' class='clone-me' style='display:none'>\n\
   <tr id='title-row'>\n\
     <th colspan='7'>\n\
       <span class='calendar-title title'></span>\n\
-      <span class ='navigation-group'>\n\
+      <span id ='navigation-group'>\n\
         <button id = 'prev-month' class='change-month' >Previous Month</button>\n\
         <span class='month-title title'> </span>\n\
         <button id = 'next-month' class='change-month'>Next Month</button>\n\
@@ -21,7 +21,7 @@ var calendar_html = "<table border='1' class='clone-me' style='display:none'>\n\
     <th class='day-7'></th>\n\
   </tr>\n\
   \n\
-  <tr class='row1'>\n\
+  <tr id='row1'>\n\
     <td class='rc11'></td>\n\
     <td class='rc12'></td>\n\
     <td class='rc13'></td>\n\
@@ -30,7 +30,7 @@ var calendar_html = "<table border='1' class='clone-me' style='display:none'>\n\
     <td class='rc16'></td>\n\
     <td class='rc17'></td>\n\
   </tr>\n\
-  <tr class='row2'>\n\
+  <tr id='row2'>\n\
     <td class='rc21'></td>\n\
     <td class='rc22'></td>\n\
     <td class='rc23'></td>\n\
@@ -39,7 +39,7 @@ var calendar_html = "<table border='1' class='clone-me' style='display:none'>\n\
     <td class='rc26'></td>\n\
     <td class='rc27'></td>\n\
   </tr>\n\
-  <tr class='row3'>\n\
+  <tr id='row3'>\n\
     <td class='rc31'></td>\n\
     <td class='rc32'></td>\n\
     <td class='rc33'></td>\n\
@@ -48,7 +48,7 @@ var calendar_html = "<table border='1' class='clone-me' style='display:none'>\n\
     <td class='rc36'></td>\n\
     <td class='rc37'></td>\n\
   </tr>\n\
-  <tr class='row4'>\n\
+  <tr id='row4'>\n\
     <td class='rc41'></td>\n\
     <td class='rc42'></td>\n\
     <td class='rc43'></td>\n\
@@ -57,7 +57,7 @@ var calendar_html = "<table border='1' class='clone-me' style='display:none'>\n\
     <td class='rc46'></td>\n\
     <td class='rc47'></td>\n\
   </tr>\n\
-  <tr class='row5'>\n\
+  <tr id='row5'>\n\
     <td class='rc51'></td>\n\
     <td class='rc52'></td>\n\
     <td class='rc53'></td>\n\
