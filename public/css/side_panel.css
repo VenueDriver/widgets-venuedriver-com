@@ -1,8 +1,7 @@
 /* side panel stuff here */
 #side-panel{
   border:3px solid black;
-  height:550px;
-  width:205px;
+  width:185px;
   background-color:white;
   opacity:.7;
 }

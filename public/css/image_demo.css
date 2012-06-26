@@ -51,10 +51,6 @@ table th{
   /* see above */
 }
 
-#side-panel {
-  min-height:500px;
-}
-
 td {
   /* this refers to all the table cells that could be used to display a calendar day*/
   width:124;
