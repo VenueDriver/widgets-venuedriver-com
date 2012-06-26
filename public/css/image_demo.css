@@ -14,10 +14,6 @@ table {
    border-color:#FF4900;   
 }
 
-.cal-table{
-  margin:50px;
-}
-
 table th{
   /* control #title-row and day-title-row simultaneously */
 }

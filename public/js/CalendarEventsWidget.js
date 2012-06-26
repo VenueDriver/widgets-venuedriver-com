@@ -82,9 +82,9 @@ var side_panel_html = "\
   <h2> <div id='sp-event-title'>testing</div> </h2>\
   <div id='sp-event-date'>testing date </div>\
   <div id='sp-event-closed' style='display:none'>CLOSED</div>\
-  <div id='sp-buy-tickets'><button type='button'>Buy Tickets</button></div>\
-  <div id='sp-join-guestlist'><button type='button'>Join The Guestlist</button></div>\
-  <div id='sp-vip-reservation'><button type='button'>Make a VIP Reservation</button></div>\
+  <div id='sp-buy-tickets'><button class='sp-button' type='button'>Buy Tickets</button></div>\
+  <div id='sp-join-guestlist'><button class='sp-button' type='button'>Join The Guestlist</button></div>\
+  <div id='sp-vip-reservation'><button class='sp-button' type='button'>Make a VIP Reservation</button></div>\
 </div>\
 "
 
