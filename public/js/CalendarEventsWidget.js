@@ -123,10 +123,7 @@ var Utils = {
       default: "error";
     }
   },
-  first_date_of_month: function(date){
-    newDate = new Date(date.getFullYear(),date.getMonth());
-    return newDate;
-  },
+
 }
 
 //iterator for table cells
@@ -210,8 +207,9 @@ VenueDriverCalendarWidget = function(options){
     });
   };that.t_pull_api_events = pull_api_events;
   
-  var first_day_of_month = function(){
-    return Utils.first_date_of_month(date).getDay();
+  var first_date_of_month = function(){
+    newDate = new Date(date.getFullYear(),date.getMonth());
+    return newDate;
   };
 
   var construct_table_header = function() {
@@ -233,7 +231,7 @@ VenueDriverCalendarWidget = function(options){
     // this functions goal is to account for spaces in the calendar table 
     // that are not part of the month. that function handles the spaces
     // that occur before the first day of the month
-    difference = first_day_of_month() - first_day;
+    difference = first_date_of_month().getDay() - first_day;
     if( difference >= 0) padding = difference;
     else padding = 7 + difference;
     //remove extra row if it is not needed
@@ -325,13 +323,13 @@ VenueDriverCalendarWidget = function(options){
   };
   
   var make_cell_id = function(i){
-    var d = Utils.first_date_of_month(date).add(i-1).days();
+    var d = first_date_of_month().add(i-1).days();
     var month = d.getMonth()+1;
     var date_num = d.getDate()
     if (month <10) month = '0' +month;
     if (date_num<10) date_num = '0'+date_num;
     return d.getFullYear()+'-'+month+'-'+ date_num;
-  }
+  };
 
   var construct_days = function(){
     var number_of_days =date.getDaysInMonth();
