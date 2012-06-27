@@ -137,10 +137,6 @@ var CellIndex = function(r,c) {
     this.c = new_col
   };
   this.set(r,c);
-  this.next = function() {
-    if (this.c >= 7) return new CellIndex(this.r+1,1);
-    else return new CellIndex(this.r,this.c+1);
-  };
   this.go_to_next = function(){
     if (this.c >= 7) this.set(this.r+1,1);
     else this.set(this.r,this.c+1);

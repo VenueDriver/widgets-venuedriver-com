@@ -128,14 +128,14 @@ describe("Calendar Widget", function() {
     
       it("should go to the next month, when the 'next month' button is pressed",function(){
         expect($('#calendar-container .month-title').text()).toEqual("June 2012");
-        $btn = $('#calendar-container .next-month');
+        $btn = $('#calendar-container #next-month');
         $btn.trigger('click');
         expect($('#calendar-container .month-title').text()).toEqual("July 2012")
       });
     
       it("should go to the previous month, when the 'previous month' button is pressed",function(){
         expect($('#calendar-container .month-title').text()).toEqual("June 2012");
-        $btn = $('#calendar-container .prev-month');
+        $btn = $('#calendar-container #prev-month');
         $btn.trigger('click');
         expect($('#calendar-container .month-title').text()).toEqual("May 2012")
       });
@@ -147,7 +147,7 @@ describe("Calendar Widget", function() {
         mock_date_today('2012/12/01');
         $('#cal-test').AccountCalendar({account_id:1});
         expect($('#calendar-container .month-title').text()).toEqual("December 2012");
-        $btn = $('#calendar-container .next-month');
+        $btn = $('#calendar-container #next-month');
         $btn.trigger('click');
         expect($('#calendar-container .month-title').text()).toEqual("January 2013");
       });
@@ -156,7 +156,7 @@ describe("Calendar Widget", function() {
         mock_date_today('2012/01/01');
         $('#cal-test').AccountCalendar({account_id:1});
         expect($('#calendar-container .month-title').text()).toEqual("January 2012");
-        $btn = $('#calendar-container .prev-month');
+        $btn = $('#calendar-container #prev-month');
         $btn.trigger('click');
         expect($('#calendar-container .month-title').text()).toEqual("December 2011");
       })
@@ -185,11 +185,11 @@ describe("Calendar Widget", function() {
       $('#cal-test').AccountCalendar({account_id:1});
       var cal = window.my_calendar
       expect(cal.t_api_url()).toEqual('http://www.venuedriver.com/api/accounts/1/events/calendar_month?month=6&year=2012');
-      $('#calendar-container .next-month').trigger('click');
+      $('#calendar-container #next-month').trigger('click');
       expect(cal.t_api_url()).toEqual('http://www.venuedriver.com/api/accounts/1/events/calendar_month?month=7&year=2012');
-      $('#calendar-container .prev-month').trigger('click');
+      $('#calendar-container #prev-month').trigger('click');
       expect(cal.t_api_url()).toEqual('http://www.venuedriver.com/api/accounts/1/events/calendar_month?month=6&year=2012');
-      $('#calendar-container .prev-month').trigger('click');
+      $('#calendar-container #prev-month').trigger('click');
       expect(cal.t_api_url()).toEqual('http://www.venuedriver.com/api/accounts/1/events/calendar_month?month=5&year=2012');
     });
     
