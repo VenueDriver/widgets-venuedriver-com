@@ -90,7 +90,6 @@ var side_panel_html = "\
 
 var VenueDriverCalendarWidget;
 // javascript represents sunday as 0, monday as 1...saturday as 6
-var db_panel = true;
 var Utils = {
   day_string_to_number: function(day_str) { //defaults to sunday if day_str is mispelled
     switch(day_str){
