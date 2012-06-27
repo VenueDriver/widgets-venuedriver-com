@@ -213,10 +213,10 @@ VenueDriverCalendarWidget = function(options){
   };
 
   var construct_table_header = function() {
-    var cal_title = date.getMonthName()+' '+date.getFullYear();
+    var month_title = date.getMonthName()+' '+date.getFullYear();
     //TODO, make an option for setting calendar title
     $('#calendar-container .calendar-title').text("Events Calendar");
-    $('#calendar-container .month-title').text(cal_title);
+    $('#calendar-container .month-title').text(month_title);
 
     for(i=0;i<=6;i++){
       var day_num = first_day + i;
@@ -250,12 +250,11 @@ VenueDriverCalendarWidget = function(options){
   var construct_unused_day_post_padding = function(){
     //this function accounts for unused table cells that occur after the 
     // calendar has run out of days
-    while(true){
+    while(current_cell.r<7){
       var $html_location = $("#calendar-container " + current_cell.to_css());
       $html_location.text("");
       $html_location.addClass("not-in-month");
       current_cell.go_to_next();
-      if (current_cell.r>=7) break;
     }
   };
 
