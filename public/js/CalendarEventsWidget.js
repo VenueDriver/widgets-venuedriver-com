@@ -182,26 +182,22 @@ VenueDriverCalendarWidget = function(options){
     pull_api_events();
   };
   
-  var month = function(){ //wrapper so that month counts from one
-    return date.getMonth()+1;
-  };
-  
-  var year = function(){
-    return date.getFullYear();
-  };
-  
   var to_next_month = function(){
-    if (month() >= 12) that.set_month(year()+1,1);
-    else that.set_month(year(),month()+1);
+    var current_month = date.getMonth()+1;//javascript counts from 0 with months
+    var current_year = date.getFullYear();
+    if (current_month >= 12) that.set_month(current_year+1,1);
+    else that.set_month(current_year,current_month+1);
   };
   
   var to_prev_month = function(){
-    if (month() <= 1) that.set_month(year()-1,12);
-    else that.set_month(year(),month()-1);
+    var current_month = date.getMonth()+1;//javascript counts from 0 with months
+    var current_year = date.getFullYear();
+    if (current_month <= 1) that.set_month(current_year-1,12);
+    else that.set_month(current_year,current_month-1);
   };
 
   var api_url = function(){
-    return http_str + api_type +'s/' + api_id + '/events/calendar_month?month='+month()+'&year='+year();
+    return http_str + api_type +'s/' + api_id + '/events/calendar_month?month='+(date.getMonth()+1)+'&year='+date.getFullYear();
   };that.t_api_url = api_url;
 
   var pull_api_events = function() {
