@@ -66,7 +66,7 @@ var calendar_html = "<table border='1' class='clone-me' style='display:none'>\n\
     <td class='rc56'></td>\n\
     <td class='rc57'></td>\n\
   </tr>\n\
-  <tr class='extra-row'>\n\
+  <tr id='extra-row'>\n\
     <td class='rc61'></td>\n\
     <td class='rc62'></td>\n\
     <td class='rc63'></td>\n\
@@ -137,6 +137,7 @@ var CellIndex = function(r,c) {
     this.c = new_col
   };
   this.set(r,c);
+  
   this.go_to_next = function(){
     if (this.c >= 7) this.set(this.r+1,1);
     else this.set(this.r,this.c+1);
@@ -245,7 +246,7 @@ VenueDriverCalendarWidget = function(options){
     if( difference >= 0) padding = difference;
     else padding = 7 + difference;
     //remove extra row if it is not needed
-    if(padding+date.getDaysInMonth() <= 35) $('#calendar-container .extra-row').remove();
+    if(padding+date.getDaysInMonth() <= 35) $('#calendar-container #extra-row').remove();
     current_cell = new CellIndex(1,1);
     if (padding > 0){
       for(i=1;i<=padding;i++){
@@ -400,7 +401,7 @@ VenueDriverCalendarWidget = function(options){
   };
   that.change_first_day = function(day_str) {
     first_day = Utils.day_string_to_number(day_str);
-    that.construct_output();
+    construct_output();
   };
   construct_output();
   that.refresh = construct_output;
