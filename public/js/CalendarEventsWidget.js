@@ -214,16 +214,12 @@ VenueDriverCalendarWidget = function(options){
     return Utils.first_date_of_month(date).getDay();
   };
 
-  var construct_calendar_title = function() {
+  var construct_table_header = function() {
     var cal_title = date.getMonthName()+' '+date.getFullYear();
     //TODO, make an option for setting calendar title
     $('#calendar-container .calendar-title').text("Events Calendar");
     $('#calendar-container .month-title').text(cal_title);
-  };
 
-  var construct_table_header = function() {
-    //clarify this if time permits
-    construct_calendar_title();
     for(i=0;i<=6;i++){
       var day_num = first_day + i;
       if(day_num >= 7) day_num-=7;
