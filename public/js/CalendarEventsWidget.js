@@ -295,6 +295,7 @@ VenueDriverCalendarWidget = function(options){
   };
   
   var update_side_panel =  function(info){
+    $('#side-panel').show();
     $('#sp-event-title').html(info.attr('data-title'));
     var l_date = Date.parse(info.attr('data-date'));
     var date_str = l_date.toDateString();
@@ -399,6 +400,7 @@ VenueDriverCalendarWidget = function(options){
     construct_unused_day_post_padding();
     construct_navigation_buttons();
     $(div_id + ' #calendar-container').append(side_panel_html);
+    $('#side-panel').hide()
   };
   that.change_first_day = function(day_str) {
     first_day = Utils.day_string_to_number(day_str);
