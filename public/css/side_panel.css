@@ -2,8 +2,9 @@
 #side-panel{
   border:3px solid black;
   width:185px;
-  background-color:white;
-  opacity:.7;
+  background-color:black;
+  color:white;
+  opacity:.86;
 }
 
 #side-panel #sp-event-title {
