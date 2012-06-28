@@ -275,10 +275,9 @@ VenueDriverCalendarWidget = function(options){
 
   var write_embedded_event_data = function(event_param){
     var format_event_info = function(event, args){
-      result = "";
-      result+= "' data-id='"+event['event_id']
+      result = "' data-id='"+event['event_id']
       for (var index in args) {
-        key=args[index];
+        var key=args[index];
         result += "' data-" + key + "='"+event[key];
       };
       return result;
