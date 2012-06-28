@@ -276,6 +276,7 @@ VenueDriverCalendarWidget = function(options){
   var write_embedded_event_data = function(event_param){
     var format_event_info = function(event, pairs){
       result = "";
+      result+= "' data-id='"+event['event_id']
       for (var key in pairs) {
         var property = pairs[key];
         result += "' data-" + key + "='"+event[property];
@@ -284,7 +285,8 @@ VenueDriverCalendarWidget = function(options){
     };
     
     var l_event = event_param;
-    var append = format_event_info(l_event,{id:'event_id',title:'title',date:'date',public_guestlists:'public_guestlists'});
+    var append = format_event_info(l_event,{title:'title',date:'date',public_guestlists:'public_guestlists'});
+    debugger;
     var result = "id='event_" + l_event.event_id +append;
     return result;
   }; 
