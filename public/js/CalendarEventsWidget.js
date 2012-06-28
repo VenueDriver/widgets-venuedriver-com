@@ -304,6 +304,12 @@ VenueDriverCalendarWidget = function(options){
     } else {
       $('#sp-join-guestlist').hide();
     }
+    var todays_date = Date.today();
+    if (todays_date > l_date){
+      $('#sp-event-closed').show();
+    } else {
+      $('#sp-event-closed').hide();
+    }
     
   };
 
