@@ -274,18 +274,18 @@ VenueDriverCalendarWidget = function(options){
   };
 
   var write_embedded_event_data = function(event_param){
-    var format_event_info = function(event, pairs){
+    var format_event_info = function(event, args){
       result = "";
       result+= "' data-id='"+event['event_id']
-      for (var key in pairs) {
-        var property = pairs[key];
-        result += "' data-" + key + "='"+event[property];
+      for (var index in args) {
+        key=args[index];
+        result += "' data-" + key + "='"+event[key];
       };
       return result;
     };
     
     var l_event = event_param;
-    var append = format_event_info(l_event,{title:'title',date:'date',public_guestlists:'public_guestlists'});
+    var append = format_event_info(l_event,['title','date','public_guestlists']);
     debugger;
     var result = "id='event_" + l_event.event_id +append;
     return result;
