@@ -123,7 +123,6 @@ var Utils = {
       default: "error";
     }
   },
-
 }
 
 //iterator for table cells
@@ -274,18 +273,18 @@ VenueDriverCalendarWidget = function(options){
     that.t_sorted_events = sorted_events
   };
 
-  var format_event_info = function(event, pairs){
-    result = "";
-    for (var key in pairs) {
-      var property = pairs[key];
-      result += "' data-" + key + "='"+event[property];
-    };
-    return result;
-  };
-
   var write_embedded_event_data = function(event_param){
+    var format_event_info = function(event, pairs){
+      result = "";
+      for (var key in pairs) {
+        var property = pairs[key];
+        result += "' data-" + key + "='"+event[property];
+      };
+      return result;
+    };
+    
     var l_event = event_param;
-    var append = format_event_info(l_event,{id:'event_id',title:'title',date:'date',description:'description'});
+    var append = format_event_info(l_event,{id:'event_id',title:'title',date:'date',public_guestlists:'public_guestlists'});
     var result = "id='event_" + l_event.event_id +append;
     return result;
   }; 
@@ -299,6 +298,13 @@ VenueDriverCalendarWidget = function(options){
     var l_date = Date.parse(info.attr('data-date'));
     var date_str = l_date.toDateString();
     $('#sp-event-date').html(date_str);
+    var show_guestlist = !(info.attr('data-public_guestlists')=='false')
+    if (show_guestlist){
+      $('#sp-join-guestlist').show();
+    } else {
+      $('#sp-join-guestlist').hide();
+    }
+    
   };
 
   var construct_event = function(l_event,$content_area) {
@@ -410,3 +416,7 @@ jQuery.fn.AccountCalendar = function(params) {
   window.my_calendar = new VenueDriverCalendarWidget(settings);
   return this;
 };
+
+function grab_calendar(){
+  a = window.my_calendar;
+}
