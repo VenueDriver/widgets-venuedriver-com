@@ -284,8 +284,7 @@ VenueDriverCalendarWidget = function(options){
     };
     
     var l_event = event_param;
-    var append = format_event_info(l_event,['title','date','public_guestlists']);
-    debugger;
+    var append = format_event_info(l_event,['title','date','public_guestlists','public_reservations']);
     var result = "id='event_" + l_event.event_id +append;
     return result;
   }; 
@@ -306,6 +305,13 @@ VenueDriverCalendarWidget = function(options){
     } else {
       $('#sp-join-guestlist').hide();
     }
+    var show_reservation = !(info.attr('data-public_reservations')=='false')
+    if (show_reservation){
+      $('#sp-vip-reservation').show();
+    } else {
+      $('#sp-vip-reservation').hide();
+    }
+    
     var todays_date = Date.today();
     if (todays_date > l_date){
       $('#sp-event-closed').show();
