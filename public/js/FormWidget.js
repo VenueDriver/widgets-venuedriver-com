@@ -13,6 +13,7 @@
       		'split_venues' : false					//whether or not to display a venue drop-down
       };
 			settings = $.extend(true, {}, defaults, options);
+			var request_url = "http://venuedriver.com/api/accounts/"+settings['account_id']+"/all_events?token="+settings['api_token'];
 
       return this.each(function() {
 				formDiv = $(this);
@@ -26,7 +27,7 @@
         	//return some sort of error data
         	alert("something failed validation");
         }
-				fetch_data();
+				fetch_data(request_url, settings['split_venues']);
 			  if(settings['split_venues'] === true) {
 					attachChangeListener();
 				}
@@ -34,18 +35,14 @@
   };
 
 	//Fetch event data
-	var fetch_data = function() {
-		var action = (settings['split_venues'] === true) ? "venues.json" : "all_events";
-		var request_url = "http://venuedriver.com/api/accounts/"+settings['account_id']+"/"+action+"?token="+settings['api_token'];
+	var fetch_data = function(request_url, split_venues) {
 		var vIds = "";
 
-		if(action == "all_events") {
-			if(settings['venues'] != undefined) {
-				$.each(settings['venues'], function(i, venue_name) {
-					vIds += i + ",";
-				});
-				vIds = vIds.substring(0, vIds.length-1);
-			}
+		if(split_venues === true || settings['venues'] != undefined) {
+			$.each(settings['venues'], function(i, venue_name) {
+				vIds += i + ",";
+			});
+			vIds = vIds.substring(0, vIds.length-1);
 			request_url += "&venue_ids="+vIds;
 		}
 		request_url += "&callback=?";
@@ -54,23 +51,25 @@
 	    	var items = "";
 
 	    	$.each(data, function(i, venue) {
-	    		if(settings['split_venues'] === false) {
-		    		$.each(venue.events, function(j, event) {
-		    			//data = event names and ids
-		    			items += event['id'] + ":" + event['title'] + " - " + $.PHPDate("D, M-d", new Date(event['date'])) + "^";
-		    		});
+	    		if(split_venues === false) {
+	    			if(venue.events.length === 0) {
+	    				items += "0:No Events - Venue{" + venue.venue.title + "}^";
+	    			}
+	    			else {
+			    		$.each(venue.events, function(j, event) {
+			    			//data = event names and ids
+			    			items += event['id'] + ":" + event['title'] + " - " + $.PHPDate("D, M-d", new Date(event['date'])) + "^";
+			    		});
+			    	}
 		    	}
 		    	else {
 		    		//data = venue names and ids
-		    		if(i == 0) {
-		    			items += ":^";
-		    		}
-		    		items += venue['id'] + ":" + venue['title'] + "^";
-		    	}
+	    			items += venue.venue.id + ":" + venue.venue.title + "^";
+	    		}
 	    	});
 	    	items = items.substring(0, items.length-1);
 
-	    	if(settings['split_venues'] === true) {
+	    	if(split_venues === true) {
 	    		populateSelect(items, "#venues");
 	    	}
 	    	else {
@@ -82,10 +81,17 @@
 
 	//assemble form HTML
 	var build_form = function() {
-		var fType = (settings['form_type'] == "GUESTLIST") ? "guestlist" : "reservation";
+		var fType = (settings['form_type'] == "GUESTLIST") ? "guest" : "reservation";
+		var fTypePlural = (settings['form_type'] == "GUESTLIST") ? "guests" : "reservations";
 
 		var form_data =
-		'<form action="http://venuedriver.com/api/'+fType+'s?api_token='+settings['api_token']+'&redirect='+settings['success']+'" method="POST" id="widgetForm">';
+		'<form action="http://venuedriver.com/api/'+fTypePlural+'" method="POST" id="widgetForm">';
+			form_data += 
+			'<input type="hidden" name="account_id" value="'+settings['account_id']+'" />' +
+			'<input type="hidden" name="token" value="'+settings['api_token']+'" />';
+		if(settings['success'] != undefined) {
+			form_data += '<input type="hidden" name="redirect" value="'+settings['success']+'" />';
+		}
 		if(settings['afc'] !== null) {
 			form_data += '<input type="hidden" name="afc" value="'+settings['afc']+'" />';
 		}
@@ -143,7 +149,7 @@
 		'<div class="inputItem">' +
 			'<span class="required">*</span>' +
 			'<span class="label">Guests:</span> <span class="inputBox">' +
-			'<select name="'+fType+'[extra_count]">' +
+			'<select name="'+fType+'[guests]">' +
 				'<option value="0">0</option>' +
 				'<option value="1">+1</option>' +
 				'<option value="2">+2</option>' +
@@ -187,18 +193,9 @@
 	// Public Functions
 	this.attachChangeListener = function() {
 		$("#venues").change(function () {
-			var request_url = "http://venuedriver.com/api/venues/"+$("#venues option:selected").val()+"/events.json?token="+settings['api_token'];
-console.log('you selected: "'+$("#venues option:selected").val()+'", "'+$("#venues option:selected").text()+'"');
-//	 		if($("#venues option:selected").val() == "") {
-//				$('option', $('#event')).remove();
-//			$('#event').append('<option value="" selected="selected"><?php print $eventDefaultOptionTxt ?></option>');
-//				return;
-//			}
-//			else {
-//		   	$.getJSON(request_url, function(data) {
-//					process return data and then call populateSelect
-//		  	});
-//		  }
+			$("#overlay").toggle();
+			var request_url = "http://venuedriver.com/api/accounts/"+settings['account_id']+"/all_events?token="+settings['api_token']+"&venue_ids="+$("#venues option:selected").val();
+			fetch_data(request_url, false);
 	  });
 	};
 
