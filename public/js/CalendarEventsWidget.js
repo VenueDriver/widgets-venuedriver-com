@@ -198,17 +198,26 @@ VenueDriverCalendarWidget = function(options){
   };
 
   var api_url = function(){
-    return http_str + api_type +'s/' + api_id + '/events/calendar_month?month='+month()+'&year='+year();
+    return http_str + api_type +'s/' + api_id +
+      '/events/calendar_month?month='+month()+'&year='+year() +
+      '&callback=?';
   };this.t_api_url = api_url;
 
   var pull_api_events = function() {
     var url = api_url();
     console.log(url);
+    console.log("$.getJSON");
+
     $.getJSON(url,function(data){
       json_events = data;
       that._json_events = data
       construct_output();
+    })
+    .error(function(jqXHR, textStatus, errorThrown) {
+        console.log("error " + textStatus);
+        console.log("incoming Text " + jqXHR.responseText);
     });
+
   };this.t_pull_api_events = pull_api_events;
   
   var first_day_of_month = function(){
