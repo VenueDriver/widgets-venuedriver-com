@@ -324,15 +324,19 @@ VenueDriverCalendarWidget = function(options){
       event_URL +
       "'>"+l_event.title+"</a></div>");
     $event_location.append("<div class='event-date'>"+l_event.date+"</div>");
-    $('#'+id).click(function(){
-      var info = $(this)
-      //here 'this' = $('#'+id) called above ^^
-      var html = "<p> id: "+info.attr('data-id')+" </p>"
-      html += "<p> title: "+info.attr('data-title')+" </p>"
-      html += "<p> date: " +info.attr('data-date')+" </p>"
-      html += "<p> description: " +info.attr('data-description')+" </p>"
-      $('#side-panel').html(html);
-    });
+
+    // This is for displaying information about the selected event in a side panel,
+    // which isn't necessary if you want the user to follow links.  This is here
+    // for future reference, maybe to be enabled with an option.
+    // $('#'+id).click(function(){
+    //   var info = $(this)
+    //   //here 'this' = $('#'+id) called above ^^
+    //   var html = "<p> id: "+info.attr('data-id')+" </p>"
+    //   html += "<p> title: "+info.attr('data-title')+" </p>"
+    //   html += "<p> date: " +info.attr('data-date')+" </p>"
+    //   html += "<p> description: " +info.attr('data-description')+" </p>"
+    //   $('#side-panel').html(html);
+    // });
   }
 
   var construct_events = function(the_days_events,$content_area){
@@ -403,7 +407,9 @@ VenueDriverCalendarWidget = function(options){
     construct_days();
     construct_unused_day_post_padding();
     construct_navigation_buttons();
-    $(div_id + ' #calendar-container').append("<div id='side-panel' style='display:inline-block;float:left'>side panel </div>");
+
+    // Not necessary for now.  Could possibly be re-enabled later with an option.
+    // $(div_id + ' #calendar-container').append("<div id='side-panel' style='display:inline-block;float:left'>side panel </div>");
   };
   that.change_first_day = function(day_str) {
     first_day = Utils.day_string_to_number(day_str);
