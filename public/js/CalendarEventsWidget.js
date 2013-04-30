@@ -193,7 +193,16 @@ VenueDriverCalendarWidget = function(options){
   };
 
   var api_url = function(){
-    return http_str + api_type +'s/' + api_id + '/events/calendar_month?month='+(date.getMonth()+1)+'&year='+date.getFullYear();
+    var url = http_str + api_type +'s/' + api_id +
+      '/events/calendar_month?month='+(date.getMonth()+1)+'&year='+date.getFullYear();
+
+    // Provide a way to disable JSONP in testing because it's extremely difficult to
+    // mock JSONP requests at the time of writing.
+    if (!window.noJSONP) {
+      url += '&callback=?'
+    }
+
+    return url;
   };that.t_api_url = api_url;
 
   var pull_api_events = function() {

@@ -1,3 +1,6 @@
+// Let the widget know that we're in testing mode.  Mainly for disabling JSONP,
+// because it's extremely difficult to mock JSONP requests at the time of writing.
+window.noJSONP = true;
 
 describe("Calendar Widget", function() {  
   //cal-test div is in calendar.html fixture
@@ -88,6 +91,7 @@ describe("Calendar Widget", function() {
       json.push(make_event_json(event1));
       json.push(make_event_json(event2));
       json.push(make_event_json(event3));
+
       jQuery.ajaxMock.url('http://www.venuedriver.com/api/accounts/1/events/calendar_month?month=6&year=2012', json);
       $('#cal-test').AccountCalendar({account_id:1})
     });
