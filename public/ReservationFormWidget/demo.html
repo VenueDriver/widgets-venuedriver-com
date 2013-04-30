@@ -1,18 +1,33 @@
 <html>
   <head>
     <title>ReservationFormWidget: demo</title>
-    <link href="http://widgets.venuedriver.com/css/styles.css"  rel='stylesheet' type='text/css'/>
+    <link href="../css/form.css"  rel='stylesheet' type='text/css'/>
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js" charset="utf-8"></script>
-    <script src="http://widgets.venuedriver.com/js/ReservationFormWidget.js" charset="utf-8"></script>
+    <script src="../js/lib/jquery.phpdate.js" charset="utf-8"></script>
+    <script src="../js/FormWidget.js" charset="utf-8"></script>
+    <script src="../js/getUrlParams.js" charset="utf-8"></script>
+	  <script>
+			var formObj;
+
+			$(document).ready(function() {
+				var afc = $.getUrlVar('afc');
+			  formObj = $('#VenueDriverForm').VenueDriverFormWidget({
+					      		'form_type' 		: 'RESERVATION',		//GUESTLIST or RESERVATION
+			  						'api_token' 		: 'E5MV86M8PCXW5O',
+			  						'account_id'		: 3,
+			  						'split_venues'	: true,
+			  						'venues'    		: {46: 'Venue Alpha', 15: 'Gryphon', 48: 'Venue Charlie'},
+			  						'allow_guests'	: false,
+			  						'success'				:	'http://www.google.com',
+			  						'afc'       		: ((afc == undefined) ? null : afc)
+			  					});
+			});
+	  </script>
   </head>
   <body>
-  <h1>AccountEventsWidget: demo</h1>
+  <h1>ReservationFormWidget: demo</h1>
   <div id="wrapper">
-    <div id="center_table">
-      <div id="selectevent_columnlabelbar">
-        <div id="venueDriverReservationFormWidgetMainTable"></div>
-      </div>
-    </div>
+    <div id="VenueDriverForm"></div>
   </div>  
 </body>
 </html>

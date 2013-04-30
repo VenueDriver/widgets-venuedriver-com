@@ -1,16 +1,26 @@
 <html>
   <head>
     <title>GuestListFormWidget: demo</title>
-    <link href="http://widgets.venuedriver.com/css/styles.css"  rel='stylesheet' type='text/css'/>
+    <link href="../css/form.css"  rel='stylesheet' type='text/css'/>
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js" charset="utf-8"></script>
+    <script src="../js/lib/jquery.phpdate.js" charset="utf-8"></script>
     <script src="../js/FormWidget.js" charset="utf-8"></script>
+    <script src="../js/getUrlParams.js" charset="utf-8"></script>
 	  <script>
+			var formObj;
+
 			$(document).ready(function() {
-			  $('#VenueDriverForm').VenueDriverFormWidget({
-			  	'api_token' : 'E5MV86M8PCXW5O',
-			  	'account_id': 3,
-			  	'venue_ids' : [117, 15, 183, 147]
-			  });
+				var afc = $.getUrlVar('afc');
+			  formObj = $('#VenueDriverForm').VenueDriverFormWidget({
+					      		'form_type' 		: 'GUESTLIST',		//GUESTLIST or RESERVATION
+			  						'api_token' 		: 'E5MV86M8PCXW5O',
+			  						'account_id'		: 3,
+			  						'split_venues'	: false,
+			  						'venues'    		: {46: 'Venue Alpha'},
+			  						'allow_guests'	: true,
+			  						'success'				:	'http://www.google.com',
+			  						'afc'       		: ((afc == undefined) ? null : afc)
+			  					});
 			});
 	  </script>
   </head>
