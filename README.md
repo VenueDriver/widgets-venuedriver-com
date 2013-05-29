@@ -23,7 +23,7 @@
     </div>
     <script id='install here'>
       //Your installation code goes here
-      $('#calendar-location').AccountCalendar({account_id:1})
+      $('#calendar-location').AccountCalendar({account_id:1, friendly_id:'something'})
     </script> 
   </body>
 </html>
@@ -37,9 +37,9 @@
 
 * There are two plugins: AccountCalendar and VenueCalendar - one requires am account_id and the other requires a venue_id
 
-* For an account calendar, use the AccountCalendar plugin ```$('#calendar-location').AccountCalendar({account_id:12})```
+* For an account calendar, use the AccountCalendar plugin ```$('#calendar-location').AccountCalendar({account_id:12, friendly_id:'something'})```
 
-* For a venue calendar, use the VenueCalendar plugin ```$('#calendar-location').VenueCalendar({venue_id:42})```
+* For a venue calendar, use the VenueCalendar plugin ```$('#calendar-location').VenueCalendar({venue_id:42, friendly_id:'something'})```
 
 * The plugins are otherwise identical
 
@@ -47,11 +47,11 @@
 
 ## Calendar Options
 
-* By default, the calendar starts on 'Monday'. This can be changed with the first_day parameter ```$('#calendar-location').AccountCalendar({account_id:12,first_day:Thursday})```
+* By default, the calendar starts on 'Monday'. This can be changed with the first_day parameter ```$('#calendar-location').AccountCalendar({account_id:12, friendly_id:'something', first_day:Thursday})```
 
-* The calendar defaults to Sunday if the first_day parameter is mispelled ```$('#calendar-location').AccountCalendar({account_id:12,first_day:Thurday})``` will default to Sunday
+* The calendar defaults to Sunday if the first_day parameter is mispelled ```$('#calendar-location').AccountCalendar({account_id:12, friendly_id:'something', first_day:Thurday})``` will default to Sunday
 
-* (under development- this feature may look akward at the moment) The calendar currently shows the date number for each day of the calendar at the top of its cell. This can be changed by setting the day_bottom parameter to true ```$('#calendar-location').AccountCalendar({account_id:12,day_bottom:true})```
+* (under development- this feature may look akward at the moment) The calendar currently shows the date number for each day of the calendar at the top of its cell. This can be changed by setting the day_bottom parameter to true ```$('#calendar-location').AccountCalendar({account_id:12, friendly_id:'something', day_bottom:true})```
 
 * Try clicking on event titles in the calendar!
 
