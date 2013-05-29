@@ -310,6 +310,29 @@ describe("Calendar Widget", function() {
       expect(jQuery('#side-panel #sp-buy-tickets').is(':hidden')).toBe(true);
     });
 
+    it('hides the action buttons when the event is closed', function(){
+      mock_date_today('2012/06/04');
+
+      jQuery.ajaxMock.url('http://www.venuedriver.com/api/accounts/1/events/calendar_month?month=6&year=2012',
+        [make_event_json(new FakeEvent({
+          event_title: 'Event 1',
+          event_date: '2012/06/01', // This puts the test event in the past.
+          public_guestlists: true,
+          public_reservations: true,
+          active: true,
+          id:1
+        }))]);
+
+      $('#cal-test').AccountCalendar({ account_id:1 });
+
+      jQuery('#calendar-container #2012-06-01 a').trigger(jQuery.Event('click'));
+
+      expect(jQuery('#side-panel #sp-event-closed').is(':hidden')).toBe(false);
+      expect(jQuery('#side-panel #sp-join-guestlist').is(':hidden')).toBe(true);
+      expect(jQuery('#side-panel #sp-vip-reservation').is(':hidden')).toBe(true);
+      expect(jQuery('#side-panel #sp-buy-tickets').is(':hidden')).toBe(true);
+    });
+
     it('sets the button action for guest lists', function(){
       mock_date_today('2012/06/01');
 

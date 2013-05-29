@@ -166,7 +166,7 @@ VenueDriverCalendarWidget = function(options){
   var div_id = '#' + options.div_id
   var api_type = options.api_type;
   var api_id = options.api_id;
-  var date = Date.today(); //calendar defaults to current month 
+  var date = Date.today(); //calendar defaults to current month
   that.t_date = date;
   that.friendly_id = options.friendly_id;
   var first_day = Utils.day_string_to_number(options.first_day || 'Monday');
@@ -323,8 +323,18 @@ VenueDriverCalendarWidget = function(options){
     var l_date = Date.parse(info.attr('data-date'));
     var date_str = l_date.toDateString();
     $('#sp-event-date').html(date_str);
+
+    var todays_date = Date.today();
+    var closed = false;
+    if (todays_date > l_date){
+      closed = true;
+      $('#sp-event-closed').show();
+    } else {
+      $('#sp-event-closed').hide();
+    }
+
     var show_guestlist = !(info.attr('data-public_guestlists')=='false');
-    if (show_guestlist){
+    if (show_guestlist && !closed){
       $('#sp-join-guestlist').show();
       $('#sp-join-guestlist a').attr('href',
         'http://www.venuedriver.com/' + that.friendly_id +
@@ -332,8 +342,9 @@ VenueDriverCalendarWidget = function(options){
     } else {
       $('#sp-join-guestlist').hide();
     }
+
     var show_reservation = !(info.attr('data-public_reservations')=='false');
-    if (show_reservation){
+    if (show_reservation && !closed){
       $('#sp-vip-reservation').show();
       $('#sp-vip-reservation a').attr('href',
         'http://www.venuedriver.com/' + that.friendly_id +
@@ -341,8 +352,9 @@ VenueDriverCalendarWidget = function(options){
     } else {
       $('#sp-vip-reservation').hide();
     }
+
     var show_tickets = info.data('active');
-    if (show_tickets){
+    if (show_tickets && !closed){
       $('#sp-buy-tickets').show();
       if(info.data('tickets_URL') == null) {
         $('#sp-buy-tickets a').attr('href',
@@ -354,15 +366,7 @@ VenueDriverCalendarWidget = function(options){
       }  
     } else {
       $('#sp-buy-tickets').hide();
-    }
-    
-    var todays_date = Date.today();
-    if (todays_date > l_date){
-      $('#sp-event-closed').show();
-    } else {
-      $('#sp-event-closed').hide();
-    }
-    
+    }    
   };
 
   var construct_event = function(l_event,$content_area) {
