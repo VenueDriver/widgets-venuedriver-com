@@ -1,0 +1,127 @@
+a {
+/* remove underline in links */
+text-decoration: none; 
+}
+
+body {
+  font-family:sans-serif;
+  background-color:black;
+  background-image:url(../images/calendar_demo/cityscape.jpeg);
+}
+
+table {
+   border-collapse:collapse;
+   border-color:#FF4900;   
+}
+
+table th{
+  /* control #title-row and day-title-row simultaneously */
+}
+
+#title-row{
+  /* class for first row of calendar */
+  color:#FF4900;
+  background-color:black;
+  text-transform:uppercase;
+}
+
+#day-title-row {
+  /* controls second row of calendar */
+  color:#51E841;
+  text-transform:uppercase;
+}
+
+.title {
+  /* class for styling calendar title and event title */
+}
+
+#navigation-group {
+  /* this is a label for the div that contains the month title, and next and previous month buttons */
+}
+
+.change-month {
+  /* label for style the next month and previous month buttons */
+  background-color:black;
+  border-color:#FF4900;
+  color:#FF4900;
+  text-transform:uppercase;
+}
+
+.change-month:hover {
+  /* see above */
+}
+
+td {
+  /* this refers to all the table cells that could be used to display a calendar day*/
+  width:124;
+  height:96;
+  background-color:black;
+  opacity:0.87;
+}
+.title-truncate {
+  /* this class is necessary for the truncate_events option, should have same width as td */
+  overflow:hidden;
+  white-space: nowrap;
+  width:124;
+}
+
+.date-top-style{
+ /* this class is necessary for the day_bottom option*/
+  vertical-align:top;
+}
+
+.date-bottom-style{
+  /* this class is necessary for the day_bottom option*/
+  vertical-align:bottom;
+}
+
+.not-in-month {
+  /* class for styling cells in the calendar grid that are NOT part of the month */
+  opacity:.0;
+}
+
+.in_month {
+  /* class for styling cells in the calendar grid that ARE part of the month */
+}
+
+.has-events {
+  /* class for styling cells in that are part of the month AND have events*/
+}
+
+.has-no-events {
+  /* class for styling cells in that are part of the month and DO NOT have events*/
+}
+
+.day-number {
+  /* class for styling the section of each cell that shows that days date number */
+  height:auto;
+  color:#79E86D;
+}
+
+.events-content-area {
+  /* class for styling the section of each cell that shows that days date number */
+  vertical-align:top;
+  margin-bottom:auto;
+  height:84%; /* rest of area does to .day-number div */
+}
+
+.event-content {
+
+}
+
+/* these remaining selectors are for styling event links */
+.event-title {
+  font-size:77%;
+}
+
+.event-title a:link{
+}
+
+.event-title a:visited {
+  color:white;
+  font-weight:bold;
+}
+
+.event-title a:hover {
+  color:#C85C31;
+}

@@ -1,0 +1,28 @@
+/* side panel stuff here */
+#side-panel{
+  border:3px solid black;
+  width:185px;
+  background-color:black;
+  color:white;
+  opacity:.86;
+}
+
+#side-panel #sp-event-title {
+  margin:1px;
+  padding:0px;
+}
+
+#side-panel #sp-event-date {
+  margin:1px;
+  padding:0px;
+}
+
+.sp-button {
+  width:140px;
+}
+
+#calendar-container {
+  width: 1300px;
+  overflow: hidden;
+  margin:50px;
+}

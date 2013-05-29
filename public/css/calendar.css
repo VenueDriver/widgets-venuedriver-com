@@ -1,4 +1,7 @@
-/* these all select different cell types */
+a {
+text-decoration: none; 
+}
+
 body {
   font-family:sans-serif;
 }
@@ -7,15 +10,8 @@ table {
   border-collapse:collapse;
 }
 
-/* this applies to the first two rows */
-table th {
-}
-
-.title-cell {
-  /*background-color:883511;*/
- /* filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#883511', endColorstr='#883511'); /* for IE */ 
+#title-row{
   background: -webkit-gradient(linear, left top, left bottom, to(#691F00), from(#A23000)); /* for webkit browsers */
- /*  background: -moz-linear-gradient(top,  #883511,  #883511); /* for firefox 3.6+ */
 }
 
 .title {
@@ -24,17 +20,12 @@ table th {
   margin:4px;
 }
 
-.calendar-title {
-  float:left;
-  margin-left:5%;
-}
-
-.navigation-group {
+#navigation-group {
   float:right;
   margin-right:5%;
 }
 
-.day-title-row {
+#day-title-row {
   color: white;
   font-family: 'century gothic', 'arial';
   text-transform: uppercase;
@@ -42,15 +33,6 @@ table th {
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#33464f', endColorstr='#1d333f'); /* for IE */
   background: -webkit-gradient(linear, left top, left bottom, from(#33464f), to(#1d333f)); /* for webkit browsers */
   background: -moz-linear-gradient(top,  #33464f,  #1d333f); /* for firefox 3.6+ */ 
-}
-
-.next-month {
-}
-
-.month-title {
-}
-
-.prev-month {
 }
 
 /* this class applies to the 'next month' and 'prevous month' buttons */
@@ -71,14 +53,15 @@ table th {
   background: -moz-linear-gradient(top,  #e08500,  #ff9f00); /* for firefox 3.6+ */   
 }
 
-#side-panel {
-  min-height:500px;
-}
-
 /* this refers to all the table cells that could be used to diplay a calendar day*/
-table td {
-  min-width:111;
-  height:65;
+td {
+  width:124;
+  height:96;
+}
+.title-truncate {
+  overflow:hidden;
+  white-space: nowrap;
+  width:124;
 }
 
 .date-top-style{
@@ -87,10 +70,6 @@ table td {
 
 .date-bottom-style{
   vertical-align:bottom;
-}
-
-.in-month {
-  text-align:left;
 }
 
 .not-in-month {
@@ -110,21 +89,19 @@ table td {
   /* background-color:#91A8EC; */
   background: -webkit-gradient(linear, left top, left bottom, from(#C1CEF6), to(#516AB2));
   font-weight:bold;
-}
-
-/* TODO: this should be 'events' */
-.event-content-area {
-  vertical-align:top;
-  font-size:85%;
-  margin-bottom:auto;
   height:auto;
 }
 
-.event-content {
+/* TODO: this should be 'events' */
+.events-content-area {
+  vertical-align:top;
+  margin-bottom:auto;
+  height:85%;
 }
 
 .event-title {
   color:white;
+  font-size:77%;
 }
 
 .event-title a:link{
@@ -136,10 +113,5 @@ table td {
 }
 
 .event-title a:hover {
-  color:#ff9f00;;
-}
-
-.event-date {
-  color:white;
-  font-size:50%;
+  color:#ff9f00;
 }

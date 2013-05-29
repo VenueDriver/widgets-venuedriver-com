@@ -1,0 +1,104 @@
+a {
+/* remove underline in links */
+text-decoration: none; 
+}
+
+body {
+  font-family:sans-serif;
+}
+
+table {
+   border-collapse:collapse; 
+}
+
+.title-cell {
+  /* class for first row of calendar */
+}
+
+.title {
+  /* class for styling calendar title and event title */
+}
+
+#navigation-group {
+  /* this is a label for the div that contains the month title, and next and previous month buttons */
+}
+
+#day-title-row {
+  /* controls second row of calendar */
+}
+
+.change-month {
+  /* label for style the next month and previous month buttons */
+}
+
+.change-month:hover {
+  /* see above */
+}
+
+td {
+  /* this refers to all the table cells that could be used to display a calendar day*/
+  width:124;
+  height:96;
+}
+.title-truncate {
+  /* this class is necessary for the truncate_events option, should have same width as td */
+  overflow:hidden;
+  white-space: nowrap;
+  width:124;
+}
+
+.date-top-style{
+ /* this class is necessary for the day_bottom option*/
+  vertical-align:top;
+}
+
+.date-bottom-style{
+  /* this class is necessary for the day_bottom option*/
+  vertical-align:bottom;
+}
+
+.not-in-month {
+  /* class for styling cells in the calendar grid that are NOT part of the month */
+}
+
+.in_month {
+  /* class for styling cells in the calendar grid that ARE part of the month */
+}
+
+.has-events {
+  /* class for styling cells in that are part of the month AND have events*/
+}
+
+.has-no-events {
+  /* class for styling cells in that are part of the month and DO NOT have events*/
+}
+
+.day-number {
+  /* class for styling the section of each cell that shows that days date number */
+  height:auto;
+}
+
+.events-content-area {
+  /* class for styling the section of each cell that shows that days date number */
+  vertical-align:top;
+  margin-bottom:auto;
+  height:84%; /* rest of area does to .day-number div */
+}
+
+/* these remaining selectors are for styling event links */
+.event-title {
+  color:black;
+  font-size:77%;
+}
+
+.event-title a:link{
+  color:black;
+}
+
+.event-title a:visited {
+  color:black;
+}
+
+.event-title a:hover {
+  color:#ff9f00;
+}
