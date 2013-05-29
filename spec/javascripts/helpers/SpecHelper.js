@@ -12,7 +12,7 @@ function make_event_json(fake_event){
   //specify event_date,id,event_title,
   var json = {
     VIP_URL: null,
-    active: null,
+    active: fake_event.active,
     ages: null,
     canceled: false,
     close: null,
@@ -20,7 +20,7 @@ function make_event_json(fake_event){
     cover: null,
     created_at: "2012/01/02 14:59:58 -0400",
     date: fake_event.event_date,    //ex 2012/06/01,
-    description: options.description || "No Deescription Given",
+    description: options.description || "No Description Given",
     event_id: fake_event.id.toString(), 
     friendly_id: null,
     guestlist_URL: null,
@@ -35,16 +35,17 @@ function make_event_json(fake_event){
     open: "2000/01/01 00:20:12 -0500",
     parent_id: null,
     pass_codes: "",
-    public_guestlists: true,
+    public_guestlists: fake_event.public_guestlists,
+    public_reservations: fake_event.public_reservations,
     repeat_day: null,
     reservation_count: 0,
     show_in_calendars: true,
     template: null,
     template_active: null,
-    tickets_URL: null,
+    tickets_URL: fake_event.tickets_URL || null,
     tickets_sold_count: 0,
     time: null,
-    title: fake_event.event_title ,
+    title: fake_event.event_title,
     updated_at: "2012/02/14 14:59:58 -0400",
     venue_id: "1",
     wiki_name: null
@@ -56,6 +57,10 @@ function FakeEvent(params){
   this.id = params.id;
   this.event_date = params.event_date;
   this.event_title = params.event_title;
+  this.public_reservations = params.public_reservations;
+  this.public_guestlists = params.public_guestlists;
+  this.active = params.active;
+  this.tickets_URL = params.tickets_URL;
 }
 
 function generate_events_json(dates){

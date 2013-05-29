@@ -79,12 +79,12 @@ var calendar_html = "<table border='1' class='clone-me' style='display:none'>\n\
 
 var side_panel_html = "\
 <div id='side-panel' style='display:inline-block;float:left'>\
-  <h2> <div id='sp-event-title'>testing</div> </h2>\
-  <div id='sp-event-date'>testing date </div>\
+  <h2> <div id='sp-event-title'></div> </h2>\
+  <div id='sp-event-date'></div>\
   <div id='sp-event-closed' style='display:none'>CLOSED</div>\
-  <div id='sp-buy-tickets'><button class='sp-button' type='button'>Buy Tickets</button></div>\
-  <div id='sp-join-guestlist'><button class='sp-button' type='button'>Join The Guestlist</button></div>\
-  <div id='sp-vip-reservation'><button class='sp-button' type='button'>Make a VIP Reservation</button></div>\
+  <div id='sp-buy-tickets'><a class='sp-button' href='#'>Buy Tickets</a></div>\
+  <div id='sp-join-guestlist'><a class='sp-button' href='#'>Join The Guestlist</a></div>\
+  <div id='sp-vip-reservation'><a class='sp-button' href='#'>Make a VIP Reservation</a></div>\
 </div>\
 "
 
@@ -168,6 +168,7 @@ VenueDriverCalendarWidget = function(options){
   var api_id = options.api_id;
   var date = Date.today(); //calendar defaults to current month 
   that.t_date = date;
+  that.friendly_id = options.friendly_id;
   var first_day = Utils.day_string_to_number(options.first_day || 'Monday');
   var refresh_on_creation = options.refresh_on_creation || true;
   
@@ -207,10 +208,10 @@ VenueDriverCalendarWidget = function(options){
 
   var pull_api_events = function() {
     var url = api_url();
-    console.log(url);
-    console.log("$.getJSON");
-
+    console.log("fetching JSON from: " + url);
     $.getJSON(url,function(data){
+      console.log("JSON data:");
+      console.log(data);
       json_events = data;
       that._json_events = data
       construct_output();
@@ -299,7 +300,15 @@ VenueDriverCalendarWidget = function(options){
     };
     
     var l_event = event_param;
-    var append = format_event_info(l_event,['title','date','public_guestlists','public_reservations']);
+    var append = format_event_info(l_event,
+      [
+        'title',
+        'date',
+        'public_guestlists',
+        'public_reservations',
+        'active',
+        'tickets_URL'
+      ]);
     var result = "id='event_" + l_event.event_id +append;
     return result;
   }; 
@@ -314,17 +323,37 @@ VenueDriverCalendarWidget = function(options){
     var l_date = Date.parse(info.attr('data-date'));
     var date_str = l_date.toDateString();
     $('#sp-event-date').html(date_str);
-    var show_guestlist = !(info.attr('data-public_guestlists')=='false')
+    var show_guestlist = !(info.attr('data-public_guestlists')=='false');
     if (show_guestlist){
       $('#sp-join-guestlist').show();
+      $('#sp-join-guestlist a').attr('href',
+        'http://www.venuedriver.com/' + that.friendly_id +
+          '/apps/web/guestlist?event_id=' + info.data('id'));
     } else {
       $('#sp-join-guestlist').hide();
     }
-    var show_reservation = !(info.attr('data-public_reservations')=='false')
+    var show_reservation = !(info.attr('data-public_reservations')=='false');
     if (show_reservation){
       $('#sp-vip-reservation').show();
+      $('#sp-vip-reservation a').attr('href',
+        'http://www.venuedriver.com/' + that.friendly_id +
+          '/apps/web/reservation?event_id=' + info.data('id'));
     } else {
       $('#sp-vip-reservation').hide();
+    }
+    var show_tickets = info.data('active');
+    if (show_tickets){
+      $('#sp-buy-tickets').show();
+      if(info.data('tickets_URL') == null) {
+        $('#sp-buy-tickets a').attr('href',
+          'http://www.ticketdriver.com/' + that.friendly_id +
+            '/buy/tickets/event/' + info.data('id'));
+      }
+      else {
+        $('#sp-buy-tickets a').attr('href', info.data('tickets_URL'));
+      }  
+    } else {
+      $('#sp-buy-tickets').hide();
     }
     
     var todays_date = Date.today();
@@ -432,17 +461,26 @@ VenueDriverCalendarWidget = function(options){
   if (refresh_on_creation) pull_api_events(); 
 }
 
-
 jQuery.fn.VenueCalendar = function(params) {
   var $location = this.attr('id');
-  var settings = jQuery.extend(params,{div_id:$location,api_type:'venue',api_id:params.venue_id});
+  var settings = jQuery.extend(params,
+    {
+      api_type: 'venue',
+      div_id: $location,
+      api_id: params.venue_id
+    });
   window.my_calendar = new VenueDriverCalendarWidget(settings);
   return this;
 };
 
 jQuery.fn.AccountCalendar = function(params) {
   var $location = this.attr('id');
-  var settings = jQuery.extend(params,{div_id:$location,api_type:'account',api_id:params.account_id});
+  var settings = jQuery.extend(params,
+    {
+      api_type: 'account',
+      div_id: $location,
+      api_id: params.account_id
+    });
   window.my_calendar = new VenueDriverCalendarWidget(settings);
   return this;
 };
