@@ -230,15 +230,15 @@ VenueDriverCalendarWidget = function(options){
   var construct_table_header = function() {
     var month_title = date.getMonthName()+' '+date.getFullYear();
     //TODO, make an option for setting calendar title
-    $('#calendar-container .calendar-title').text("Events Calendar");
-    $('#calendar-container .month-title').text(month_title);
+    jQuery('#calendar-container .calendar-title').text("Events Calendar");
+    jQuery('#calendar-container .month-title').text(month_title);
 
     for(i=0;i<=6;i++){
       var day_num = first_day + i;
       if(day_num >= 7) day_num-=7;
       //I use css classes as identifiers here
       var html_location = '#calendar-container .day-'+ (i+1);
-      $(html_location).text(Utils.day_number_to_string(day_num));
+      jQuery(html_location).text(Utils.day_number_to_string(day_num));
     }
   };
 
@@ -250,11 +250,11 @@ VenueDriverCalendarWidget = function(options){
     if( difference >= 0) padding = difference;
     else padding = 7 + difference;
     //remove extra row if it is not needed
-    if(padding+date.getDaysInMonth() <= 35) $('#calendar-container #extra-row').remove();
+    if(padding+date.getDaysInMonth() <= 35) jQuery('#calendar-container #extra-row').remove();
     current_cell = new CellIndex(1,1);
     if (padding > 0){
       for(i=1;i<=padding;i++){
-        var $html_location = $('#calendar-container ' + current_cell.to_css());
+        var $html_location = jQuery('#calendar-container ' + current_cell.to_css());
         $html_location.text("");
         $html_location.addClass("not-in-month");
         current_cell.go_to_next();
@@ -266,7 +266,7 @@ VenueDriverCalendarWidget = function(options){
     //this function accounts for unused table cells that occur after the 
     // calendar has run out of days
     while(current_cell.r<7){
-      var $html_location = $("#calendar-container " + current_cell.to_css());
+      var $html_location = jQuery("#calendar-container " + current_cell.to_css());
       $html_location.text("");
       $html_location.addClass("not-in-month");
       current_cell.go_to_next();
@@ -318,54 +318,54 @@ VenueDriverCalendarWidget = function(options){
   };
   
   var update_side_panel =  function(info){
-    $('#side-panel').show();
-    $('#sp-event-title').html(info.attr('data-title'));
+    jQuery('#side-panel').show();
+    jQuery('#sp-event-title').html(info.attr('data-title'));
     var l_date = Date.parse(info.attr('data-date'));
     var date_str = l_date.toDateString();
-    $('#sp-event-date').html(date_str);
+    jQuery('#sp-event-date').html(date_str);
 
     var todays_date = Date.today();
     var closed = false;
     if (todays_date > l_date){
       closed = true;
-      $('#sp-event-closed').show();
+      jQuery('#sp-event-closed').show();
     } else {
-      $('#sp-event-closed').hide();
+      jQuery('#sp-event-closed').hide();
     }
 
     var show_guestlist = !(info.attr('data-public_guestlists')=='false');
     if (show_guestlist && !closed){
-      $('#sp-join-guestlist').show();
-      $('#sp-join-guestlist a').attr('href',
+      jQuery('#sp-join-guestlist').show();
+      jQuery('#sp-join-guestlist a').attr('href',
         'http://www.venuedriver.com/' + that.friendly_id +
           '/apps/web/guestlist?event_id=' + info.data('id'));
     } else {
-      $('#sp-join-guestlist').hide();
+      jQuery('#sp-join-guestlist').hide();
     }
 
     var show_reservation = !(info.attr('data-public_reservations')=='false');
     if (show_reservation && !closed){
-      $('#sp-vip-reservation').show();
-      $('#sp-vip-reservation a').attr('href',
+      jQuery('#sp-vip-reservation').show();
+      jQuery('#sp-vip-reservation a').attr('href',
         'http://www.venuedriver.com/' + that.friendly_id +
           '/apps/web/reservation?event_id=' + info.data('id'));
     } else {
-      $('#sp-vip-reservation').hide();
+      jQuery('#sp-vip-reservation').hide();
     }
 
     var show_tickets = info.data('active');
     if (show_tickets && !closed){
-      $('#sp-buy-tickets').show();
+      jQuery('#sp-buy-tickets').show();
       if(info.data('tickets_URL') == null) {
-        $('#sp-buy-tickets a').attr('href',
+        jQuery('#sp-buy-tickets a').attr('href',
           'http://www.ticketdriver.com/' + that.friendly_id +
             '/buy/tickets/event/' + info.data('id'));
       }
       else {
-        $('#sp-buy-tickets a').attr('href', info.data('tickets_URL'));
+        jQuery('#sp-buy-tickets a').attr('href', info.data('tickets_URL'));
       }  
     } else {
-      $('#sp-buy-tickets').hide();
+      jQuery('#sp-buy-tickets').hide();
     }    
   };
 
@@ -373,12 +373,12 @@ VenueDriverCalendarWidget = function(options){
     var id = 'event_'+l_event.event_id;
     var event_div = write_event_div(l_event);
     $content_area.append(event_div);
-    var $event_location = $('#calendar-container #'+id);
+    var $event_location = jQuery('#calendar-container #'+id);
     $event_location.append("<div class='event-title'><a href='#'>"+l_event.title+"</a></div>");
-    $event_title = $("#"+id)
+    $event_title = jQuery("#"+id)
     if (truncate_events) {$event_title.addClass("title-truncate")}
-    $($event_title).click(function(){
-      update_side_panel($(this));
+    jQuery($event_title).click(function(){
+      update_side_panel(jQuery(this));
     });
   };
 
@@ -403,7 +403,7 @@ VenueDriverCalendarWidget = function(options){
     sort_events();
     for (i=1; i<= number_of_days;i++ && current_cell.go_to_next()){
       var css_path = "#calendar-container " + current_cell.to_css();
-      var $html_location = $(css_path);
+      var $html_location = jQuery(css_path);
       $html_location.text("");
       
       var id = make_cell_id(i);
@@ -412,7 +412,7 @@ VenueDriverCalendarWidget = function(options){
       $html_location.addClass('in-month');
       $html_location.append("<div class='day-number'>"+i+"</div>");
       $html_location.append("<div class='events-content-area'></div>");
-      $event_content_area = $(css_path + ' .events-content-area');
+      $event_content_area = jQuery(css_path + ' .events-content-area');
       var the_days_events = sorted_events[i-1];
       if(the_days_events.length > 0)$html_location.addClass('has-events');
       else $html_location.addClass('has-no-events');
@@ -420,8 +420,8 @@ VenueDriverCalendarWidget = function(options){
       
       if(day_bottom){
         $html_location.addClass('date-bottom-style')
-        $('#'+id + ' .events-content-area').insertBefore('#'+id + ' .day-number');
-        $('#'+id + ' .day-number').attr('style','vertical-align:bottom')
+        jQuery('#'+id + ' .events-content-area').insertBefore('#'+id + ' .day-number');
+        jQuery('#'+id + ' .day-number').attr('style','vertical-align:bottom')
       } else {
         $html_location.addClass('date-top-style')
       }         
@@ -430,31 +430,31 @@ VenueDriverCalendarWidget = function(options){
 
   var clone_table_template = function() {
     //remove previous table
-    $('cal-table').remove();
+    jQuery('cal-table').remove();
     //create hidden table template if there is none
-    if ($('.clone-me').length == 0){
-      $('body').append(calendar_html);
+    if (jQuery('.clone-me').length == 0){
+      jQuery('body').append(calendar_html);
     }
     //clone hidden html table
-    table_template = $('.clone-me').clone().attr('class','cal-table').attr('style','display:inline-block;float:left');
-    $('#calendar-container').append(table_template);
+    table_template = jQuery('.clone-me').clone().attr('class','cal-table').attr('style','display:inline-block;float:left');
+    jQuery('#calendar-container').append(table_template);
   };
 
   var construct_navigation_buttons = function(){
-    $('#calendar-container #prev-month').click(to_prev_month);
-    $('#calendar-container #next-month').click(to_next_month);
+    jQuery('#calendar-container #prev-month').click(to_prev_month);
+    jQuery('#calendar-container #next-month').click(to_next_month);
   };
 
   var construct_output = function(){
-    $(div_id).html("<div id='calendar-container'></div>");  
+    jQuery(div_id).html("<div id='calendar-container'></div>");  
     clone_table_template();
     construct_table_header();
     construct_unused_day_pre_padding();
     construct_days();
     construct_unused_day_post_padding();
     construct_navigation_buttons();
-    $(div_id + ' #calendar-container').append(side_panel_html);
-    $('#side-panel').hide()
+    jQuery(div_id + ' #calendar-container').append(side_panel_html);
+    jQuery('#side-panel').hide()
   };
   that.change_first_day = function(day_str) {
     first_day = Utils.day_string_to_number(day_str);
