@@ -209,7 +209,7 @@ VenueDriverCalendarWidget = function(options){
   var pull_api_events = function() {
     var url = api_url();
     console.log("fetching JSON from: " + url);
-    $.getJSON(url,function(data){
+    jQuery.getJSON(url,function(data){
       console.log("JSON data:");
       console.log(data);
       json_events = data;
