@@ -440,6 +440,34 @@ describe("Calendar Widget", function() {
         toBe('http://google.com');
     });
 
+    it('sets the flyer image url', function(){
+      mock_date_today('2012/06/01');
+
+      jQuery.ajaxMock.url('http://www.venuedriver.com/api/venues/1/events/calendar_month?month=6&year=2012',
+        [make_event_json(new FakeEvent({
+          event_title: 'WORKING',
+          event_date: '2012/06/04',
+          public_guestlists: true,
+          public_reservations: false,
+          active: false,
+          tickets_URL: 'http://google.com',
+          id:1,
+          flyer_url: '/missing.png'
+        }))]);
+
+      $('#cal-test').VenueCalendar({
+        venue_id:1,
+        friendly_id:'someid'
+      });
+
+      jQuery('#calendar-container #2012-06-04 a').trigger(jQuery.Event('click'));
+
+      expect(jQuery('#side-panel #sp-flyer').is(':hidden')).toBe(false);
+
+      expect(jQuery('#side-panel #sp-flyer img').attr('src')).
+        toBe('http://www.venuedriver.com/assets/1/original/missing.png');
+    });
+
   });
 
 });

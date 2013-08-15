@@ -48,7 +48,8 @@ function make_event_json(fake_event){
     title: fake_event.event_title,
     updated_at: "2012/02/14 14:59:58 -0400",
     venue_id: "1",
-    wiki_name: null
+    wiki_name: null,
+    flyer_url: fake_event.flyer_url
   }
   return json;
 };
@@ -61,6 +62,7 @@ function FakeEvent(params){
   this.public_guestlists = params.public_guestlists;
   this.active = params.active;
   this.tickets_URL = params.tickets_URL;
+  this.flyer_url = params.flyer_url;
 }
 
 function generate_events_json(dates){

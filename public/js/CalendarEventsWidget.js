@@ -85,6 +85,7 @@ var side_panel_html = "\
   <div id='sp-buy-tickets'><a class='sp-button' href='#'>Buy Tickets</a></div>\
   <div id='sp-join-guestlist'><a class='sp-button' href='#'>Join The Guestlist</a></div>\
   <div id='sp-vip-reservation'><a class='sp-button' href='#'>Make a VIP Reservation</a></div>\
+  <div id='sp-flyer'><img src=''></div>\
 </div>\
 "
 
@@ -307,7 +308,8 @@ VenueDriverCalendarWidget = function(options){
         'public_guestlists',
         'public_reservations',
         'active',
-        'tickets_URL'
+        'tickets_URL',
+        'flyer_url'
       ]);
     var result = "id='event_" + l_event.event_id +append;
     return result;
@@ -341,6 +343,16 @@ VenueDriverCalendarWidget = function(options){
           '/apps/web/guestlist?event_id=' + info.data('id'));
     } else {
       jQuery('#sp-join-guestlist').hide();
+    }
+
+    var show_flyer = info.data('flyer_url');
+    if (show_flyer){
+      jQuery('#sp-flyer').show();
+      jQuery('#sp-flyer img').attr('src',
+        'http://www.venuedriver.com/assets/' + info.data('id') +
+          '/original' + info.data('flyer_url'))
+    } else {
+      jQuery('#sp-flyer').hide();
     }
 
     var show_reservation = !(info.attr('data-public_reservations')=='false');
