@@ -348,9 +348,7 @@ VenueDriverCalendarWidget = function(options){
     var show_flyer = info.data('flyer_url');
     if (show_flyer){
       jQuery('#sp-flyer').show();
-      jQuery('#sp-flyer img').attr('src',
-        'http://www.venuedriver.com/assets/' + info.data('id') +
-          '/original' + info.data('flyer_url'))
+      jQuery('#sp-flyer img').attr('src', info.data('flyer_url'));
     } else {
       jQuery('#sp-flyer').hide();
     }

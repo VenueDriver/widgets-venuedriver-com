@@ -465,7 +465,7 @@ describe("Calendar Widget", function() {
       expect(jQuery('#side-panel #sp-flyer').is(':hidden')).toBe(false);
 
       expect(jQuery('#side-panel #sp-flyer img').attr('src')).
-        toBe('http://www.venuedriver.com/assets/1/original/missing.png');
+        toBe('/missing.png');
     });
 
   });
