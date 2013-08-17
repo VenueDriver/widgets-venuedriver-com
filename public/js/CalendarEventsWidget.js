@@ -387,7 +387,7 @@ VenueDriverCalendarWidget = function(options){
     $event_location.append("<div class='event-title'><a href='#'>"+l_event.title+"</a></div>");
     $event_title = jQuery("#"+id)
     if (truncate_events) {$event_title.addClass("title-truncate")}
-    jQuery($event_title).click(function(){
+    jQuery($event_title).click(function(event){
       update_side_panel(jQuery(this));
       event.preventDefault();
     });
