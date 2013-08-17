@@ -389,6 +389,7 @@ VenueDriverCalendarWidget = function(options){
     if (truncate_events) {$event_title.addClass("title-truncate")}
     jQuery($event_title).click(function(){
       update_side_panel(jQuery(this));
+      event.preventDefault();
     });
   };
 
