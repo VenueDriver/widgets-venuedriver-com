@@ -468,6 +468,44 @@ describe("Calendar Widget", function() {
         toBe('/missing.png');
     });
 
+
+    it('Show the event of the hashbang', function(){
+      mock_date_today('2012/06/01');
+
+      jQuery.ajaxMock.url('http://www.venuedriver.com/api/venues/1/events/calendar_month?month=6&year=2012',
+        [make_event_json(new FakeEvent({
+          event_title: 'WORKING',
+          event_date: '2012/06/04',
+          public_guestlists: true,
+          public_reservations: false,
+          active: false,
+          tickets_URL: 'http://google.com',
+          id:3,
+          flyer_url: '/missing.png'
+        })),
+        make_event_json(new FakeEvent({
+          event_title: 'WORKING',
+          event_date: '2012/06/05',
+          public_guestlists: true,
+          public_reservations: false,
+          active: false,
+          tickets_URL: 'http://google.com',
+          id:4,
+          flyer_url: '/missing.png'
+        }))]);
+
+      $('#cal-test').VenueCalendar({
+        venue_id:1,
+        friendly_id:'someid'
+      });
+
+      jQuery('#calendar-container #2012-06-04 a').trigger(jQuery.Event('click'));
+      expect(window.location.hash).toBe('#!/event/3');
+
+      jQuery('#calendar-container #2012-06-05 a').trigger(jQuery.Event('click'));
+      expect(window.location.hash).toBe('#!/event/4');
+    });
+
   });
 
 });

@@ -179,7 +179,21 @@ VenueDriverCalendarWidget = function(options){
     construct_output();
     pull_api_events();
   };
-  
+
+  var construct_specific_event = function () {
+    var hashbang_text = window.location.hash;
+
+    if (hashbang_text != "") {
+      var hashbang_split = hashbang_text.split('/');
+      var event_id       = hashbang_split[hashbang_split.length -1];
+      var event_div      = document.getElementById('event_' + event_id);
+
+      if (event_div != undefined) {
+        jQuery('#event_' + event_id).trigger('click');
+      }
+    };
+  };
+
   var to_next_month = function(){
     var current_month = date.getMonth()+1;//javascript counts from 0 with months
     var current_year = date.getFullYear();
@@ -318,6 +332,10 @@ VenueDriverCalendarWidget = function(options){
   var write_event_div = function(l_event){
     return "<div class='event-content' "+ write_embedded_event_data(l_event)+"'></div>";
   };
+
+  var update_url = function(info) {
+    window.location.hash = '#!/event/' + info.attr('data-id');
+  };
   
   var update_side_panel =  function(info){
     jQuery('#side-panel').show();
@@ -389,6 +407,7 @@ VenueDriverCalendarWidget = function(options){
     if (truncate_events) {$event_title.addClass("title-truncate")}
     jQuery($event_title).click(function(event){
       update_side_panel(jQuery(this));
+      update_url(jQuery(this));
       event.preventDefault();
     });
   };
@@ -466,6 +485,7 @@ VenueDriverCalendarWidget = function(options){
     construct_navigation_buttons();
     jQuery(div_id + ' #calendar-container').append(side_panel_html);
     jQuery('#side-panel').hide()
+    construct_specific_event();
   };
   that.change_first_day = function(day_str) {
     first_day = Utils.day_string_to_number(day_str);
