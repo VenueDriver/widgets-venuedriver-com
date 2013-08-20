@@ -334,7 +334,7 @@ VenueDriverCalendarWidget = function(options){
   };
 
   var update_url = function(info) {
-    window.location.hash = '#!/event/' + info.attr('data-id');
+    window.location.hash = '#!/events/' + info.attr('data-id');
   };
   
   var update_side_panel =  function(info){

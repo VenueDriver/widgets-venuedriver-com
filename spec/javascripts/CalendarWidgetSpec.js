@@ -500,10 +500,10 @@ describe("Calendar Widget", function() {
       });
 
       jQuery('#calendar-container #2012-06-04 a').trigger(jQuery.Event('click'));
-      expect(window.location.hash).toBe('#!/event/3');
+      expect(window.location.hash).toBe('#!/events/3');
 
       jQuery('#calendar-container #2012-06-05 a').trigger(jQuery.Event('click'));
-      expect(window.location.hash).toBe('#!/event/4');
+      expect(window.location.hash).toBe('#!/events/4');
     });
 
   });
