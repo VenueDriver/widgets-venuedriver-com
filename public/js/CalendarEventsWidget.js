@@ -468,6 +468,7 @@ VenueDriverCalendarWidget = function(options){
     //clone hidden html table
     table_template = jQuery('.clone-me').clone().attr('class','cal-table').attr('style','display:inline-block;float:left');
     jQuery('#calendar-container').append(table_template);
+    jQuery('.cal-table').css('width', '70%');
   };
 
   var construct_navigation_buttons = function(){
