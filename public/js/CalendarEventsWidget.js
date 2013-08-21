@@ -406,6 +406,7 @@ VenueDriverCalendarWidget = function(options){
     $event_title = jQuery("#"+id)
     if (truncate_events) {$event_title.addClass("title-truncate")}
     jQuery($event_title).click(function(event){
+      jQuery('.cal-table').css('width', '70%');
       update_side_panel(jQuery(this));
       update_url(jQuery(this));
       event.preventDefault();
@@ -468,7 +469,6 @@ VenueDriverCalendarWidget = function(options){
     //clone hidden html table
     table_template = jQuery('.clone-me').clone().attr('class','cal-table').attr('style','display:inline-block;float:left');
     jQuery('#calendar-container').append(table_template);
-    jQuery('.cal-table').css('width', '70%');
   };
 
   var construct_navigation_buttons = function(){
