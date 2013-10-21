@@ -1,5 +1,5 @@
 
-var calendar_html = "<table border='1' class='clone-me' style='display:none'>\n\
+var calendar_html = "<table border='0' class='clone-me' style='display:none'>\n\
   <tr id='title-row'>\n\
     <th colspan='7'>\n\
       <span class='calendar-title title'></span>\n\
