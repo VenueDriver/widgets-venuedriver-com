@@ -84,7 +84,7 @@ var side_panel_html = "\
   <div id='sp-event-closed' style='display:none'>CLOSED</div>\
   <div id='sp-buy-tickets'><a class='sp-button' href='#'>Buy Tickets</a></div>\
   <div id='sp-join-guestlist'><a class='sp-button' href='#'>Join The Guestlist</a></div>\
-  <div id='sp-vip-reservation'><a class='sp-button' href='#'>Make a VIP Reservation</a></div>\
+  <div id='sp-vip-reservation'><a class='sp-button' href='#'>Reservations</a></div>\
   <div id='sp-flyer'><img src=''></div>\
 </div>\
 "
